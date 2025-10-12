@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research - NGUYEN Phu-Huy - Astrophysics Research</title>
+    <meta name="description" content="Research projects of NGUYEN Phu-Huy, Master's student in Astrophysics specializing in cosmology and galaxy evolution.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Cosmic Web Large Scale Structure Background -->
+    <canvas id="starfield"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">NGUYEN Phu-Huy</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="about.html" class="nav-link">About</a>
+                <a href="cv.html" class="nav-link">CV</a>
+                <a href="research.html" class="nav-link active">Research</a>
+                <a href="notes.html" class="nav-link">Notes</a>
+                <a href="travel.html" class="nav-link">Travel</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Research Section -->
+        <section id="research" class="section">
+            <div class="container">
+                <h2 class="section-title">Research Projects</h2>
+                <div class="research-grid">
+                    <div class="research-card">
+                        <div class="research-image">
+                            <div class="image-placeholder">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                        </div>
+                        <div class="research-content">
+                            <h3>Dark Matter Halo Evolution</h3>
+                            <p>N-body simulations investigating the formation and evolution of dark matter halos in different cosmological scenarios. Focus on halo mass functions and merger rates.</p>
+                            <div class="research-tools">
+                                <span class="tool-tag">Python</span>
+                                <span class="tool-tag">GADGET-2</span>
+                                <span class="tool-tag">NumPy</span>
+                                <span class="tool-tag">Matplotlib</span>
+                            </div>
+                            <div class="research-links">
+                                <a href="#" class="link-btn"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="#" class="link-btn"><i class="fas fa-file-pdf"></i> Paper</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="research-card">
+                        <div class="research-image">
+                            <div class="image-placeholder">
+                                <i class="fas fa-satellite"></i>
+                            </div>
+                        </div>
+                        <div class="research-content">
+                            <h3>CMB Polarization Analysis</h3>
+                            <p>Analysis of cosmic microwave background polarization data from Planck satellite to constrain inflationary models and primordial gravitational waves.</p>
+                            <div class="research-tools">
+                                <span class="tool-tag">Python</span>
+                                <span class="tool-tag">HEALPix</span>
+                                <span class="tool-tag">NaMaster</span>
+                                <span class="tool-tag">AstroPy</span>
+                            </div>
+                            <div class="research-links">
+                                <a href="#" class="link-btn"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="#" class="link-btn"><i class="fas fa-external-link-alt"></i> Poster</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="research-card">
+                        <div class="research-image">
+                            <div class="image-placeholder">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                        </div>
+                        <div class="research-content">
+                            <h3>Galaxy Clustering Analysis</h3>
+                            <p>Statistical analysis of galaxy distribution patterns in large-scale structure surveys to understand cosmic web formation and dark energy effects.</p>
+                            <div class="research-tools">
+                                <span class="tool-tag">Python</span>
+                                <span class="tool-tag">SciPy</span>
+                                <span class="tool-tag">Pandas</span>
+                                <span class="tool-tag">R</span>
+                            </div>
+                            <div class="research-links">
+                                <a href="#" class="link-btn"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="#" class="link-btn"><i class="fas fa-code"></i> Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>NGUYEN Phu-Huy</h4>
+                    <p>Master's Student in Astrophysics</p>
+                    <p>Stanford University</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="cv.html">CV</a></li>
+                        <li><a href="research.html">Research</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-orcid"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-google"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NGUYEN Phu-Huy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

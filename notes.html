@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes - NGUYEN Phu-Huy - Astrophysics Research</title>
+    <meta name="description" content="Research notes of NGUYEN Phu-Huy, Master's student in Astrophysics specializing in cosmology and galaxy evolution.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Cosmic Web Large Scale Structure Background -->
+    <canvas id="starfield"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">NGUYEN Phu-Huy</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="about.html" class="nav-link">About</a>
+                <a href="cv.html" class="nav-link">CV</a>
+                <a href="research.html" class="nav-link">Research</a>
+                <a href="notes.html" class="nav-link active">Notes</a>
+                <a href="travel.html" class="nav-link">Travel</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Notes Section -->
+        <section id="notes" class="section">
+            <div class="container">
+                <h2 class="section-title">Research Notes</h2>
+                <p class="section-subtitle">Thoughts and reflections on astrophysics and computational methods</p>
+                
+                <div class="notes-grid">
+                    <article class="note-card">
+                        <div class="note-date">December 15, 2024</div>
+                        <h3>Understanding Dark Matter Through Simulations</h3>
+                        <p>Reflections on the latest N-body simulation results and their implications for our understanding of dark matter distribution in galactic halos...</p>
+                        <div class="note-tags">
+                            <span class="note-tag">Dark Matter</span>
+                            <span class="note-tag">Simulations</span>
+                        </div>
+                        <a href="#" class="read-more">Read More</a>
+                    </article>
+
+                    <article class="note-card">
+                        <div class="note-date">November 28, 2024</div>
+                        <h3>Python Tools for Astrophysics</h3>
+                        <p>A comprehensive guide to essential Python libraries for astronomical data analysis, from AstroPy basics to advanced statistical methods...</p>
+                        <div class="note-tags">
+                            <span class="note-tag">Python</span>
+                            <span class="note-tag">Data Analysis</span>
+                            <span class="note-tag">Tools</span>
+                        </div>
+                        <a href="#" class="read-more">Read More</a>
+                    </article>
+
+                    <article class="note-card">
+                        <div class="note-date">October 12, 2024</div>
+                        <h3>The Beauty of Cosmic Microwave Background</h3>
+                        <p>Exploring the intricate patterns in CMB data and what they reveal about the early universe, inflation, and the seeds of structure formation...</p>
+                        <div class="note-tags">
+                            <span class="note-tag">CMB</span>
+                            <span class="note-tag">Cosmology</span>
+                        </div>
+                        <a href="#" class="read-more">Read More</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>NGUYEN Phu-Huy</h4>
+                    <p>Master's Student in Astrophysics</p>
+                    <p>Stanford University</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="cv.html">CV</a></li>
+                        <li><a href="research.html">Research</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-orcid"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-google"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NGUYEN Phu-Huy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
