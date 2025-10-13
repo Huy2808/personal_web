@@ -63,7 +63,8 @@ class CosmicWeb {
 
         window.addEventListener('scroll', () => {
             this.updatePortraitPosition();
-            // Don't regenerate - just update position for offset drawing
+            // Don't regenerate - just update position for offset drawing on portrait pages
+            // For non-portrait pages, keep center fixed
         });
     }
 
@@ -89,11 +90,13 @@ class CosmicWeb {
                 isPortraitOrigin: true
             };
         } else {
-            // Other pages: origin at right edge of screen
+            // Other pages: central bright point on the right side, similar to portrait position
+            // Position it where the portrait would typically be (right side of content area)
+            const rightOffset = Math.min(window.innerWidth * 0.75, window.innerWidth - 250);
             this.portraitCenter = {
-                x: window.innerWidth + 300, // Off-screen to the right
-                y: window.innerHeight / 2,
-                radius: 100,
+                x: rightOffset,
+                y: Math.min(window.innerHeight * 0.4, 400), // Upper-right area
+                radius: 20, // Small central point
                 visible: true,
                 isPortraitOrigin: false
             };
@@ -116,7 +119,8 @@ class CosmicWeb {
         const dx = x - this.portraitCenter.x;
         const dy = y - this.portraitCenter.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        return dist > this.portraitCenter.radius * 1.1; // Outside portrait
+        // Allow all angles, just check distance from center
+        return dist > this.portraitCenter.radius * 1.1; // Outside origin point
     }
 
     generateCosmicStructure() {
@@ -126,8 +130,8 @@ class CosmicWeb {
         const isPortraitOrigin = origin.isPortraitOrigin;
         
         // Adjust parameters based on page type
-        const maxRadius = isPortraitOrigin ? 2000 : 2000; // Extended to span across page
-        const wedgeAngle = isPortraitOrigin ? Math.PI * 2 : Math.PI * 1.2; // Full circle vs wedge
+        const maxRadius = 2000; // Extended to span across page
+        const wedgeAngle = Math.PI * 2; // Always full circle now
         
         this.clusters = [];
         this.filaments = [];
@@ -136,9 +140,7 @@ class CosmicWeb {
         // Generate clusters along the filament paths
         for (let i = 0; i < this.config.clusterCount; i++) {
             const r = Math.pow(Math.random(), 0.8) * maxRadius * this.rand(0.3, 1);
-            const a = isPortraitOrigin ? 
-                     Math.random() * Math.PI * 2 : // Full circle around portrait
-                     -wedgeAngle/2 + Math.random() * wedgeAngle; // Wedge from right edge
+            const a = Math.random() * Math.PI * 2; // Full circle
             const x = origin.x + r * Math.cos(a) + this.rand(-30, 30);
             const y = origin.y + r * Math.sin(a) + this.rand(-30, 30);
             this.clusters.push({ x, y, connections: 0 });
@@ -148,11 +150,9 @@ class CosmicWeb {
         // Aberration effect tilted towards down-left, lifted 10° from previous (20° down from left)
         
         for (let i = 0; i < this.config.majorFilaments; i++) {
-            const angle = isPortraitOrigin ?
-                         (i / this.config.majorFilaments) * Math.PI * 2 : // Evenly distributed around portrait
-                         -wedgeAngle/2 + (i / this.config.majorFilaments) * wedgeAngle; // Evenly distributed in wedge
+            const angle = (i / this.config.majorFilaments) * Math.PI * 2; // Evenly distributed full circle
             
-            // Start from portrait edge or right screen edge
+            // Start from origin edge
             const startX = origin.x + origin.radius * Math.cos(angle);
             const startY = origin.y + origin.radius * Math.sin(angle);
             
@@ -182,12 +182,17 @@ class CosmicWeb {
             });
         }
 
-        // Add background filaments for depth (faint, slightly offset)
-        const backgroundCount = 5; // Reduced from 8
+        // Add background filaments for depth (faint, positioned between major filaments)
+        // Place them between major filaments but not exactly in the middle
+        const backgroundCount = 5; // Reduced number of faint filaments
+        const angleStep = (Math.PI * 2) / this.config.majorFilaments;
+        
         for (let i = 0; i < backgroundCount; i++) {
-            const angle = isPortraitOrigin ?
-                         (i / backgroundCount) * Math.PI * 2 + 0.15 : // Offset from main filaments
-                         -wedgeAngle/2 + (i / backgroundCount) * wedgeAngle;
+            // Distribute across the full circle, between major filaments
+            const majorFilamentIndex = Math.floor(i * (this.config.majorFilaments / backgroundCount));
+            // Position between major filaments, offset by 35-45% of the gap (not exactly 50%)
+            const offsetRatio = 0.35 + Math.random() * 0.1; // Random offset between 35-45%
+            const angle = (majorFilamentIndex * angleStep) + (angleStep * offsetRatio);
             
             const startX = origin.x + origin.radius * Math.cos(angle);
             const startY = origin.y + origin.radius * Math.sin(angle);
@@ -196,8 +201,8 @@ class CosmicWeb {
             const variableSkew = alignmentWithAberration * -0.4;
             
             const aberratedAngle = angle + variableSkew;
-            const endX = origin.x + maxRadius * 0.9 * Math.cos(aberratedAngle); // Slightly shorter
-            const endY = origin.y + maxRadius * 0.9 * Math.sin(aberratedAngle);
+            const endX = origin.x + maxRadius * 0.85 * Math.cos(aberratedAngle); // Slightly shorter than major
+            const endY = origin.y + maxRadius * 0.85 * Math.sin(aberratedAngle);
             
             this.filaments.push({
                 p0: { x: startX, y: startY },
@@ -205,7 +210,7 @@ class CosmicWeb {
                 p2: { x: startX + (endX - startX) * 0.67, y: startY + (endY - startY) * 0.67 },
                 p3: { x: endX, y: endY },
                 type: 'background',
-                depth: 0.15 // Much fainter - reduced from 0.3
+                depth: 0.15 // Much fainter
             });
         }
 
@@ -223,7 +228,12 @@ class CosmicWeb {
                 const nx = -tangent.dy / len;
                 const ny = tangent.dx / len;
                 
-                const width = 30 * (0.5 + 0.5 * Math.sqrt(t)); // Increased width from 20 to 30
+                // Cone effect: width INCREASES with distance from origin
+                // Galaxies spread out more as they move away from the central point
+                // Start narrow (10) and expand wider (60) to match the cone shape
+                const minWidth = 5;    // Very tight at origin
+                const maxWidth = 120;  // Very wide at edge
+                const width = minWidth + (maxWidth - minWidth) * Math.pow(t, 1.2); // Width increases exponentially with distance
                 
                 const offset = this.gauss(0, width);
                 const dist = Math.sqrt((pos.x - origin.x) ** 2 + (pos.y - origin.y) ** 2);
@@ -275,6 +285,43 @@ class CosmicWeb {
         this.drawClusters();
         this.drawFilaments();
         this.drawGalaxies();
+        
+        // Draw bright central point (Big Bang) for non-portrait pages
+        if (!this.portraitCenter.isPortraitOrigin) {
+            this.drawBigBangPoint();
+        }
+    }
+    
+    drawBigBangPoint() {
+        if (!this.portraitCenter) return;
+        
+        const origin = this.portraitCenter;
+        const cx = origin.x;
+        const cy = origin.y;
+        
+        // Pulsing effect
+        const pulse = Math.sin(this.time * 2) * 0.3 + 1;
+        
+        // Multiple glowing layers for bright point
+        const gradients = [
+            { radius: 40 * pulse, alpha: 0.15 },
+            { radius: 25 * pulse, alpha: 0.3 },
+            { radius: 15 * pulse, alpha: 0.5 },
+            { radius: 8 * pulse, alpha: 0.8 },
+            { radius: 3 * pulse, alpha: 1.0 }
+        ];
+        
+        for (const g of gradients) {
+            const gradient = this.ctx.createRadialGradient(cx, cy, 0, cx, cy, g.radius);
+            gradient.addColorStop(0, `rgba(255, 255, 255, ${g.alpha})`);
+            gradient.addColorStop(0.4, `rgba(200, 220, 255, ${g.alpha * 0.6})`);
+            gradient.addColorStop(1, 'rgba(150, 200, 255, 0)');
+            
+            this.ctx.fillStyle = gradient;
+            this.ctx.beginPath();
+            this.ctx.arc(cx, cy, g.radius, 0, Math.PI * 2);
+            this.ctx.fill();
+        }
     }
 
     drawClusters() {
@@ -293,7 +340,7 @@ class CosmicWeb {
             const cx = c.x + offsetX;
             const cy = c.y + offsetY;
             
-            // Distance-based fade for portrait origin (using current position)
+            // Distance-based fade only for portrait origin
             const distance = Math.sqrt(Math.pow(cx - origin.x, 2) + Math.pow(cy - origin.y, 2));
             const fadeFactor = isPortraitOrigin ? Math.max(0, 1 - distance / maxRadius) : 1;
             
@@ -346,11 +393,12 @@ class CosmicWeb {
             
             // Depth-based properties
             const depth = f.depth || 1.0;
-            const baseAlpha = f.type === 'background' ? 0.02 : 0.08; // Main lines subtle, background fainter
+            const baseAlpha = f.type === 'background' ? 0.04 : 0.04; // Increased opacity for more visible cone
             const alpha = baseAlpha * fadeFactor * depth;
             
-            // Draw filament with tapering effect (cone-like)
-            // Split into segments and gradually reduce width
+            // Draw filament with cone/tapering effect
+            // Filaments start THIN at the central point and WIDEN as they expand outward
+            // Split into segments and gradually INCREASE width (cone expanding outward)
             const segments = 20;
             for (let i = 0; i < segments; i++) {
                 const t1 = i / segments;
@@ -370,10 +418,11 @@ class CosmicWeb {
                     p3: {x: p3x, y: p3y}
                 }, t2);
                 
-                // Tapering: width decreases from base (2.5) to tip (0.5)
-                const baseWidth = f.type === 'background' ? 1.2 : 2.5;
-                const tipWidth = f.type === 'background' ? 0.3 : 0.5;
-                const width = baseWidth - (baseWidth - tipWidth) * t1;
+                // Cone effect: width INCREASES from origin (thin) to outer edge (wide)
+                // Start very thin (0.3) and expand to wide (4.0) for major filaments
+                const startWidth = f.type === 'background' ? 0.15 : 0.2;  // Very thin at origin
+                const endWidth = f.type === 'background' ? 3.5 : 8.0;     // Much wider at edge
+                const width = startWidth + (endWidth - startWidth) * t1;  // Increases with distance
                 
                 this.ctx.beginPath();
                 this.ctx.moveTo(pos1.x, pos1.y);
