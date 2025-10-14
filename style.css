@@ -11,9 +11,9 @@
     --bg-primary: #0a0a0f;
     --bg-secondary: #1a1a2e;
     --bg-tertiary: #16213e;
-    --text-primary: #ffffff;
-    --text-secondary: #b8b8b8;
-    --text-muted: #888888;
+    --text-primary: #f5f5f5;
+    --text-secondary: #d4d4d4;
+    --text-muted: #a0a0a0;
     --accent-primary: #4a9eff;
     --accent-secondary: #ff6b6b;
     --accent-gold: #ffd700;
@@ -582,6 +582,22 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+}
+
+.research-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;           /* How image fills: cover/contain/fill */
+    object-position: center;      /* Position: center/top/bottom/left/right or 50% 50% */
+}
+
+.research-image img.proper-motion-img {
+    transform: scale(1.3);        /* Zoom in 30% for proper motion image */
+}
+
+.research-image img.high-z-img {
+    transform: scale(1.0);        /* Normal zoom for high-z image */
 }
 
 .research-image i {
@@ -639,6 +655,124 @@ body {
 .link-btn:hover {
     color: var(--accent-secondary);
     transform: translateX(3px);
+}
+
+/* === RESEARCH DETAIL PAGE === */
+.breadcrumb {
+    margin-bottom: 2rem;
+}
+
+.breadcrumb a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.breadcrumb a:hover {
+    color: var(--accent-primary);
+}
+
+.research-detail-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.research-detail-image {
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-secondary);
+}
+
+.research-detail-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.research-detail-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-card {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+}
+
+.info-card h3 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-card h3 i {
+    color: var(--accent-primary);
+}
+
+.info-list {
+    list-style: none;
+    padding: 0;
+}
+
+.info-list li {
+    color: var(--text-secondary);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.info-list li:last-child {
+    border-bottom: none;
+}
+
+.info-list strong {
+    color: var(--text-primary);
+    margin-right: 0.5rem;
+}
+
+.research-detail-description {
+    margin-top: 2rem;
+}
+
+.research-detail-description h2 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.research-detail-description p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.research-detail-description ul {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.research-detail-description ul li {
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .research-detail-info {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* === NOTES SECTION === */
@@ -706,6 +840,196 @@ body {
 
 .read-more:hover {
     color: var(--accent-secondary);
+}
+
+/* === NOTE ARTICLE PAGE === */
+.note-article {
+    width: 90%;
+    max-width: none;
+    margin: 0 auto 4rem auto;
+    background: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+
+.note-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.note-title {
+    color: var(--text-primary);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.note-meta {
+    display: flex;
+    gap: 2rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.note-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.note-meta i {
+    color: var(--accent-primary);
+}
+
+.note-body {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.note-body h2 {
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.note-body h3 {
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.note-body p {
+    margin-bottom: 1.5rem;
+}
+
+.note-body ul, .note-body ol {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+}
+
+.note-body li {
+    margin-bottom: 0.5rem;
+}
+
+.note-body strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.note-body code {
+    background: var(--bg-tertiary);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.note-body pre {
+    background: var(--bg-tertiary);
+    padding: 1.5rem;
+    border-radius: 10px;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+}
+
+/* LaTeX equations styling */
+.note-body .MathJax {
+    font-size: 1.1em;
+}
+
+.note-body mjx-container {
+    margin: 1.5rem 0;
+}
+
+/* Flexible image positioning with text wrapping */
+.note-figure {
+    margin: 1.5rem 0;
+    max-width: 500px;
+}
+
+.note-figure.float-right {
+    float: right;
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.note-figure.float-left {
+    float: left;
+    margin-right: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.note-figure.center {
+    display: block;
+    margin: 2.5rem auto;
+    max-width: 100%;
+    text-align: center;
+}
+
+.note-figure img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    display: block;
+}
+
+.note-figure figcaption {
+    margin-top: 0.75rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+/* Figure styling for images in notes */
+.note-figure {
+    margin: 2.5rem 0;
+    text-align: center;
+}
+
+.note-figure img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.note-figure figcaption {
+    margin-top: 1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 0.95em;
+}
+
+@media (max-width: 768px) {
+    .note-title {
+        font-size: 2rem;
+    }
+    
+    .note-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .note-body h2 {
+        font-size: 1.5rem;
+    }
+    
+    .note-body h3 {
+        font-size: 1.2rem;
+    }
 }
 
 /* === TRAVEL SECTION === */

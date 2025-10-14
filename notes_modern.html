@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Astrophysics - NGUYEN Phu-Huy</title>
+    <meta name="description" content="Study notes on modern astrophysics covering stellar physics and recent advancements.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- MathJax for LaTeX support -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+</head>
+<body>
+    <!-- Cosmic Web Large Scale Structure Background -->
+    <canvas id="starfield"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">NGUYEN Phu-Huy</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="about.html" class="nav-link">About</a>
+                <a href="cv.html" class="nav-link">CV</a>
+                <a href="research.html" class="nav-link">Research</a>
+                <a href="notes.html" class="nav-link active">Notes</a>
+                <a href="travel.html" class="nav-link">Travel</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Note Content Section -->
+        <section id="note-content" class="section">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="notes.html"><i class="fas fa-arrow-left"></i> Back to Notes</a>
+                </div>
+                
+                <article class="note-article">
+                    <header class="note-header">
+                        <h1 class="note-title">Modern Astrophysics</h1>
+                        <div class="note-meta">
+                            <span><i class="fas fa-calendar"></i> Last updated: October 2025</span>
+                            <span><i class="fas fa-tag"></i> Stellar Physics</span>
+                        </div>
+                    </header>
+                    
+                    <div class="note-body">
+                        <h2>Galactic structure</h2>
+                        <p> The galaxy is divided into several components that we can identify by their evolution and kinematics properties and chemical composition.
+                        We will focus on the Milky Way, which is a barred spiral galaxy, but this argument only apply to systems in the <b>local universe</b>. 
+                        The <b>local universe</b> is the region of space about 1 Byr from Earth that every stellar system in which, with the current observational facilities, we can identify stars.</p>
+
+                        <p>The most important component of the local universe is called <b>local group</b>, which are all the stellar system within a distance $d \leq 1\mathrm{Mpc}$.
+                        This regions is dominated by the Milky Way and Andromeda galaxies. The other crucial component of the local universe is the <b>local volume</b>, which is the 
+                        system within 25 Mpc.</p> 
+
+                        <p> The local universe is affected by the local motion and it is moving towards the <b>Great Attractor</b>. This is important if we want to measure the Hubble constant $H_0$ 
+                            since the local motion can affect the redshift of the galaxies. Furthermore, there are no elliptical galaxies in the local group.</p> 
+
+                        <figure class="note-figure float-right">
+                            <img src="image/gal_structure.png" alt="Galaxy Structure Diagram">
+                            <figcaption>Figure 1: Structural components of the Milky Way galaxy showing the halo, bulge, and disk regions.</figcaption>
+                        </figure>
+
+                        <p>When studying our galaxy, the important components that needed to investigate are halo, bulge, and disk.</p>
+                        <ul>
+                            <li><strong>Halo:</strong> Spherical region surrounding the galaxy (<span style="color: rgb(163, 148, 250);">$M_{halo} \approx 0.1 M_{MW}$, $R_{halo} \approx 120 \mathrm{kpc}$</span>), containing mainly old red stars and globular clusters. 
+                                Low metallicity, indicating early formation. Globular clusters are stellar systems with <span style="color: rgb(163, 148, 250);"> $M_{GC} \approx 10^3 - 10^6 M_{\odot}$</span> and almost the age of the universe. The stars within 
+                                them follow the Maxwell-Boltzmann distribution due to their radial velocity. <span style="color: rgb(238, 144, 144);">These structures are the most important stellar systems you can find in the halo.</span></li>
+                            <li><strong>Bulge:</strong> Central, dense region of the galaxy (<span style="color: rgb(163, 148, 250);">$M_{bulge} \approx 0.4 M_{MW}$, $R_{bulge} \approx 3 \mathrm{kpc}$</span>). Contains mostly red stars and have similar stellar population as the halo</li>
+                            <li><strong>Disk:</strong> Flat, rotating component containing most of the galaxy's stars, gas, and dust (<span style="color: rgb(163, 148, 250);">$M_{disk} \approx 0.5 M_{MW}$, $R_{disk} \approx 20 - 23 \mathrm{kpc}$</span>). Includes spiral arms with ongoing star formation. 
+                                Contain open clusters (younger and more chaotic than globular clusters) with the main population beging blue stars.</li>
+                        </ul> 
+                         
+                        In astrophysics, we can only measure radiation in specific bands rather than the whole spectrum. Therefore, we use the <b>Photometric System</b> as shown in Figure 2.
+                        <figure class="note-figure float-right">
+                            <img src="image/photometric_system.png" alt="Photometric System Diagram">
+                            <figcaption>Figure 2: Common photometric systems used in astronomy, showing the wavelength coverage of various filters. The name of the filters are Ultraviolet, Blue, Green, Visual, Red, Infrared, respectively.</figcaption>
+                        </figure>
+
+                        An important thing that we can use to characterize stellar popolation is their chemical composition, such as their <b>metallicity</b> [Fe/H] = log<sub>10</sub>(Z/Z<sub>☉</sub>), where Z is the metallicity and Z<sub>☉</sub> is the solar metallicity. 
+                        For halo population, we have -3.5$\leq$[Fe/H]$\leq$-1.5, for disk population, we have -1.0$\leq$[Fe/H]$\leq$0.5, and for bulge population, we have -1.5$\leq$[Fe/H]$\leq$0.5. This indicate that metallicity is not a good indicator for the age of a star.
+
+                        <p> The <b><span style="color: rgb(163, 148, 250);">distance modulus</span></b> is the apparent distance between the absolute and apparent magnitude <span style="color: rgb(163, 148, 250);">$DM_{\nu} = m_{\nu} - M_{\nu} = 5(\log_{10}(D) - 1)$</span>, where D is the distance in parsecs.</p>
+                        <p> However, we need to account for the amount of dust between us and the object also, which is called <b><span style="color: rgb(163, 148, 250);">color excess E(B - V) = $A_B - A_V$</span></b></p>. Therefore, the intrinsic color is 
+                        $$(m_B - m_V)_{\phi} = (m_B - m_V) - E(B - V)$$
+
+                        <div style="clear: both;"></div>
+
+                        <h2>Stellar Matter</h2> 
+
+
+
+
+                        <div style="clear: both;"></div>
+                        
+                        <h2>Stellar Structure and Evolution</h2>
+                        
+                        <h3>Equations of Stellar Structure</h3>
+                        <p>The four fundamental equations governing stellar structure:</p>
+                        
+                        <p><strong>1. Mass continuity:</strong></p>
+                        $$\frac{dM_r}{dr} = 4\pi r^2 \rho$$
+                        
+                        <p><strong>2. Hydrostatic equilibrium:</strong></p>
+                        $$\frac{dP}{dr} = -\frac{GM_r \rho}{r^2}$$
+                        
+                        <p><strong>3. Energy transport:</strong></p>
+                        $$\frac{dL_r}{dr} = 4\pi r^2 \rho \epsilon$$
+                        
+                        <p><strong>4. Temperature gradient:</strong></p>
+                        $$\frac{dT}{dr} = -\frac{3\kappa \rho L_r}{16\pi a c T^3 r^2}$$
+                        
+                        <h2>Nuclear Fusion</h2>
+                        
+                        <h3>Proton-Proton Chain</h3>
+                        <p>The dominant fusion process in Sun-like stars:</p>
+                        $$4p \rightarrow {}^4\text{He} + 2e^+ + 2\nu_e + 26.7\text{ MeV}$$
+                        
+                        <h3>CNO Cycle</h3>
+                        <p>Important in more massive stars where $T > 1.5 \times 10^7$ K.</p>
+                        
+                        <h2>Stellar Classification</h2>
+                        
+                        <h3>Spectral Types</h3>
+                        <p>O, B, A, F, G, K, M (from hottest to coolest)</p>
+                        
+                        <h3>Hertzsprung-Russell Diagram</h3>
+                        <p>Relationship between luminosity and temperature:</p>
+                        $$L = 4\pi R^2 \sigma T_{eff}^4$$
+                        
+                        <h2>Stellar Evolution Stages</h2>
+                        
+                        <h3>Main Sequence</h3>
+                        <p>Stars spend ~90% of their lifetime here, burning hydrogen in the core.</p>
+                        <p>Mass-luminosity relation:</p>
+                        $$\frac{L}{L_\odot} \approx \left(\frac{M}{M_\odot}\right)^{3.5}$$
+                        
+                        <h3>Post-Main Sequence</h3>
+                        <ul>
+                            <li><strong>Red Giant Branch:</strong> Hydrogen shell burning</li>
+                            <li><strong>Horizontal Branch:</strong> Helium core burning</li>
+                            <li><strong>Asymptotic Giant Branch:</strong> Double shell burning</li>
+                        </ul>
+                        
+                        <h3>Stellar Remnants</h3>
+                        
+                        <p><strong>White Dwarfs:</strong></p>
+                        <p>Supported by electron degeneracy pressure. Maximum mass (Chandrasekhar limit):</p>
+                        $$M_{Ch} = 1.4 M_\odot$$
+                        
+                        <p><strong>Neutron Stars:</strong></p>
+                        <p>Supported by neutron degeneracy pressure. Typical mass:</p>
+                        $$M_{NS} \sim 1.4 - 2.0 M_\odot$$
+                        
+                        <p><strong>Black Holes:</strong></p>
+                        <p>Schwarzschild radius:</p>
+                        $$R_s = \frac{2GM}{c^2}$$
+                        
+                        <h2>Stellar Populations</h2>
+                        
+                        <h3>Population I</h3>
+                        <ul>
+                            <li>Young stars</li>
+                            <li>High metallicity ($Z > 0.01$)</li>
+                            <li>Located in galactic disk</li>
+                        </ul>
+                        
+                        <h3>Population II</h3>
+                        <ul>
+                            <li>Old stars</li>
+                            <li>Low metallicity ($Z < 0.001$)</li>
+                            <li>Located in halo and bulge</li>
+                        </ul>
+                        
+                        <h2>Stellar Atmospheres</h2>
+                        
+                        <h3>Effective Temperature</h3>
+                        $$T_{eff} = \left(\frac{L}{4\pi R^2 \sigma}\right)^{1/4}$$
+                        
+                        <h3>Saha Equation</h3>
+                        <p>Describes ionization equilibrium:</p>
+                        $$\frac{n_{i+1}n_e}{n_i} = \frac{2Z_{i+1}}{Z_i}\left(\frac{2\pi m_e k_B T}{h^2}\right)^{3/2}e^{-\chi_i/k_BT}$$
+                        
+                        <h2>Binary Stars</h2>
+                        
+                        <h3>Kepler's Third Law</h3>
+                        $$\frac{a^3}{P^2} = \frac{G(M_1 + M_2)}{4\pi^2}$$
+                        
+                        <h3>Roche Lobe</h3>
+                        <p>Critical radius for mass transfer:</p>
+                        $$\frac{R_L}{a} \approx 0.49 \frac{q^{2/3}}{0.6q^{2/3} + \ln(1+q^{1/3})}$$
+                        
+                        <h2>Recent Developments</h2>
+                        <ul>
+                            <li>Detection of gravitational waves from binary mergers</li>
+                            <li>Asteroseismology and stellar interiors</li>
+                            <li>Exoplanet host star characterization</li>
+                            <li>Population III star searches</li>
+                        </ul>
+                        
+                        <h2>Key References</h2>
+                        <ul>
+                            <li>Carroll & Ostlie - "An Introduction to Modern Astrophysics"</li>
+                            <li>Kippenhahn, Weigert & Weiss - "Stellar Structure and Evolution"</li>
+                            <li>Hansen, Kawaler & Trimble - "Stellar Interiors"</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>NGUYEN Phu-Huy</h4>
+                    <p>Master's Student in Astrophysics and Space Science</p>
+                    <p>University of Rome "Tor Vergata"</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="cv.html">CV</a></li>
+                        <li><a href="research.html">Research</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-orcid"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-google"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 NGUYEN Phu-Huy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

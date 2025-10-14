@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radiative Process - NGUYEN Phu-Huy</title>
+    <meta name="description" content="Study notes on radiative processes in astrophysics.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- MathJax for LaTeX support -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+</head>
+<body>
+    <!-- Cosmic Web Large Scale Structure Background -->
+    <canvas id="starfield"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">NGUYEN Phu-Huy</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="about.html" class="nav-link">About</a>
+                <a href="cv.html" class="nav-link">CV</a>
+                <a href="research.html" class="nav-link">Research</a>
+                <a href="notes.html" class="nav-link active">Notes</a>
+                <a href="travel.html" class="nav-link">Travel</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Note Content Section -->
+        <section id="note-content" class="section">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="notes.html"><i class="fas fa-arrow-left"></i> Back to Notes</a>
+                </div>
+                
+                <article class="note-article">
+                    <header class="note-header">
+                        <h1 class="note-title">Radiative Process</h1>
+                        <div class="note-meta">
+                            <span><i class="fas fa-calendar"></i> Last updated: October 2025</span>
+                            <span><i class="fas fa-tag"></i> Astrophysics</span>
+                        </div>
+                    </header>
+                    
+                    <div class="note-body">
+                        <h2>Introduction</h2>
+                        <p>Astronomy is the science of observation and from the radiation observed, we learned about what is going on in the universe through radiative processes.</p>
+                        
+                        <h2>Fundamental Equations</h2>
+                        <p>The specific intensity is defined as:</p>
+                        $$I_\nu = \frac{dE}{dA \, dt \, d\nu \, d\Omega}$$
+                        
+                        <p>where $E$ is energy, $A$ is area, $t$ is time, $\nu$ is frequency, and $\Omega$ is solid angle.</p>
+                        
+                        <h2>Blackbody Radiation</h2>
+                        <p>The Planck function describes the spectral radiance of blackbody radiation:</p>
+                        $$B_\nu(T) = \frac{2h\nu^3}{c^2} \frac{1}{e^{h\nu/k_BT} - 1}$$
+                        
+                        <p>where:</p>
+                        <ul>
+                            <li>$h$ is Planck's constant</li>
+                            <li>$\nu$ is frequency</li>
+                            <li>$c$ is the speed of light</li>
+                            <li>$k_B$ is Boltzmann's constant</li>
+                            <li>$T$ is temperature</li>
+                        </ul>
+                        
+                        <h2>Radiative Transfer</h2>
+                        <p>The equation of radiative transfer is:</p>
+                        $$\frac{dI_\nu}{ds} = -\kappa_\nu \rho I_\nu + j_\nu \rho$$
+                        
+                        <p>where $\kappa_\nu$ is the absorption coefficient and $j_\nu$ is the emission coefficient.</p>
+                        
+                        <h2>Key Processes</h2>
+                        
+                        <h3>1. Bremsstrahlung (Free-Free Emission)</h3>
+                        <p>Radiation from accelerated charged particles. The emissivity is proportional to:</p>
+                        $$j_\nu^{ff} \propto n_e n_i T^{-1/2} e^{-h\nu/k_BT}$$
+                        
+                        <h3>2. Synchrotron Radiation</h3>
+                        <p>Emission from relativistic electrons spiraling in magnetic fields. Power radiated:</p>
+                        $$P = \frac{4}{3} \sigma_T c \gamma^2 U_B$$
+                        
+                        <p>where $\sigma_T$ is the Thomson cross-section, $\gamma$ is the Lorentz factor, and $U_B$ is the magnetic energy density.</p>
+                        
+                        <h3>3. Compton Scattering</h3>
+                        <p>The change in photon energy through scattering:</p>
+                        $$\Delta E = E \frac{4k_BT_e}{m_ec^2}$$
+                        
+                        <h2>Applications in Astrophysics</h2>
+                        <ul>
+                            <li><strong>Stellar atmospheres:</strong> Understanding spectral lines and continuum emission</li>
+                            <li><strong>Interstellar medium:</strong> Heating and cooling processes</li>
+                            <li><strong>Active galactic nuclei:</strong> High-energy emission mechanisms</li>
+                            <li><strong>Cosmic microwave background:</strong> Blackbody radiation from early universe</li>
+                        </ul>
+                        
+                        <h2>Important Constants</h2>
+                        <p>Some useful constants in radiative processes:</p>
+                        <ul>
+                            <li>Speed of light: $c = 3 \times 10^{10}$ cm/s</li>
+                            <li>Planck constant: $h = 6.626 \times 10^{-27}$ erg·s</li>
+                            <li>Boltzmann constant: $k_B = 1.381 \times 10^{-16}$ erg/K</li>
+                            <li>Stefan-Boltzmann constant: $\sigma = 5.67 \times 10^{-5}$ erg cm$^{-2}$ s$^{-1}$ K$^{-4}$</li>
+                        </ul>
+                        
+                        <h2>Further Reading</h2>
+                        <ul>
+                            <li>Rybicki & Lightman - "Radiative Processes in Astrophysics"</li>
+                            <li>Shu - "The Physics of Astrophysics: Radiation"</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>NGUYEN Phu-Huy</h4>
+                    <p>Master's Student in Astrophysics and Space Science</p>
+                    <p>University of Rome "Tor Vergata"</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="cv.html">CV</a></li>
+                        <li><a href="research.html">Research</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-orcid"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-google"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 NGUYEN Phu-Huy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

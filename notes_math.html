@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematical Methods for Physics - NGUYEN Phu-Huy</title>
+    <meta name="description" content="Study notes on mathematical methods used in physics.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- MathJax for LaTeX support -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+</head>
+<body>
+    <!-- Cosmic Web Large Scale Structure Background -->
+    <canvas id="starfield"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">NGUYEN Phu-Huy</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="about.html" class="nav-link">About</a>
+                <a href="cv.html" class="nav-link">CV</a>
+                <a href="research.html" class="nav-link">Research</a>
+                <a href="notes.html" class="nav-link active">Notes</a>
+                <a href="travel.html" class="nav-link">Travel</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Note Content Section -->
+        <section id="note-content" class="section">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="notes.html"><i class="fas fa-arrow-left"></i> Back to Notes</a>
+                </div>
+                
+                <article class="note-article">
+                    <header class="note-header">
+                        <h1 class="note-title">Mathematical Methods for Physics</h1>
+                        <div class="note-meta">
+                            <span><i class="fas fa-calendar"></i> Last updated: October 2025</span>
+                            <span><i class="fas fa-tag"></i> Mathematics</span>
+                        </div>
+                    </header>
+                    
+                    <div class="note-body">
+                        <h2>Introduction</h2>
+                        <p>Just math... but the kind that makes physics possible.</p>
+                        
+                        <h2>Vector Calculus</h2>
+                        
+                        <h3>Gradient, Divergence, and Curl</h3>
+                        <p><strong>Gradient:</strong></p>
+                        $$\nabla f = \frac{\partial f}{\partial x}\hat{x} + \frac{\partial f}{\partial y}\hat{y} + \frac{\partial f}{\partial z}\hat{z}$$
+                        
+                        <p><strong>Divergence:</strong></p>
+                        $$\nabla \cdot \vec{F} = \frac{\partial F_x}{\partial x} + \frac{\partial F_y}{\partial y} + \frac{\partial F_z}{\partial z}$$
+                        
+                        <p><strong>Curl:</strong></p>
+                        $$\nabla \times \vec{F} = \begin{vmatrix} \hat{x} & \hat{y} & \hat{z} \\ \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\ F_x & F_y & F_z \end{vmatrix}$$
+                        
+                        <h3>Important Theorems</h3>
+                        <p><strong>Divergence Theorem:</strong></p>
+                        $$\iiint_V (\nabla \cdot \vec{F}) \, dV = \iint_S \vec{F} \cdot d\vec{S}$$
+                        
+                        <p><strong>Stokes' Theorem:</strong></p>
+                        $$\iint_S (\nabla \times \vec{F}) \cdot d\vec{S} = \oint_C \vec{F} \cdot d\vec{l}$$
+                        
+                        <h2>Differential Equations</h2>
+                        
+                        <h3>Ordinary Differential Equations</h3>
+                        <p><strong>First Order Linear:</strong></p>
+                        $$\frac{dy}{dx} + P(x)y = Q(x)$$
+                        <p>Solution:</p>
+                        $$y = e^{-\int P dx}\left(\int Q e^{\int P dx} dx + C\right)$$
+                        
+                        <p><strong>Second Order Homogeneous:</strong></p>
+                        $$ay'' + by' + cy = 0$$
+                        <p>Characteristic equation: $ar^2 + br + c = 0$</p>
+                        
+                        <h3>Partial Differential Equations</h3>
+                        
+                        <p><strong>Wave Equation:</strong></p>
+                        $$\frac{\partial^2 u}{\partial t^2} = c^2 \nabla^2 u$$
+                        
+                        <p><strong>Heat Equation:</strong></p>
+                        $$\frac{\partial u}{\partial t} = \alpha \nabla^2 u$$
+                        
+                        <p><strong>Laplace Equation:</strong></p>
+                        $$\nabla^2 u = 0$$
+                        
+                        <h2>Complex Analysis</h2>
+                        
+                        <h3>Euler's Formula</h3>
+                        $$e^{i\theta} = \cos\theta + i\sin\theta$$
+                        
+                        <h3>Cauchy-Riemann Equations</h3>
+                        $$\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$$
+                        
+                        <h3>Residue Theorem</h3>
+                        $$\oint_C f(z) dz = 2\pi i \sum \text{Res}(f, z_k)$$
+                        
+                        <h2>Fourier Analysis</h2>
+                        
+                        <h3>Fourier Series</h3>
+                        $$f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} \left(a_n \cos(nx) + b_n \sin(nx)\right)$$
+                        
+                        <p>where:</p>
+                        $$a_n = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\cos(nx) dx$$
+                        $$b_n = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\sin(nx) dx$$
+                        
+                        <h3>Fourier Transform</h3>
+                        $$\tilde{f}(k) = \int_{-\infty}^{\infty} f(x) e^{-ikx} dx$$
+                        
+                        <p><strong>Inverse Transform:</strong></p>
+                        $$f(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty} \tilde{f}(k) e^{ikx} dk$$
+                        
+                        <h2>Special Functions</h2>
+                        
+                        <h3>Bessel Functions</h3>
+                        <p>Solutions to Bessel's equation:</p>
+                        $$x^2\frac{d^2y}{dx^2} + x\frac{dy}{dx} + (x^2 - n^2)y = 0$$
+                        
+                        <h3>Legendre Polynomials</h3>
+                        <p>Rodrigues formula:</p>
+                        $$P_n(x) = \frac{1}{2^n n!}\frac{d^n}{dx^n}(x^2-1)^n$$
+                        
+                        <h3>Spherical Harmonics</h3>
+                        $$Y_l^m(\theta,\phi) = \sqrt{\frac{(2l+1)(l-m)!}{4\pi(l+m)!}}P_l^m(\cos\theta)e^{im\phi}$$
+                        
+                        <h2>Linear Algebra</h2>
+                        
+                        <h3>Eigenvalue Problem</h3>
+                        $$A\vec{v} = \lambda\vec{v}$$
+                        
+                        <p>Characteristic equation:</p>
+                        $$\det(A - \lambda I) = 0$$
+                        
+                        <h3>Matrix Diagonalization</h3>
+                        $$A = PDP^{-1}$$
+                        
+                        <h2>Tensor Analysis</h2>
+                        
+                        <h3>Metric Tensor</h3>
+                        $$ds^2 = g_{\mu\nu}dx^\mu dx^\nu$$
+                        
+                        <h3>Christoffel Symbols</h3>
+                        $$\Gamma^\lambda_{\mu\nu} = \frac{1}{2}g^{\lambda\sigma}\left(\frac{\partial g_{\sigma\mu}}{\partial x^\nu} + \frac{\partial g_{\sigma\nu}}{\partial x^\mu} - \frac{\partial g_{\mu\nu}}{\partial x^\sigma}\right)$$
+                        
+                        <h2>Green's Functions</h2>
+                        
+                        <p>Solution to inhomogeneous differential equation:</p>
+                        $$\mathcal{L}G(x,x') = \delta(x-x')$$
+                        
+                        <p>General solution:</p>
+                        $$u(x) = \int G(x,x')f(x') dx'$$
+                        
+                        <h2>Variational Calculus</h2>
+                        
+                        <h3>Euler-Lagrange Equation</h3>
+                        $$\frac{\partial L}{\partial q} - \frac{d}{dt}\frac{\partial L}{\partial \dot{q}} = 0$$
+                        
+                        <h2>Applications in Physics</h2>
+                        <ul>
+                            <li><strong>Quantum Mechanics:</strong> Schrödinger equation, spherical harmonics</li>
+                            <li><strong>Electromagnetism:</strong> Maxwell's equations, vector calculus</li>
+                            <li><strong>General Relativity:</strong> Tensor analysis, differential geometry</li>
+                            <li><strong>Statistical Mechanics:</strong> Fourier analysis, special functions</li>
+                        </ul>
+                        
+                        <h2>Key References</h2>
+                        <ul>
+                            <li>Arfken, Weber & Harris - "Mathematical Methods for Physicists"</li>
+                            <li>Boas - "Mathematical Methods in the Physical Sciences"</li>
+                            <li>Riley, Hobson & Bence - "Mathematical Methods for Physics and Engineering"</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>NGUYEN Phu-Huy</h4>
+                    <p>Master's Student in Astrophysics and Space Science</p>
+                    <p>University of Rome "Tor Vergata"</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="cv.html">CV</a></li>
+                        <li><a href="research.html">Research</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-orcid"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-google"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 NGUYEN Phu-Huy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

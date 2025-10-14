@@ -393,7 +393,7 @@ class CosmicWeb {
             
             // Depth-based properties
             const depth = f.depth || 1.0;
-            const baseAlpha = f.type === 'background' ? 0.04 : 0.04; // Increased opacity for more visible cone
+            const baseAlpha = f.type === 'background' ? 0.01 : 0.01; // Increased opacity for more visible cone
             const alpha = baseAlpha * fadeFactor * depth;
             
             // Draw filament with cone/tapering effect
