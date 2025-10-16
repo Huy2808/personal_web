@@ -282,7 +282,7 @@ class CosmicWeb {
         this.offsetY = this.portraitCenter.y - this.initialPortraitCenter.y;
 
         // Draw in layers
-        this.drawClusters();
+        // this.drawClusters(); // Removed - clusters looked unrelated to the cosmic web
         this.drawFilaments();
         this.drawGalaxies();
         

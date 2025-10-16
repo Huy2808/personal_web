@@ -109,8 +109,8 @@
                          
                         In astrophysics, we can only measure radiation in specific bands rather than the whole spectrum. Therefore, we use the <b>Photometric System</b> as shown in Figure 2.
                         <figure class="note-figure float-right">
-                            <img src="image/photometric_system.png" alt="Photometric System Diagram">
-                            <figcaption>Figure 2: Common photometric systems used in astronomy, showing the wavelength coverage of various filters. The name of the filters are Ultraviolet, Blue, Green, Visual, Red, Infrared, respectively.</figcaption>
+                            <img src="image/photometric_system.png" alt="Photometric System Diagram" width="300px" style="max-width: 100%; height: auto;">
+                            <figcaption style="width: 400px; max-width: 100%;">Figure 2: Common photometric systems used in astronomy, showing filters (U, B, G, V, R, IR) and their wavelength coverage.</figcaption>
                         </figure>
 
                         An important thing that we can use to characterize stellar popolation is their chemical composition, such as their <b>metallicity</b> [Fe/H] = log<sub>10</sub>(Z/Z<sub>☉</sub>), where Z is the metallicity and Z<sub>☉</sub> is the solar metallicity. 
@@ -118,15 +118,32 @@
 
                         <p> The <b><span style="color: rgb(163, 148, 250);">distance modulus</span></b> is the apparent distance between the absolute and apparent magnitude <span style="color: rgb(163, 148, 250);">$DM_{\nu} = m_{\nu} - M_{\nu} = 5(\log_{10}(D) - 1)$</span>, where D is the distance in parsecs.</p>
                         <p> However, we need to account for the amount of dust between us and the object also, which is called <b><span style="color: rgb(163, 148, 250);">color excess E(B - V) = $A_B - A_V$</span></b></p>. Therefore, the intrinsic color is 
-                        $$(m_B - m_V)_{\phi} = (m_B - m_V) - E(B - V)$$
+                        $$(m_B - m_V)_{\phi} = (m_B - m_V) - E(B - V)$$ 
 
+
+                        <figure class="note-figure float-left">
+                            <img src="image/reddening_law.png" alt="Reddening Law Diagram" width="400px" style="max-width: 100%; height: auto;">
+                            <figcaption style="width: 300px; max-width: 100%;">Figure 3: Reddening law in astronomy, showing the relationship between extinction and frequency. J, H, K are belongs to the near-infrared photometric system.</figcaption>
+                        </figure>
+                        <p>Starting from the distance modulus, we can express that $A_V = R_V . E(B-V)$, with $R_V$ being the total-to-selective absorption ratio. Usually, $R_V \approx 3.1$. However, this only works on V band, therefore, we need some extra information to work 
+                            with other bands, which is called the <b>reddening law</b>. However, the first principle of the reddening law comes from the empirical evidences rather than derivation. The evidences said that a good fraction for the a galaxy is about 3.1
+                        Looking at the Figure 3, we can see that the shorter wavelength are observed less is because their wave-lengths are comparable to the dust grains, therefore, they are more affected by extinction. For example, the transition from the optical to near-ir is 
+                        $\dfrac{A_U}{A_V} \approx 1.6$, which means that the number of photons in U band is 16 times dimmer than in V band.</p>
+
+                        <p>The peak in the Figure 3 is called the <b>Druid Profile</b> and it is associated with the size of the grains that are absorbing the photons. The main culprit seems to be PAHs (Polycyclic Aromatic Hydrocarbons).</p>
                         <div style="clear: both;"></div>
 
                         <h2>Stellar Matter</h2> 
 
+                        <p>The ingredients of a star are gas and radiation. We need to quantify the properties of the material. The first step is to use the <b>Mean Molecular Weight</b>:
+                        $$\mu = \dfrac{\langle m \rangle}{m_H} = \dfrac{\rho}{n m_H}$$
+                        where $\langle m \rangle$ is the average mass of a particle, $m_H$ is the mass of hydrogen, $\rho$ is the density of the gas, and n is the number of particles per unit volume.</p>
 
-
-
+                        <p>For a fully ionized gas, we have 3 parameters, which are $X_i, \, A_i, \, Z_i$, which are the mass fraction, atomic weight, and atomic number, respectively. Therefore, the total number of particles per unit volume is given by
+                            $$n = \sum_i \dfrac{\rho X_i}{A_i m_H} + \sum_i \dfrac{\rho X_i Z_i}{A_i m_H}$$
+                            where the first term is the contribution from the ions and the second one is the contribution of electrons. Therefore, we can express the mean molecular weight as
+                            $$\mu = \dfrac{1}{\sum_i \dfrac{X_i}{A_i}}$$
+                        </p>
                         <div style="clear: both;"></div>
                         
                         <h2>Stellar Structure and Evolution</h2>
