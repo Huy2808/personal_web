@@ -59,63 +59,62 @@
                     <div class="research-detail-image">
                         <img src="image/high_z.png" alt="High-redshift Galaxies">
                     </div>
-                    
-                    <div class="research-detail-info">
-                        <div class="info-card">
-                            <h3><i class="fas fa-info-circle"></i> Project Information</h3>
-                            <ul class="info-list">
-                                <li><strong>Status:</strong> Ongoing</li>
-                                <li><strong>Duration:</strong> 2024 - Present</li>
-                                <li><strong>Role:</strong> Researcher</li>
-                                <li><strong>Institution:</strong> University of Rome "Tor Vergata"</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="info-card">
-                            <h3><i class="fas fa-link"></i> Links</h3>
-                            <div class="research-links">
-                                <a href="#" class="link-btn"><i class="fab fa-github"></i> GitHub Repository</a>
-                                <!-- <a href="#" class="link-btn"><i class="fas fa-file-pdf"></i> Paper</a> -->
-                                <!-- <a href="#" class="link-btn"><i class="fas fa-presentation"></i> Presentation</a> -->
-                            </div>
-                        </div>
-                    </div>
+                
                     
                     <div class="research-detail-description">
                         <h2>Overview</h2>
-                        <p>This research focuses on studying the morphologies and physical properties of high-redshift lensed galaxies, providing insights into galaxy formation and evolution in the early Universe.</p>
-                        
-                        <h2>Scientific Goals</h2>
-                        <p>High-redshift galaxies offer a unique window into the early Universe, allowing us to observe galaxy formation processes that occurred billions of years ago. Gravitational lensing magnifies these distant objects, enabling detailed studies that would otherwise be impossible.</p>
-                        
-                        <h2>Research Focus</h2>
-                        <ul>
-                            <li>Morphological classification of lensed high-redshift galaxies</li>
-                            <li>Analysis of physical properties (mass, star formation rate, metallicity)</li>
-                            <li>Understanding galaxy evolution across cosmic time</li>
-                            <li>Leveraging gravitational lensing for enhanced observations</li>
-                        </ul>
-                        
-                        <h2>Methodology</h2>
-                        <ul>
-                            <li>Multi-wavelength imaging analysis</li>
-                            <li>Spectroscopic studies for redshift determination</li>
-                            <li>Gravitational lens modeling</li>
-                            <li>Statistical analysis of galaxy populations</li>
-                        </ul>
-                        
-                        <h2>Tools & Technologies</h2>
-                        <div class="research-tools">
-                            <span class="tool-tag">Python</span>
-                            <span class="tool-tag">AstroPy</span>
-                            <span class="tool-tag">Source Extractor</span>
-                            <span class="tool-tag">DS9</span>
-                            <span class="tool-tag">Photutils</span>
-                            <span class="tool-tag">SciPy</span>
-                        </div>
-                        
-                        <h2>Significance</h2>
-                        <p>Understanding high-redshift galaxies is crucial for testing theories of galaxy formation and evolution. These observations help constrain cosmological models and provide insights into the physical processes that shaped the Universe we see today.</p>
+                        <p>The history of the Universe is characterized by distinct epochs of structure assembly and formation. Among these, there is a critical period known as the Cosmic Dawn, which marks the time when the first stars and galaxies began to form.
+                            This ended the Dark Ages and initiated the Epoch of Reionization, fundamentally transforming the intergalactic medium from neutral to ionized. This is one of the last major phase transitions in the Universe and is suggested that it was
+                            largely complete by redshift z ~ 6, which is about 1 billion years after the Big Bang. Therefore, galaxies at these redshifts
+                            therefore provide a crucial window into this transitionary era, lying at the boundary between
+                            a partially ionized and a fully ionized Universe. 
+                        </p>
+
+
+                        <p>In this project, we focus on P109 (also called RXC J2248-ID3), a quintuply lensed galaxy located at redshift z ~ 6.11, distorted and magnified by the Abell S1063 galaxy cluster. Over the years, P109 has been observed with several major 
+                            facilities, including the VLT, Magellan/FIRE, HST, and more recently JWST, providing high-quality imaging and spectroscopy from the ultraviolet to the infrared. With the unprecedented spatial resolution of JWST, we were able to distinguish the individual 
+                        substructures within the galaxy and study their properties in detail.</p>
+
+                        <figure class="research-figure float-right" style="--figure-width: 800px;">
+                            <img src="image/photom_high_z.png" alt="P109 galaxy clumps">
+                                <figcaption>Figure 1: Multi-wavelength cutout images of P109 observed with HST and JWST in different filters. The
+                                filter name is labeled in each panel. The clump divisions are shown as rectangles. All cutouts cover the same 1 &times; 1 arcsec<sup>2</sup>
+                                sky area. All maps are shown in units of flux per pixel
+                                (nJy/pixel; see color bar).</figcaption>
+                            </figure>
+                            
+                            <p>From the multiband images and source plane reconstruction, we confirmed that P109 has a 3 distinct clumps of star-forming regions as shown in Figure 1. 
+                                The presence of such compact clumps is consistent with the theoretical predictions of of the violent disk instability model for the high-redshift galaxies, where gas-rich turbulent 
+                                disks fragment into massive star-forming clumps due to gravitational instabilities. We then use spectral energy distribution (SED) fitting to derive the physical properties for each 
+                                clump and galaxy as a whole, including their stellar masses, star formation rates, ages, and dust content. We then compare P109 properties to the star-forming main sequence (SFMS) 
+                                at similar redshifts to understand its star formation activity in the context of galaxy evolution as shown in Figure 2. 
+                            </p>
+                            
+                            <div style="clear: both;"></div>
+
+                            <figure class="research-figure float-left" style="--figure-width: 500px;">
+                                <img src="image/m_sfr_relation.png" alt="Star-forming main sequence">
+                                <figcaption>Figure 2:  Correlation between SFR and stellar mass (M⋆) for main-sequence galaxies at z ∼ 6. The blue
+                            line indicates the star-forming main sequence from Speagle et al. (2014), with the shaded region showing
+                            the ±0.34 dex scatter (± 1-σ). P109 from our study is shown as a red square, along with its three clumps:
+                            Clump 1 (yellow square), Clump 2 (green square), and Clump 3 (black square). For comparison, the result
+                            for P109 from Topping et al. (2024) is also plotted as an orange circle.</figcaption>
+                            </figure>
+
+                            
+                               <p>From the Figure 2, P109 is firmly in the starburst regime, indicating
+                                an exceptionally high star formation efficiency. This extreme activity is likely captured in
+                                our model by the recent burst component, which dominates the galaxy’s UV luminosity. While Clump 1 and Clump 2 are powerful starbursts lying above or on the MS, Clump 3 falls on
+                                it. Its low and poorly constrained SFR suggests that its star formation has significantly
+                                declined compared to the other two clumps.</p> 
+
+                                <p> Our results show that significant internal diversity can exist even within small,
+                                    high-redshift systems, with regions of extreme star formation coexisting alongside less active
+                                    components.Future observations with integral field spectroscopy could provide the kinematic data
+                                    needed to confirm the association of these clumps and further unravel the assembly history
+                                    of this intriguing system.</p>
+
+                            <div style="clear: both;"></div>
                     </div>
                 </div>
             </div>

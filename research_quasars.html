@@ -60,59 +60,55 @@
                         <img src="image/proper_motion.png" alt="Quasars Proper Motion Dipole">
                     </div>
                     
-                    <div class="research-detail-info">
-                        <div class="info-card">
-                            <h3><i class="fas fa-info-circle"></i> Project Information</h3>
-                            <ul class="info-list">
-                                <li><strong>Status:</strong> Ongoing</li>
-                                <li><strong>Duration:</strong> 2024 - Present</li>
-                                <li><strong>Role:</strong> Lead Researcher</li>
-                                <li><strong>Institution:</strong> University of Rome "Tor Vergata"</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="info-card">
-                            <h3><i class="fas fa-link"></i> Links</h3>
-                            <div class="research-links">
-                                <a href="#" class="link-btn"><i class="fab fa-github"></i> GitHub Repository</a>
-                                <!-- <a href="#" class="link-btn"><i class="fas fa-file-pdf"></i> Paper</a> -->
-                                <!-- <a href="#" class="link-btn"><i class="fas fa-presentation"></i> Presentation</a> -->
-                            </div>
-                        </div>
-                    </div>
-                    
+                
                     <div class="research-detail-description">
                         <h2>Overview</h2>
-                        <p>This research project focuses on analyzing the proper motion dipole of quasars to understand fundamental properties of the Universe and our Solar System's motion through space.</p>
+                        <p>When the observer is moving, it cause the displacement in
+                            the apparent positions of celestial bodies in the direction of the
+                            velocity. This effect is called aberration. If the velocity changes
+                            with time, which is correspond to the acceleration, the change of
+                            displacements create a pattern of proper motions in the direction
+                            of acceleration. This effect is called secular aberration drift and
+                            can be used to detect the acceleration of the Solar System with
+                            respect to the rest frame of distant extragalactic sources.</p>
+
+                        <figure class="research-figure float-right" style="--figure-width: 600px;">
+                            <img src="image/cl_qq_quaia.png" alt="Power spectrum of proper motion field">
+                            <figcaption>Figure 1: Power spectrum of the proper motion field. The error bar represent the standard
+                            deviation of simulated many fields. The blue dash line represents the power of E-mode of the field while the green dash line
+                            represents that of the B-mode.</figcaption>
+                        </figure>
+
+                        <p>The proper motion map is pixelized to perform summary statistics, specifically the 2-point correlation function. Theoretically, 
+                         the proper motion field induced by the acceleration of the Solar System
+                            has a unique signature in its 2-point correlation function, which is a pure E-mode dipole pattern. However, from the power spectrum in Figure 1, 
+                            we saw that the higher-order multipoles are non zero, which indicates the presence of systematics in the data or (less likely) the 
+                            inhomogeineity and anisotropy of the Universe at large scales. 
+                            To better understand and quantify these effects, we employ simulation-based inference (SBI) techniques to model the proper motion field 
+                            and extract constraints on the Solar System's acceleration as well as the power spectrum to identify the systematics.</p>
+                            
+                           
+                        <p> Our model include main components contibute to the small modes in the power spectrum including the secular aberration drift, the small-scale 
+                        systematics from the larger modes and random shot noise. By simulating many realizations of the proper motion field with different parameters, we can
+                        build a dataset to train neural density estimators (NDEs) to learn the posterior distribution of the parameters given the observed summary statistics. 
+                        This approach allows us to infer the parameters of interest while accounting for the complex noise and systematics present in the data without the 
+                        need of explicit likelihood of the noise and systematics.</p>
                         
-                        <h2>Methodology</h2>
-                        <p>Using summary statistics, specifically the 2-point correlation function, of the quasars proper motion fields combined with simulation-based inference techniques to:</p>
-                        <ul>
-                            <li>Infer the acceleration of the Solar System relative to the cosmic frame</li>
-                            <li>Test the homogeneity and isotropy of the Universe</li>
-                            <li>Constrain cosmological parameters through kinematic observations</li>
-                        </ul>
+                        <p>The result in Figure 2 shows the posterior distribution of the Solar System acceleration components
+                        along the three axes in equatorial coordinates. The error bars are larger if we include the small-scale systematics in the model.
+                        </p>
+                        <figure class="research-figure float-left" style="--figure-width: 450px;">
+                            <img src="image/gxyz.png" alt="Posterior distribution of Solar System acceleration">
+                            <figcaption>Figure 2: Posterior distribution of the Solar System acceleration components along the three axes in equatorial coordinates.
+                            The blue contours represent the results with modeling small-scale systematics, while the orange contours exclude them in the model.</figcaption>
+                        </figure>
                         
-                        <h2>Key Objectives</h2>
-                        <ul>
-                            <li>Develop robust statistical methods for proper motion analysis</li>
-                            <li>Create simulation frameworks for inference</li>
-                            <li>Validate results against theoretical predictions</li>
-                            <li>Provide constraints on Solar System dynamics</li>
-                        </ul>
-                        
-                        <h2>Tools & Technologies</h2>
-                        <div class="research-tools">
-                            <span class="tool-tag">Python</span>
-                            <span class="tool-tag">NumPy</span>
-                            <span class="tool-tag">SciPy</span>
-                            <span class="tool-tag">Matplotlib</span>
-                            <span class="tool-tag">AstroPy</span>
-                            <span class="tool-tag">Simulation-Based Inference</span>
-                        </div>
-                        
-                        <h2>Expected Outcomes</h2>
-                        <p>This research aims to provide new insights into both local (Solar System) and global (Universe) scales, bridging observational cosmology with fundamental physics.</p>
+                        <p>However, the maximum posterior power spectrum not really match the observed one in Figure 1, indicating that our model for small-scale systematics might not be sufficient.
+                        In the future, we will trying to include the effect from the anisotropic expansion from the LTB void model to see if it can better explain the observed power spectrum.</p>
+
+                        <div class="clear-fix"></div>
+
+                       
                     </div>
                 </div>
             </div>
