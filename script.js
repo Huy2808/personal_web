@@ -171,6 +171,12 @@ class CosmicWeb {
             const endX = origin.x + maxRadius * Math.cos(aberratedAngle);
             const endY = origin.y + maxRadius * Math.sin(aberratedAngle);
             
+            // Assign 3D orientation angle for this filament
+            // Map the 2D angle to a 3D orientation where 0° points toward viewer
+            // We'll use a simple mapping: angle in [0, 2π] maps to 3D angle in [-π/2, π/2]
+            // This creates variation where some filaments point toward/away from viewer
+            const angle3D = Math.sin(angle * 2) * Math.PI / 2; // Varies between -π/2 and π/2
+            
             // For straight lines, control points are along the line (no curvature)
             this.filaments.push({
                 p0: { x: startX, y: startY },
@@ -178,7 +184,8 @@ class CosmicWeb {
                 p2: { x: startX + (endX - startX) * 0.67, y: startY + (endY - startY) * 0.67 },
                 p3: { x: endX, y: endY },
                 type: 'major',
-                depth: 1.0 // Foreground filaments
+                depth: 1.0, // Foreground filaments
+                angle3D: angle3D // 3D orientation angle
             });
         }
 
@@ -204,13 +211,17 @@ class CosmicWeb {
             const endX = origin.x + maxRadius * 0.85 * Math.cos(aberratedAngle); // Slightly shorter than major
             const endY = origin.y + maxRadius * 0.85 * Math.sin(aberratedAngle);
             
+            // Assign 3D orientation angle for background filaments
+            const angle3D = Math.sin(angle * 2 + Math.PI / 4) * Math.PI / 2;
+            
             this.filaments.push({
                 p0: { x: startX, y: startY },
                 p1: { x: startX + (endX - startX) * 0.33, y: startY + (endY - startY) * 0.33 },
                 p2: { x: startX + (endX - startX) * 0.67, y: startY + (endY - startY) * 0.67 },
                 p3: { x: endX, y: endY },
                 type: 'background',
-                depth: 0.15 // Much fainter
+                depth: 0.15, // Much fainter
+                angle3D: angle3D
             });
         }
 
@@ -299,8 +310,8 @@ class CosmicWeb {
         const cx = origin.x;
         const cy = origin.y;
         
-        // Pulsing effect
-        const pulse = Math.sin(this.time * 2) * 0.3 + 1;
+        // Static bright point (no pulsing)
+        const pulse = 1;
         
         // Multiple glowing layers for bright point
         const gradients = [
@@ -418,11 +429,19 @@ class CosmicWeb {
                     p3: {x: p3x, y: p3y}
                 }, t2);
                 
+                // Calculate 3D orientation width modifier
+                // Filaments pointing toward viewer (angle3D ~ 0) should be wider
+                // Filaments pointing away or sideways should be narrower
+                // Use cosine: cos(0) = 1 (toward viewer, max width), cos(±π/2) = 0 (perpendicular, min width)
+                const angle3D = f.angle3D || 0;
+                const orientationFactor = 0.4 + 0.6 * Math.abs(Math.cos(angle3D)); // Range: 0.4 to 1.0
+                
                 // Cone effect: width INCREASES from origin (thin) to outer edge (wide)
-                // Start very thin (0.3) and expand to wide (4.0) for major filaments
+                // Modified by 3D orientation for foreshortening effect
                 const startWidth = f.type === 'background' ? 0.15 : 0.2;  // Very thin at origin
                 const endWidth = f.type === 'background' ? 3.5 : 8.0;     // Much wider at edge
-                const width = startWidth + (endWidth - startWidth) * t1;  // Increases with distance
+                const baseWidth = startWidth + (endWidth - startWidth) * t1;  // Increases with distance
+                const width = baseWidth * orientationFactor; // Apply 3D orientation scaling
                 
                 this.ctx.beginPath();
                 this.ctx.moveTo(pos1.x, pos1.y);
