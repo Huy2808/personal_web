@@ -28,15 +28,56 @@
 
 /* Light theme variables */
 [data-theme="light"] {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8f9fa;
-    --bg-tertiary: #e9ecef;
+    --bg-primary: #f5f5f0; /* Milk/cream color */
+    --bg-secondary: #fafaf5; /* Lighter milk color */
+    --bg-tertiary: #e8e8e0;
     --text-primary: #212529;
     --text-secondary: #495057;
     --text-muted: #6c757d;
     --border-color: rgba(0, 0, 0, 0.1);
     --shadow-primary: 0 4px 20px rgba(0, 0, 0, 0.1);
     --shadow-secondary: 0 8px 40px rgba(0, 0, 0, 0.05);
+}
+
+/* Light theme cosmic web styling */
+[data-theme="light"] #starfield {
+    opacity: 0.6;
+    background: radial-gradient(ellipse at center,
+        rgba(245, 245, 240, 0.3) 0%,
+        rgba(250, 250, 245, 0.2) 30%,
+        rgba(245, 245, 240, 0.5) 70%,
+        rgba(245, 245, 240, 0.7) 100%);
+}
+
+/* Light theme body background */
+[data-theme="light"] body {
+    background: #f5f5f0;
+}
+
+/* Light theme overlay - lighter and more opaque */
+[data-theme="light"] body::before {
+    background: rgba(245, 245, 240, 0.85);
+}
+
+[data-theme="light"] .navbar {
+    background: rgba(245, 245, 240, 0.95);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .navbar.scrolled {
+    background: rgba(245, 245, 240, 0.98);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .note-article {
+    background: rgba(245, 245, 240, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .about-section,
+[data-theme="light"] .research-detail-section,
+[data-theme="light"] .hero-section {
+    background: rgba(245, 245, 240, 0.95);
 }
 
 /* === BASE STYLES === */

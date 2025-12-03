@@ -47,6 +47,32 @@ class CosmicWeb {
         }
     }
 
+    // Get theme-aware colors
+    getThemeColors() {
+        const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+        if (theme === 'light') {
+            return {
+                filament: 'rgba(0, 0, 0', // Darker black for light mode
+                bigBang: {
+                    core: 'rgba(0, 0, 0',
+                    mid: 'rgba(20, 20, 20',
+                    outer: 'rgba(40, 40, 40'
+                },
+                galaxy: 'rgba(20, 20, 20'
+            };
+        } else {
+            return {
+                filament: 'rgba(150, 200, 255', // Blue for dark mode
+                bigBang: {
+                    core: 'rgba(255, 255, 255',
+                    mid: 'rgba(200, 220, 255',
+                    outer: 'rgba(150, 200, 255'
+                },
+                galaxy: 'rgba(150, 200, 255'
+            };
+        }
+    }
+
     initialize() {
         this.resize();
         this.updatePortraitPosition();
@@ -282,9 +308,8 @@ class CosmicWeb {
     }
 
     draw() {
-        // Clear canvas
-        this.ctx.fillStyle = this.config.colors.deepSpace;
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        // Clear canvas with transparency (let CSS background show through)
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         if (!this.portraitCenter || !this.initialPortraitCenter) return;
 
@@ -313,6 +338,9 @@ class CosmicWeb {
         // Static bright point (no pulsing)
         const pulse = 1;
         
+        // Get theme-aware colors
+        const colors = this.getThemeColors();
+        
         // Multiple glowing layers for bright point
         const gradients = [
             { radius: 40 * pulse, alpha: 0.15 },
@@ -324,9 +352,9 @@ class CosmicWeb {
         
         for (const g of gradients) {
             const gradient = this.ctx.createRadialGradient(cx, cy, 0, cx, cy, g.radius);
-            gradient.addColorStop(0, `rgba(255, 255, 255, ${g.alpha})`);
-            gradient.addColorStop(0.4, `rgba(200, 220, 255, ${g.alpha * 0.6})`);
-            gradient.addColorStop(1, 'rgba(150, 200, 255, 0)');
+            gradient.addColorStop(0, `${colors.bigBang.core}, ${g.alpha})`);
+            gradient.addColorStop(0.4, `${colors.bigBang.mid}, ${g.alpha * 0.6})`);
+            gradient.addColorStop(1, `${colors.bigBang.outer}, 0)`);
             
             this.ctx.fillStyle = gradient;
             this.ctx.beginPath();
@@ -385,6 +413,10 @@ class CosmicWeb {
         const offsetX = this.offsetX || 0;
         const offsetY = this.offsetY || 0;
         
+        // Get theme-aware colors once for all filaments
+        const colors = this.getThemeColors();
+        const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+        
         for (const f of this.filaments) {
             // Apply offset for scrolling
             const p0x = f.p0.x + offsetX;
@@ -402,9 +434,11 @@ class CosmicWeb {
             const distance = Math.sqrt(Math.pow(midX - origin.x, 2) + Math.pow(midY - origin.y, 2));
             const fadeFactor = isPortraitOrigin ? Math.max(0, 1 - distance / maxRadius) : 1;
             
-            // Depth-based properties
+            // Depth-based properties with theme-aware alpha
             const depth = f.depth || 1.0;
-            const baseAlpha = f.type === 'background' ? 0.01 : 0.01; // Increased opacity for more visible cone
+            const baseAlpha = f.type === 'background' ? 
+                (theme === 'light' ? 0.03 : 0.01) : 
+                (theme === 'light' ? 0.08 : 0.01); // In light mode: much subtler filaments
             const alpha = baseAlpha * fadeFactor * depth;
             
             // Draw filament with cone/tapering effect
@@ -446,7 +480,7 @@ class CosmicWeb {
                 this.ctx.beginPath();
                 this.ctx.moveTo(pos1.x, pos1.y);
                 this.ctx.lineTo(pos2.x, pos2.y);
-                this.ctx.strokeStyle = `rgba(150, 200, 255, ${alpha})`;
+                this.ctx.strokeStyle = `${colors.filament}, ${alpha})`;
                 this.ctx.lineWidth = width;
                 this.ctx.stroke();
             }
@@ -482,8 +516,20 @@ class CosmicWeb {
             const y = gy + this.config.motionAmplitude * Math.cos(this.time * 0.001 + g.phase);
             const redShift = Math.min(1, g.dist / this.config.maxRadius);
             
-            // Simple galaxy rendering with depth-based brightness
-            const color = `rgba(${Math.floor(170 + 85 * redShift)},${Math.floor(220 - 80 * redShift)},${Math.floor(255 - 150 * redShift)},${alpha})`;
+            // Get theme for color calculation
+            const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+            
+            // Apply redshift effect in dark mode, simple dark gray in light mode
+            let color;
+            if (theme === 'light') {
+                // Darker and more opaque for light mode
+                const lightModeAlpha = alpha * 100; // Increase opacity by 20%
+                color = `rgba(20, 20, 20, ${lightModeAlpha})`;
+            } else {
+                // Redshift effect for dark mode (blue to red as distance increases)
+                color = `rgba(${Math.floor(170 + 85 * redShift)},${Math.floor(220 - 80 * redShift)},${Math.floor(255 - 150 * redShift)},${alpha})`;
+            }
+            
             this.ctx.fillStyle = color;
             this.ctx.beginPath();
             this.ctx.arc(x, y, r, 0, Math.PI * 2);
@@ -596,9 +642,10 @@ class Navigation {
 
 // === THEME TOGGLE ===
 class ThemeToggle {
-    constructor() {
+    constructor(cosmicWeb = null) {
         this.themeToggle = $('#theme-toggle');
         this.currentTheme = localStorage.getItem('theme') || 'dark';
+        this.cosmicWeb = cosmicWeb;
         
         this.init();
     }
@@ -612,6 +659,11 @@ class ThemeToggle {
         this.currentTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
         this.applyTheme(this.currentTheme);
         localStorage.setItem('theme', this.currentTheme);
+        
+        // Force cosmic web to redraw with new theme colors
+        if (this.cosmicWeb) {
+            this.cosmicWeb.draw();
+        }
     }
     
     applyTheme(theme) {
@@ -878,8 +930,8 @@ class App {
             // Initialize navigation
             this.navigation = new Navigation();
             
-            // Initialize theme toggle
-            this.themeToggle = new ThemeToggle();
+            // Initialize theme toggle (pass cosmic web for redrawing on theme change)
+            this.themeToggle = new ThemeToggle(this.starField);
             
             // Initialize scroll animations
             this.scrollAnimations = new ScrollAnimations();
