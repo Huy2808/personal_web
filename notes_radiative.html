@@ -80,72 +80,664 @@
                     </header>
                     
                     <div class="note-body">
-                        <h2>Introduction</h2>
-                        <p>Astronomy is the science of observation and from the radiation observed, we learned about what is going on in the universe through radiative processes.</p>
+                    
+                        <h1>Fundamental Equations of Radiative Transfer</h1>
+                        <h2>Radiative transfer equation and how to solve</h2> 
+                            We have a quantity that does not depend on the distance to the source, which is the <strong>specific intensity</strong>
+                            $I_{\nu}$ (or brightness)$[erg s^{-1} cm^{-2} str^{-1} Hz^{-1}]$. It is defined as the amount of energy per unit time, per unit solid angle and per unit frequencies that passes through a unit area: 
+                            $$\boxed{I_{\nu} = \dfrac{dE}{dA\, dt \, d\Omega \, d\nu}}$$
+
+                            The <strong>average intensity</strong> (over all directions) is defined as: 
+                            $$\boxed{J_{\nu} = \dfrac{1}{4 \pi} \int_{\Omega} I_{\nu} \, d\Omega }$$ 
+
+                            The <strong>bolometric (integrated) intensity</strong>  $[erg s^{-1} cm^{-2} str^{-1}]$ over all frequencies is defined as:
+                            $$\boxed{I = \int_{0}^{\infty} I_{\nu} \, d\nu}$$ 
+
+                            <br> <br> 
+                            Consider a radiation field and construct a small element of area dA and some arbitrary orientation. 
+                            The differential amount of energy from the small solid angle $d\Omega$ at angle $\theta$ to the normal of dA, passing through dA is:
+                            $$\boxed{dE = I_{\nu} \cos\theta \, d\Omega \, dA \, dt \, d\nu = dF_{\nu} \, dA \, dt \, d\nu}$$
+                            The <strong>net flux</strong> in the direction n is obtained by integrating all over the solid angle:
+                            $$\boxed{F_{\nu} = \int_{\Omega} I_{\nu} \cos\theta \, d\Omega}$$
+                            However, for isotropic source, $I_{\nu} \neq I_{\nu} $  and net flux is 0 because the contributions from opposite direction cancel out.
+
+                            <br> <br>
+                            The <strong>differential momentum flux (radiation pressure)</strong> normal to dA is:
+                            $$dP_{\nu} = \dfrac{dF_{\nu} \cos\theta}{c}$$
+                            Therefore, the <strong>total momentum flux</strong> is: 
+                            $$\boxed{P_{\nu} = \dfrac{1}{2} \int_{\Omega} I_{\nu} cos^2(\theta) d_{\Omega} }$$
+
+                            <p style="color: magenta; font-weight: bold;">Radiative Energy Density</p>
+                             
+                            Given a radiation field $I_{\nu}$ and the engergy density per unit solid angle $u_{\nu}(\Omega)$, the energy contained in a volume is:
+                            $$dE = I_{\nu} \, d\Omega \, dA \, dt \, d\nu = u_{\nu}(\Omega) \,dA \,c \,dt \,d\nu $$
+                            with $u_{\nu}(\Omega) = \dfrac{I_{\nu}}{c}$ is called the <strong>specific energy density</strong>.
+
+                            Integrating over all solid angle gives the <strong>mean energy density</strong>: 
+                            $$\boxed{u_{\nu} = \int_{\Omega} u_{\nu} (\Omega) \, d\Omega = \dfrac{1}{c} \int_{\Omega} I_{\nu} \, d\Omega = \dfrac{4 \pi}{c} J_{\nu} }$$
+
+                            <br>
+                            The <strong>total radiation density</strong> is obtained by integrating over all frequencies:
+                            $$\boxed{u = \int_0^{\infty} u_{\nu} d\nu = \dfrac{4 \pi}{c} \int_{0}^{\infty} J_{\nu} d\nu} $$
+
+                            <p style="color: magenta; font-weight: bold;">Radiative Pressure</p>
+
+                            Consider a isotropic radiation field contained in a box. Due to reflection with the walls, each photon create twice the normal component of momentum:
+                            \begin{equation}
+                            \begin{aligned}
+                            p_{\nu} &= \dfrac{2}{c} \int_0^{\infty} d_{\nu} \int_{\Omega} I_{\nu} cos^2(\theta) d\Omega\\
+                            &= \dfrac{2}{c} \int_0^{\infty} d_{\nu} \int_{\Omega} J_{\nu} cos^2(\theta) d\Omega \quad \quad \text{(isotropic source, $I_\nu = J_\nu$)}
+                            \end{aligned}
+                            \end{equation}
+                            Express $d{\Omega} = \sin\theta \, d\theta \, d\phi$, we have: 
+                            $$\boxed{p = \dfrac{2}{c} \dfrac{2 \pi}{3} \int_0^{\infty} J_{\nu} d\nu = \dfrac{u}{3}}$$
+
+                            <br> 
+                            <p style="color: rgb(255, 17, 0); font-weight: bold;">Note:</p> The relation $p = \dfrac{u}{3}$ is useful in discussing thermodynamics of blackbody!
+
+                            <br>
+
+                            <p style="color: magenta; font-weight: bold;">Radiative Transfer Equation</p>
+                            Since the specific intensity $I_{\nu}$ is independent of distance, therefore we have:
+                            $$\dfrac{I_{\nu}}{ds} = 0$$
+                            which is the <strong>radiative transfer equation in free space</strong> 
+
+                            <br> If we have the medium, then the radiation will be absorbed or emitted.
+                            <p><strong> EMISSION: </strong><p>
+                            We have the <strong>emission coefficient</strong> $j_{\nu} \; (erg \, s^{-1} \, cm^{-3}\, str^{-1} \, Hz^{-1})$: 
+                            $$\boxed{dE = j_{\nu} \,dV\, d \Omega \,dt\, d_{\nu}}$$
+                            We also have $j_{\nu} = \dfrac{P_{\nu}}{4 \pi}$, if the emission is isotropic and the <strong>emissivity ($\epsilon_{\nu}$)</strong> is $\epsilon_{\nu} = \dfrac{P_{\nu}}{\rho}$, then we have: 
+                            $$\boxed{dE = \epsilon_{\nu} \,\rho \,dV \,dt \,d\nu\, \dfrac{d\Omega}{4 \pi}}$$
+                            <br> 
+                            Comparing two energy expressions, we have:
+                            \begin{equation}
+                            \begin{aligned}
+                            dE = dI_\nu \, dA\,dt \, d\nu \, d\Omega &= j_\nu \, dV\, dt \, d\nu \, d\Omega \\
+                            \Rightarrow dI_\nu &= j_\nu ds\\
+                            \Rightarrow \dfrac{dI_\nu}{ds} &= j_\nu 
+                            \end{aligned}
+                            \end{equation}
+                            Therefore we have the <stong>equation for emission only</stong>:
+                            $$\boxed{\dfrac{dI_{\nu}}{ds} = j_\nu = \dfrac{\epsilon \rho}{4 \pi}}$$ 
+
+                            <br> 
+                            The solution of the equation is then: 
+                            $$\boxed{I_{\nu} = I_{\nu}(s_0) \, +\, \int_{s_0}^s j_{\nu}(s') ds' }$$
+
+                            <p><strong> ABSORPTION: </strong><p>
+                            Similarly, we have the <strong>absorption coefficient</strong> $\alpha_{\nu} \; (cm^{-1})$, we have that:
+                            $$dI_{\nu} = -\alpha_{\nu} \,I_{\nu}\, ds = - n\, \sigma_{\nu} \,I_{\nu} \,ds$$
+                            where $n$ is the number density (number per unit volume) and $\sigma_\nu \; (cm^2)$ is the cross-section.
+                            Therefore, the <strong>equation for absorption only</strong> is:  
+                            $$\boxed{\dfrac{dI_{\nu}}{ds} = -\alpha_{\nu} I_{\nu} = - n \sigma_{\nu} I_{\nu}}$$
+                            
+                            Absorption coefficient can also bewritten as: 
+                            $$\boxed{\alpha_\nu = \rho \kappa_\nu}$$
+                            with $\kappa_\nu \; (cm^2 \,g^{-1})$ is the <strong>mass absorption coefficient</strong> or <strong>opacity</strong>
+                            
+                            <br>
+                            The solution of the equation is then:
+                            $$\boxed{I_{\nu} = I_{\nu}(s_0) + \exp\left(-\int_{s_0}^s \alpha_{\nu}(s') ds' \right)}$$ 
+
+                            <br>
+                            From both emission and absorption, we have the <strong>radiative transfer equation</strong>:
+                            $$\boxed{\dfrac{dI_{\nu}}{ds} = -\alpha_{\nu} I_{\nu} + j_{\nu}}$$
+                            
+                        <h2>Optical Depth</h2>
+                            Instead of working with the distance 's', it is more convenient to work with the <strong>optical depth</strong> $\tau_{\nu}$ defined as:
+                            $$\boxed{d\tau_{\nu} = \alpha_{\nu}ds}$$
+                            or
+                            $$\tau_{\nu} (s) = \int_{s_0}^s \alpha_{\nu}(s') ds'$$
+                            The medium is said to be <strong>optically thin</strong> if $\tau_{\nu} << 1$ and <strong>optically thick</strong> if $\tau_{\nu} >> 1$.
+                            <br> 
+
+                            The radiative transfer equation can be rewritten as: 
+                            \begin{equation}
+                            \begin{aligned}
+                            \dfrac{dI_{\nu}}{ds} &= -\alpha_{\nu} I_{\nu} +j_{\nu} \\
+                            \Leftrightarrow \dfrac{dI_{\nu}}{d\tau_{\nu}} &= -I_{\nu} + \dfrac{j_{\nu}}{\alpha_{\nu}}\\
+                            \Leftrightarrow \boxed{\dfrac{dI_{\nu}}{d\tau_{\nu}} = -I_{\nu} + S_{\nu}}
+                            \end{aligned}
+                            \end{equation}
+                            with $S_{\nu} = \dfrac{j_{\nu}}{\alpha_{\nu}}$ is called the <strong>source function</strong>.
+                            
+                            <p style="color: rgba(17, 0, 255, 0.664); font-weight: bold;">Solution</p>
+                            The solution of the radiative transfer equation in terms of optical depth is:
+                            \begin{equation}
+                            \begin{aligned}
+                            \dfrac{d}{d\tau_{\nu}}\left( e^{\tau_{\nu}} I_{\nu}\right) &= e^{\tau_{\nu}} S_{\nu}\\
+                            \Leftrightarrow \dfrac{d\mathcal{I}_{\nu}}{d\tau_{\nu}} &= \mathcal{S}_{\nu} 
+                            \end{aligned}
+                            \end{equation}
+                            with $\mathcal{I}_{\nu} = e^{\tau_{\nu}} I_{\nu}$ and $\mathcal{S}_{\nu} = e^{\tau_{\nu}} S_{\nu}$.
+                            <br>
+                            Integrating both sides, we have the solution: 
+                            $$\boxed{\mathcal{I}_{\nu}(\tau_{\nu}) = \mathcal{I}(0) + \int_{0}^{\tau_{\nu}} \mathcal{S}(\tau_{\nu}') d\tau_{\nu}'}$$
+                            In form of terms $I_{\nu}$ and $S_{\nu}$, we have: 
+                            $$\boxed{I_{\nu}(\tau_{\nu}) = e^{-\tau_{\nu}}I_{\nu}(0) + \int_0^{\tau_{\nu}} e^{\tau_{\nu} - \tau_{\nu}'} S_{\nu}(\tau_{\nu}') d\tau_{\nu}'}$$
+                            We can see that there are two components: <strong>the initial intensity attenuated by absorption </strong> and <strong> the integrated emission from the medium dimishied by absorption</strong>
+                            <br>
+                        <p style="color: magenta; font-weight: bold;">Mean free path</p>
+                            We have that the mean optical depth $\langle \tau_{\nu} \rangle = 1$, however, we also have that:
+                            $$\langle \tau_{\nu} \rangle = \int_0^s \alpha_{\nu}(s') \,ds' = \alpha_{\nu} \,l_{\nu} = 1$$
+                            Therefore, the <strong>mean free path</strong> is:
+                            $$\boxed{l_{\nu} = \dfrac{1}{\alpha_{\nu}}}$$
+
+                        <h2> Eddington Limit</h2>
+                            Since the radiation carries momentum, it exerts a force on medium, therefore we have the <strong>flux vector</strong>:
+                            $$\boxed{\vec{F_{\nu}} = \int_{\Omega} I_{\nu} \,\hat{n} \, d\Omega}$$
+                            This flux vector is associated with a  <strong>momentum vector</strong>:
+                            $$\boxed{\vec{\mathcal{F}} = \dfrac{1}{c} \int_0^{\infty} \alpha_\nu \,\vec{F_{\nu}} \,d\nu}$$
+                            The <strong>force per unit mass</strong> is then:
+                            $$\boxed{\vec{f} = \dfrac{\vec{\mathcal{F}}}{\rho} = \dfrac{1}{c} \int_0^{\infty} \kappa_\nu \,\vec{F_{\nu}} \,d\nu}    $$ 
+                            with $\alpha_{\nu} = \rho \, \kappa_{\nu}$
+
+                            <br>
+                            Let assume a star with mass M and luminosity L and a nearby cloud of distance R with constant opacity $\kappa$. The cloud experiences two forces: $F_g$ and $f_{rad}$. 
+                            For the cloud to be stable, we need $F_g = f_{rad}$:
+                            \begin{equation}
+                            \begin{aligned}
+                            F_g &= f_{rad}\\
+                            \Leftrightarrow \dfrac{GM}{R^2} &= \dfrac{\kappa F}{c} \\
+                            \Leftrightarrow \dfrac{GM}{R^2} &= \dfrac{\kappa L}{4 \pi R^2 c} \\
+                            \Leftrightarrow \dfrac{M}{L} &= \dfrac{\kappa}{4 \pi G c}
+                            \end{aligned}
+                            \end{equation}
+                            Therefore, we have the <strong>Eddington Limit</strong> is $\boxed{\dfrac{M}{L} = \dfrac{\kappa}{4 \pi G c}}$. The luminosity sastisfies this relation 
+                            is called the <strong>Eddington Luminosity</strong>.
                         
-                        <h2>Fundamental Equations</h2>
-                        <p>The specific intensity is defined as:</p>
-                        $$I_\nu = \frac{dE}{dA \, dt \, d\nu \, d\Omega}$$
+                        <h2>Blackbody Radiation</h2> 
+                            Blackbody radiation is the radiation which is it self in thermal equilibrium. 
+                            <p><strong>Though Experiment:</strong></p>
+                            A blackbody cavity contains radiation $I_{\nu}$ at temperature T. The cavity has small hole to measure the radiation without disturbing the euilibrium. 
+                            Connect the hole to a filter and another cavity contain radiation $I_{\nu}'$ also at temperature T. If $I_{\nu} \neq I_{\nu}'$, then the radiation will flow between two cavities.
+
+                            <figure class="note-figure float-left">
+                                <img src="image/blackbody.png" alt="Blackbody Cavity" width="400px" style="max-width: 100%; height: auto;">
+                                <figcaption>Figure 1: Blackbody cavity with small hole</figcaption>
+                            </figure>
+                            <p>But they have same temperature, therefore it would violate the 2nd law of thermodynamics.<p>
+                            So $I_{\nu} = I_{\nu}'$ and $I_{\nu}$ depends only on the temperature T. Then we have:
+                            $$\boxed{I_{\nu} = B_{\nu}(T) = \text{Planck function}}$$
+
+                            <br> 
+                            This kind of setup is similar to <strong>a medium with very high optical depth</strong>.
+                        <h2> Kirchoff's Law for thermal emission</h2>
+                            Consider a thermal emitter at temperature T in a blackbody cavity at the same temperature. 
+                            As the optical depth $\tau_{\nu}$ is very high, $I_{\nu} \rightarrow S_{\nu}$ (showed in the solution of radiative transfer equation). 
+                            Combined with the argument from the blackbody radiation part, we have:
+                            $$\boxed{S_{\nu} = \dfrac{j_{\nu}}{\alpha_{\nu}} = B_{\nu}}$$
+                            which is called <strong>Kirchoff's Law</strong>. 
+                            <br> 
+                            The radiative transfer equation of thermal radiation is then:
+                            $$\boxed{\dfrac{dI_{\nu}}{d\tau_{\nu}} = -I_{\nu} + B_{\nu}}$$
+
+                            from this equation, we can say that <strong>thermal radiation ($S_{\nu} = B_{\nu}$)</strong> becomes <strong>blackbody radiation ($I_{\nu} = B_{\nu}$)</strong> only for  <strong>optically thick medium ($\tau_{\nu} >> 1$)</strong>.
+
+                        <h2>Thermodynamics of Blackbody radiation</h2>
+                            Consider a blackbody cavity with a piston, it has volume V, temperature T, pressure p and energy density u.
+                            <br>
+                            From the 1st law of thermodynamics, we have $dQ = dU + pdV$, with Q is heat and U is total energy. From the 2nd law, we have $dS = \dfrac{dQ}{T}$, therefore:
+                            \begin{equation}
+                            \begin{aligned}
+                            dS &= \dfrac{dU + pdV}{T}\\
+                             &= \dfrac{d(uV) + \dfrac{u}{3}dV}{T}\\
+                             & = \dfrac{V}{T} \dfrac{du}{dT} dT + \dfrac{u}{T}dV + \dfrac{1}{3} \dfrac{u}{T} dV\\
+                             &= \dfrac{V}{T} \dfrac{du}{dT} dT + \dfrac{4}{3} \dfrac{u}{T} dV
+                            \end{aligned}
+                            \end{equation}
+                            From this we can see that $S = S (T, V)$, and:
+                            $$\left(\dfrac{dS}{dT}\right)_V = \dfrac{V}{T} \dfrac{du}{dT} \quad \left(\dfrac{dS}{dV}\right)_T = \dfrac{4}{3} \dfrac{u}{T}$$
+                            Since $dS$ is a exact differential, we have: 
+                            $$\dfrac{d^2 S}{dT dV} = \dfrac{1}{T} \dfrac{du}{dT} = \dfrac{4}{3T} \dfrac{du}{dT} - \dfrac{4u}{3T^2}$$
+                            From this relation, we have the differential equation: 
+                            \begin{equation}
+                            \begin{aligned}
+                            \dfrac{du}{dT} &= \dfrac{4u}{T}\\
+                            \Leftrightarrow \dfrac{du}{u} &= 4 \dfrac{dT}{T} \\
+                            \Leftrightarrow ln(u) &= 4ln(T) + ln(a) \quad \quad \text{('a' is a constant)}\\
+                            \Leftrightarrow u&= a\,T^4
+                            \end{aligned}
+                            \end{equation}
+                            Thus, we have the <strong>Stefan-Boltzmann law</strong>: 
+                            $$\boxed{u(T) = a\,T^4}$$
+
+                            <br>
+                            Since $I_{\nu} = J_{\nu}$ for isotropic radiation, we have: 
+                            $$u = \dfrac{4 \pi}{c} \int B_{\nu}(T) d_{\nu} = \dfrac{4 \pi}{c} B(T) = aT^4$$
+                            Therefore, the <strong>Planck Function</strong> is defined as:
+                            $$\boxed{B(T) = \int B_{\nu}(T) d\nu = \dfrac{ac}{4 \pi} T^{4} }$$
+                            Since flux from an isotropically emmiting surface is $\pi \times brightness$, we have: 
+                            $$F = \int F_{\nu} d\nu = \pi \int B_{\nu}(T) d\nu = \pi B(T) = \dfrac{ac}{4} T^4$$
+                            therefore we have another form of of <strong>Stefan-Boltzmann law</strong>:
+                            $$\boxed{F = \sigma T^4}$$
+                            with $\sigma = \dfrac{ac}{4}$ is called the <strong>Stefan-Boltzmann constant</strong>. 
+
+                            <br>
+                            Now we can have the entropy of a blackbody: 
+                            $$\dfrac{dS}{dV} = \dfrac{4}{3} \dfrac{u}{T} = \dfrac{4a}{3} T^3$$
+                            therefore, the entropy is:
+                            $$\boxed{S = \dfrac{4a}{3} T^3 V}$$
+                            This equation gives the 3rd law of thermodynamics as $T \rightarrow 0$, $S \rightarrow 0$.
+
+                            <br>
+                            If S = const, then we have the <strong>adiabatic expansion</strong>, where: 
+                            $$TV^{1/3} = \text{const}\quad \text{or} \quad pV^{4/3} = \text{const}$$
+
+
+
+                        <h2>Planck Spectrum</h2> 
+                            Since $B_{\nu} = I_{\nu}$ and $u_{\nu}(\Omega) = \dfrac{I_{\nu}}{c}$, we have that:
+                            $$B_{\nu} = u_{\nu} c = \rho_s\, \bar{E} \,c$$
+                            Therefore, to derive $B_{\nu}$, we need to find the <strong>density of photon states ($\rho_s$)</strong> and the <strong>average energy per photon states ($\bar{E}$)</strong>.
+
+                            <br>
+                            The density of photon states is: 
+                            $$\boxed{\rho_s = \dfrac{2 \nu^2}{c^3}}$$ 
+
+                            <br>
+                            The probability of a state with energy $E_n$ is: 
+                            $$P = e^{-\beta E_n} \quad, \beta = \dfrac{1}{K_B T}$$ 
+                            Therefore, the average energy per photon state is:
+                            $$\bar{E} = \dfrac{\sum_{n = 0}^\infty E_n e^{-\beta E_n}}{\sum_{n = 0}^\infty e^{-\beta E_n}} = \dfrac{d}{d\beta} \ln(\sum_{n = 0}^\infty e^{-\beta E_n})$$
+                            We can rewrite the partition function as:
+                            \begin{equation}
+                            \begin{aligned} 
+                            Z &= \sum_{n = 0}^\infty e^{-\beta E_n}\\
+                            \Leftrightarrow Z &= \sum_{n = 0}^\infty e^{- n\,\beta \,h\,\nu} \\
+                            \Leftrightarrow Z &= \dfrac{1}{1 - e^{\beta \,h\,\nu}} \quad \quad \text{(Geometric series)}\\
+                            \end{aligned}
+                            \end{equation}
+                            Therefore, we have : 
+                            $$\bar{E} = -\dfrac{d}{d\beta} \ln(\sum_{n = 0}^\infty e^{-\beta E_n}) = -\dfrac{d}{d\beta}(1 - e^{\beta \,h\,\nu})^{-1} = \dfrac{h\,\nu\,e^{\beta\,h\,\nu}}{1- e^{\beta \,h\,\nu}}$$
+                            The average energy is then becomes: 
+                            $$\boxed{\bar{E} = \dfrac{h\,\nu}{\exp\left(\dfrac{\,h\,\nu}{K_BT}\right) - 1} }$$
+
+                            <br>
+                            Combining both results, we have the <strong>Planck function</strong>:
+                            $$\boxed{B_{\nu} = \rho_s \, \bar{E} \, c = \dfrac{2h \nu^3}{c^2 \left( \exp\left(\dfrac{\,h\,\nu}{K_BT}\right) - 1 \right) }}$$ 
+
+                            In terms of wavelength, we have:
+                            $$\boxed{B_{\lambda} =  \dfrac{2h c^2 \lambda^{-5}}{\left( \exp\left(\dfrac{\,h\,\nu \,c}{\lambda K_B T}\right) - 1 \right) }}$$ 
                         
-                        <p>where $E$ is energy, $A$ is area, $t$ is time, $\nu$ is frequency, and $\Omega$ is solid angle.</p>
-                        
-                        <h2>Blackbody Radiation</h2>
-                        <p>The Planck function describes the spectral radiance of blackbody radiation:</p>
-                        $$B_\nu(T) = \frac{2h\nu^3}{c^2} \frac{1}{e^{h\nu/k_BT} - 1}$$
-                        
-                        <p>where:</p>
+                        <h2>Properties of the Planck law</h2>
+                            <ul>
+                                <li><strong>Rayleigh-Jeans regime</strong>
+                                    <br>
+                                     In <strong> low frequencies ($h\nu << K_B T$)</strong>, we have:
+                                    $$\exp\left( \dfrac{h\nu}{K_B T} \right) \approx 1 + \dfrac{h\nu}{K_B T}$$
+                                    Therefore, the Planck function reduces to:
+                                    $$\boxed{B_{\nu} \approx \dfrac{2\nu^3}{c^2} \dfrac{K_B T}{h \nu} = \dfrac{2 \nu^2}{c^2} K_B T}$$
+
+                                </li>
+                                <li><strong>Wien regime:</strong> 
+                                    <br>
+                                    In <strong> high frequencies ($h\nu >> K_B T$)</strong>
+                                     the Planck function reduces to:
+                                    $$\boxed{B_{\nu} \approx \dfrac{2 h \nu^3}{c^2} \exp \left( -\dfrac{h \nu}{K_B T}\right)}$$
+                                    We also want to find the maximum in the blackbody spectrum, which is:
+                                    $$\dfrac{dB_{\nu}}{d\nu} = 0 \Rightarrow \dfrac{d}{d\nu} \left( \dfrac{2 h \nu^3}{c^2} \dfrac{1}{\exp\left(x\right) -1} \right) = 0 \quad, x = \dfrac{h \nu}{K_B T} $$
+                                    solving this equation gives $x \approx 2.82$, therefore we have:
+                                    $$\boxed{h \nu_{max} = 2.82 K_B T}$$
+                                    which is called the <strong>Wien's displacement law</strong>.
+                                </li>
+                                <li><strong>Monotonicity with temperature</strong> 
+                                    <br>
+                                    Since $\dfrac{dB_{\nu}}{dT} > 0$, therefore no two values of T can give the same value of $B_{\nu}$ at a given frequency $\nu$.
+                                    More importanly, $\nu$ increase leads to higher T.
+                                </li>
+
+                                <li><strong>Brightness Temperature</strong> 
+                                    <br>
+                                     The brightness at a certain frequency can be characterized by give the temperature of the blackbody having the same brightness at that frequency. That said: 
+                                     $$\boxed{I_{\nu} = B_{\nu}(T_b)}$$
+                                     with $T_b$ is called the <strong>brightness temperature</strong>. 
+
+                                     <br>
+                                     It is <strong>usually used in radio astronomy</strong>, which is in the Rayleigh-Jeans regime. Therefore, $T_b$ can be directly realated to $I_{\nu}$.
+                                     <br>
+                                     Then, the radiative transfer equation can be rewritten in terms of brightness temperature:
+                                     $$\boxed{\dfrac{dT_b}{d\tau_{\nu}} = -T_b + T}$$
+                                     where T is the temperature of the medium. 
+                                     <br>
+                                     <strong>However</strong>, brightness temperature is not useful in Wien regiem due to the rapidly decrease of $B_{\nu}$ with $\nu$
+                                </li> 
+
+                                <li><strong>Color Temperature</strong> 
+                                    <br>
+                                    For the source that we dont know exactly the intensity and the distance, we can measure intensity of several frequencies and then 
+                                    fit the data to find the best-fit blackbody spectrum. The temperature optained from the fitted blackbody spectrum is called the <strong>color temperature</strong>.
+
+                                </li>
+
+                                <li><strong>Effective Temperature</strong> 
+                                    <br> 
+                                    Total flux F of of the source can be equating to a blackbody that gives the same total flux at temperature $T_{eff}$:
+                                    $$\boxed{F = \sigma T_{eff}^4}$$
+                                    This temperature is called the <strong>effective temperature</strong>.
+
+                                </li>
+
+
+                            </ul>
+                        <p style="color: rgba(255, 0, 0, 0.87); font-weight: bold;">Note:</p>
+                        $T_b$ and $T_{eff}$ depend on the magnitude of source intensity while $T_{color}$ depends on the shape of the observed spectrum.
+
+
+
+
+                        <h2>Einstein Coefficients</h2>  
+                            <h3> Deffinition of coefficients</h3>
+                            Consider a two-level atomic system with lower energy level 1 and upper energy level 2. The number density of atoms in each level are $n_1$ and $n_2$ respectively. The processes that can occur are:
+                            <ul>
+                                <li><strong>Spontaneous Emission:</strong> 
+                                    <br> 
+                                    The system is in level 2 and drops to level 1, we then define 
+                                    $$\boxed{A_{21} = \text{the transition probability per unit time for spontaneuous emission}}$$
+                                </li>
+                                <li><strong>Absorption:</strong> 
+                                    <br>
+                                    The system in level 1, then absorb a photon and jumps to level 2. We define <strong>$B_{12}$</strong>, which gives:
+                                    $$\boxed{B_{12}\, \bar{J} = \text{transition probability per unit time for absorption}}$$ 
+                                    where 
+                                    $$\bar{J} = \int_{0}^{\infty} J_{\nu} \phi(\nu) d\nu$$ 
+                                    is the mean intensity averaged over a line profile $\phi(\nu)$ since the atom only absorcs photons at certain frequencies. 
+
+                                </li>
+
+                                <li><strong>Stimulated Emission:</strong> 
+                                    <br>
+                                    The incoming radiation can also trigger the atom in level 2 and drop to level 1, we then define <strong>$B_{21}$</strong>, which gives:
+                                    $$\boxed{B_{21} \, \bar{J} = \text{transition probability per unit time for stimulated emission}}$$
+
+                                </li>
+
+                            </ul>
+                            <h3>Detailed Balance Equations</h3>
+                            In thermal equilibrium, we have the absorption rate equal to the total emission rate: 
+                            $$n_1 B_{12} \bar{J} = n_2 A_{21} + n_2 B_{21} \bar{J}$$
+                            Therefore, we have:
+                            $$\bar{J} = \dfrac{A_{21} / B_{21} }{(n_1/n_2) (B_{12}/B_{21}) -1}$$
+                            From statistical mechanics, we have:
+                            $$\dfrac{n_1}{n_2} = \dfrac{g_1 \exp(-E/K_B T)}{g_2 \exp(-(E + h\nu_0)/K_B T)} = \dfrac{g_1}{g_2} \exp(h \nu_0/K_B T)$$
+                            where g is the degeneracy coefficient of each level. 
+                            Therefore, we have:
+                            $$\bar{J} = \dfrac{A_{21} / B_{21}}{\dfrac{g_1}{g_2} \dfrac{B_{12}}{B_{21}} \exp(h \nu_0/K_B T) -1}$$
+                            Since in thermal equilibrium of isotropic source, we have $I_\nu = J_\nu = B_\nu$. 
+                            Since blackbody spectrum is a smooth function, we have $\phi(\nu) \approx \delta(\nu - \nu_0)$, therefore:
+                            $$\bar{J} = B_{\nu_0} \Leftrightarrow \dfrac{A_{21} / B_{21}}{\dfrac{g_1}{g_2} \dfrac{B_{12}}{B_{21}} \exp(h \nu_0/K_B T) -1} = \dfrac{2h\nu^3 / c^2}{\exp\left(\dfrac{h \nu_0}{K_B T} \right) -1}$$
+                            From this relation, we can have the <strong>Detailed Balance Equations</strong>:
+                            $$\boxed{\dfrac{A_{21}}{B_{21}} = \dfrac{2 h\nu^3}{c^2} \quad \text{and} \quad  \dfrac{g_1}{g_2} \dfrac{B_{12}}{B_{21}} = 1}$$
+                            
+                            <p style="color: rgba(255, 0, 0, 0.87); font-weight: bold;">Note:</p>
+                            If we don't consider the stimulated emission, then mean intensity becomes: 
+                            $$\bar{J} = \dfrac{g_1}{g_2} \dfrac{A_{21}}{B_{12}} \exp({-h \nu_0 /K_B T})$$
+                            which is similar to Planck function in the Wien regime because at high frequencies $\Leftrightarrow$ level 2 are very far from level 1, thus very high energy states are less populated.
+                            <h3> Radiative Transfer Equation with Einstein Coefficients</h3>
+                            For <strong>emission</strong>, we have: 
+                            $$\boxed{j_{\nu} = \dfrac{h \nu}{4 \pi} n_2 A_{21} \phi_{\nu}}$$
+                            For <strong>absorption</strong>, we have:
+                            $$\alpha_{\nu}^{ab} = \dfrac{h \nu}{4 \pi} n_1 B_{12} \phi_{\nu}$$
+                            For <strong>stimulated emission</strong>, treating it as <strong>negative absroption</strong> is more convenient since it is proportional to the intensity and only affects the photon along the beam (analogy to the absorption). Then, we have:
+                            $$\alpha_{\nu}^{se} = \dfrac{h \nu}{4 \pi} n_2 B_{21} \phi_{\nu}$$
+
+                            Therefore, the <strong>total absorption coefficient</strong> is:
+                            $$\boxed{\alpha_{\nu} = \alpha_{\nu}^{ab} - \alpha_{\nu}^{se} = \dfrac{h \nu}{4 \pi}(n_1 B_{12} - n_2 B_{21}) \phi_{\nu}}$$
+
+                            The radiative transfer equation is then: 
+                            $$\boxed{\dfrac{dI_{\nu}}{ds} = -\alpha_{\nu} I_{\nu} + j_{\nu} = -\dfrac{h \nu}{4 \pi}(n_1 B_{12} - n_2 B_{21})\phi_{\nu} I_{\nu} + \dfrac{h \nu}{4 \pi} n_2 A_{21} \phi_{\nu}}$$
+
+                            From this we can have the source function as:
+                            $$\boxed{\S_{\nu} = \dfrac{j_\nu}{\alpha_{\nu}} = \dfrac{n_2 A_{21}}{(n_1 B_{12} - n_2 B_{21})} = \dfrac{2 h \nu^3}{c^2} \left( \dfrac{g_2}{g_1} \dfrac{n_1}{n_2} - 1\right)^{-1}}$$
+                            This is the <strong> generalisation of the Kirchoff's law</strong>.
+                            There are 3 cases of this equation:
+                            <ul>
+                                <li><strong>Thermal equilibrium:</strong>
+                                    <br>
+                                    In this cases, we have the relation:
+                                    $$\dfrac{n_1}{n_2} = \dfrac{g_1}{g_2} \exp\left(\dfrac{h \nu}{K_B T}\right)$$
+                                    Replace this into the source function gives $S_{\nu} = B_{\nu}(T)$
+                                </li>
+
+                                <li><strong>Non-thermal emission:</strong>
+                                    <br>
+                                    In this cases, $\dfrac{n_1}{n_2} \neq \dfrac{g_1}{g_2} \exp\left(\dfrac{h \nu}{K_B T} \right)$
+
+                                </li>                            
+                                <li><strong>Inverted Population:</strong>
+                                    <br>
+                                    In this cases, $\dfrac{n1}{g1} < \dfrac{n2}{g2}$, which means that the upper levels are more populated, leads to negative $\alpha_{\nu}$. 
+                                    This situation leads to <strong>maser</strong> and <strong>laser</strong> phenomena.
+                                    <br>
+                                    Some astrophysical sources of masers are comets, planetary system, stellar atmospheres, supernovae, AGNs.
+
+
+                                </li>
+                        <h2>Scattering</h2>
+                        <h3> Pure Scattering</h3>
+                        Consider the scattering is elastic and isotropic, we have the emission coefficent from scattering as:
+                        $$j_{\nu} = \sigma_{\nu} J_{\nu}$$
+                        with $\sigma_{\nu}$ is the scattering coefficient (absorption coefficient for scattering). Dividing both sides by scattering coefficient gives:
+                        $$S_{\nu} = J_{\nu} = \dfrac{1}{4 \pi} \int I_{\nu} d\Omega$$
+                        Therefore, the radiative transfer equation for pure scattering is:
+                        $$\boxed{\dfrac{I_{\nu}}{ds} = -\sigma_{\nu}(I_{\nu} - J_{\nu})}$$
+                        However, it is more convenient to describe the scattering as <strong>random walk</strong>. The average displacement is 
+                        $$\langle R \rangle = \langle r_1 + r_2 + r_3 + ... \rangle = 0$$
+                        We also have the <strong>mean square displacement</strong> as:
+                        $$l_{\star}^2 = \langle R \rangle^2 = \langle r_1 \rangle^2 + \langle r_2 \rangle^2 + ... + \langle r_n \rangle^2 = N \,l^2$$
+                        with $l$ is the mean free path of photon and N is the number of scatterings. Therefore, we have: 
+                        $$\boxed{l_{\star} = \sqrt{N}l}$$
+                        <br>
+                        Consider different medium: 
                         <ul>
-                            <li>$h$ is Planck's constant</li>
-                            <li>$\nu$ is frequency</li>
-                            <li>$c$ is the speed of light</li>
-                            <li>$k_B$ is Boltzmann's constant</li>
-                            <li>$T$ is temperature</li>
+                            <li><strong>Optically thin</strong> 
+                                <br>
+                                We have the survival probability in a optical depth is $P = e^{-\tau}$. 
+                                The mean number of scatterings is then:
+                                $$\boxed{N = 1 - e^{-\tau} \approx \tau \quad (\text{Taylor expansion})}$$
+                            </li>
+
+                            <li><strong>Optically thick</strong> 
+                                <br>
+                                The size of medium $L$ equal to the mean square displacement. Therefore,
+                                $$N = \dfrac{l_{\star}^2}{l^2} = \dfrac{L^2}{l^2} = L^2 \alpha_{\nu}^2 = L^2 \sigma_{\nu}^2$$
+                                From optical depth definition, $\tau = L \alpha_{\nu} = L \sigma_{\nu}$, therefore: 
+                                $$\boxed{N = \tau^2}$$
+                            </li>
                         </ul>
-                        
-                        <h2>Radiative Transfer</h2>
-                        <p>The equation of radiative transfer is:</p>
-                        $$\frac{dI_\nu}{ds} = -\kappa_\nu \rho I_\nu + j_\nu \rho$$
-                        
-                        <p>where $\kappa_\nu$ is the absorption coefficient and $j_\nu$ is the emission coefficient.</p>
-                        
-                        <h2>Key Processes</h2>
-                        
-                        <h3>1. Bremsstrahlung (Free-Free Emission)</h3>
-                        <p>Radiation from accelerated charged particles. The emissivity is proportional to:</p>
-                        $$j_\nu^{ff} \propto n_e n_i T^{-1/2} e^{-h\nu/k_BT}$$
-                        
-                        <h3>2. Synchrotron Radiation</h3>
-                        <p>Emission from relativistic electrons spiraling in magnetic fields. Power radiated:</p>
-                        $$P = \frac{4}{3} \sigma_T c \gamma^2 U_B$$
-                        
-                        <p>where $\sigma_T$ is the Thomson cross-section, $\gamma$ is the Lorentz factor, and $U_B$ is the magnetic energy density.</p>
-                        
-                        <h3>3. Compton Scattering</h3>
-                        <p>The change in photon energy through scattering:</p>
-                        $$\Delta E = E \frac{4k_BT_e}{m_ec^2}$$
-                        
-                        <h2>Applications in Astrophysics</h2>
+                        Therefore, we have that <strong>$\boxed{N \approx \tau + \tau^2}$ for any optical thickness</strong>. 
+                        <h3> Combined Absorption and Scattering</h3> 
+                        Consider the scattering, the radiative transfer equation becomes:
+                        $$\dfrac{d I_{\nu}}{ds} = -\alpha_{\nu}(I_{\nu} - B_{\nu} - \sigma_{\nu}(I_{\nu} - J_{\nu}))$$
+                        Since $B_{\nu} = J_{\nu} = S_{\nu}$, we have:
+                        $$\boxed{\dfrac{dI_{\nu}}{ds} = -(\alpha_{\nu} + \sigma_{\nu})(I_{\nu} - S_{\nu})}$$
+                        with $(\alpha_{\nu} + \sigma_{\nu})$ is the called <strong>extinction coefficient</strong> and optical depth can be redefined as:
+                        $$\boxed{d\tau_{\nu} = (\alpha_{\nu} + \sigma_{\nu}) ds}$$
+                        The source function is then:
+                        $$\boxed{S_{\nu} = \dfrac{\alpha_{\nu} B_{\nu} + \sigma_{\nu} J_{\nu}}{\alpha_{\nu} + \sigma_{\nu}}}$$
+                        Consider 2 limiting cases:
                         <ul>
-                            <li><strong>Stellar atmospheres:</strong> Understanding spectral lines and continuum emission</li>
-                            <li><strong>Interstellar medium:</strong> Heating and cooling processes</li>
-                            <li><strong>Active galactic nuclei:</strong> High-energy emission mechanisms</li>
-                            <li><strong>Cosmic microwave background:</strong> Blackbody radiation from early universe</li>
-                        </ul>
+                            <li><strong>Deep inside a medium with T and $\tau >> 1$</strong> 
+                                <br>
+                                In thermal equilibrium and optically thick medium, we have $J_{\nu} = B_{\nu}$ and therefore $S_{\nu} = B_{\nu}$
+                            </li>   
+                            <li><strong>Isolated in free space</strong> 
+                                <br>
+                                In this case, $J_{\nu} =0$, therefore:
+                                $$S_{\nu} = \dfrac{\alpha_{\nu}}{\alpha_{\nu} + \sigma_{\nu}} B_{\nu}$$
                         
-                        <h2>Important Constants</h2>
-                        <p>Some useful constants in radiative processes:</p>
-                        <ul>
-                            <li>Speed of light: $c = 3 \times 10^{10}$ cm/s</li>
-                            <li>Planck constant: $h = 6.626 \times 10^{-27}$ erg·s</li>
-                            <li>Boltzmann constant: $k_B = 1.381 \times 10^{-16}$ erg/K</li>
-                            <li>Stefan-Boltzmann constant: $\sigma = 5.67 \times 10^{-5}$ erg cm$^{-2}$ s$^{-1}$ K$^{-4}$</li>
+                            </li>
                         </ul>
+                        <br>
+                        Consider the random walk, the mean free path is now:
+                        $$\boxed{l_{\nu} = \dfrac{1}{\alpha_{\nu} + \sigma_{\nu}}}$$
+                        During the path, the <strong>probability that a free path ends with absorption</strong>is:
+                        $$\epsilon_{\nu} = 1 - e^{\tau} \approx \tau = \alpha_{\nu} l_{\nu} = \dfrac{\alpha_{\nu}}{\alpha_{\nu} + \sigma_{\nu}}$$
+                        The <strong>probability that a free path ends with scattering</strong> is then:
+                        $$1 - \epsilon_{\nu} = \dfrac{\sigma_{\nu}}{\alpha_{\nu} + \sigma_{\nu}}$$.
+                        Therefore, the source function can be rewritten as:
+                        $$\boxed{S_{\nu} = \epsilon_{\nu} B_{\nu} + (1-\epsilon_{\nu}) J_{\nu}}$$
+                        The mean square displacement is $l_{\star} = \sqrt{N}l_{\nu}$, with N is the number of scattering (or number of free paths), then $N = \epsilon_{\nu}^{-1}$. Therefore we have:
                         
-                        <h2>Further Reading</h2>
+                        $$\boxed{l_{\star} = \sqrt{\dfrac{\alpha_{\nu} + \sigma_{\nu}}{\alpha_{\nu}}} \dfrac{1}{\alpha_{\nu} + \sigma_{\nu}} = \dfrac{1}{\sqrt{\alpha_{\nu}(\alpha_\nu + \sigma_{\nu})}}}$$
+                        This is also called the <strong>diffusion length</strong>.
+                        
+                        <br>
+                        Apply in the case of a medium with finite size L, we can use an <strong>effective optical depth</strong> defined as:
+                        $$\boxed{\tau_{\star} = \dfrac{L}{l_{\star}}}$$
+                        There are two limiting cases:
                         <ul>
-                            <li>Rybicki & Lightman - "Radiative Processes in Astrophysics"</li>
-                            <li>Shu - "The Physics of Astrophysics: Radiation"</li>
+                            <li><strong> If $\tau_{\star} << 1$</strong> 
+                                <br>
+                                The medium is effectively optically thin, therefore radiation can escape the medium before being absorbed. The luminosity is then:
+                                $$\mathcal{L}_{\nu} = 4 \pi \alpha_{\nu} B_{\nu} V$$
+                            </li>
+                            <li><strong> If $\tau_{\star} >> 1$</strong> 
+                                <br>
+                                The medium is effectively optically thick, therefore radiation is absorbed before escaping the medium. The physical condition at this scale approaches thermal equilibrium. The luminosity is then:
+                                $$\mathcal{L}_{\nu} = 4 \pi \alpha_{\nu} B_{\nu} A l_{\star} = 4 \pi \alpha_{\nu} B_{\nu} A \dfrac{1}{\sqrt{\alpha_{\nu}(\alpha_{\nu} + \sigma_{\nu})}} = 4 \pi B_{\nu}A \sqrt{\dfrac{\alpha_{\nu}}{\alpha_{\nu} + \sigma_{\nu}}}$$
+                                when there's no scattering ($\sigma_{\nu} = 0$), the luminosity reduces to:
+                                $$\mathcal{L}_{\nu} = 4 \pi B_{\nu} A$$
+                                which is the luminosity from a blackbody surface of area A.
+
+                            </li>
                         </ul>
+                        <h2>Radiative Diffusion</h2>
+                        <h3> Rosseland Approximation</h3>
+
+                        Consider a medium with properties change with depth of the medium. THe intensity depend only on a sigle angle $\theta$, let $\mu = \cos \theta$. The Rosseland mean absorption coefficient is:
+                        $$\boxed{\dfrac{1}{\alpha_{R}} = \dfrac{\int_0^{\infty} (\alpha_{\nu} + \sigma_{\nu})^{-1} \dfrac{dB_{\nu}}{dT} d\nu}{\int_0^{\infty} \dfrac{dB_{\nu}}{dT} d\nu}}$$
+                        Then we have the radiative flux as:
+                        $$\boxed{F(z) = -\dfrac{16 \sigma T^3}{3 \alpha_R} \dfrac{dT}{dz}}$$
+                        This equation is called the <strong>Rosseland approximation</strong>.
+                        <br>
+                        <hr class="note-divider">
+                    
+                        <h1>Fundamentals of Radiation Fields</h1>
+
+
+
+
+                        <h2>Maxwell's Equations</h2>
+
+                        First, we have the <strong>Maxwell's equations</strong>:
+                        \begin{equation}
+                        \begin{aligned}
+                        \nabla \cdot \mathbf{D} &= 4 \pi \rho \quad \quad \quad \quad &\nabla \cdot \mathbf{H} = 0\\
+                        \nabla \times \mathbf{D} &= -\dfrac{1}{c} \dfrac{\partial \mathbf{H}}{\partial t} \quad \quad \quad  &\nabla \times \mathbf{H} = \dfrac{4 \pi}{c} \mathbf{j} + \dfrac{1}{c} \dfrac{\partial \mathbf{D}}{\partial t}
+                        \end{aligned}
+                        \end{equation}
+                        where $\rho$ and $j$ is the charge and current density respectively. The fields $D$ and $H$ are related to $E$ and $B$ by:
+                        \begin{equation}
+                        \begin{aligned}
+                        \mathbf{D} &=\epsilon \mathbf{E}\\
+                        \mathbf{H} &= \dfrac{\mathbf{B}}{\mu}
+                        \end{aligned}
+                        \end{equation}
+                        where $\epsilon$ and $\mu$ are the dielectric constant and magnetic permeability of the medium. 
+                        <br>
+                        A consequence of this equation is the <strong>conservation of charge</strong>: 
+                        $$\boxed{\nabla \cdot (\nabla \times \ H) = \nabla \cdot \mathbf{j} + \dfrac{\partial \rho}{\partial t} = 0}$$
+                        <h2>Poynting Theorem</h2> 
+                        We first have the work done by the electromagnetic field  per unit volume on a charge distribution from 4th Maxwell's equation:
+                        $$\boxed{\mathbf{j \cdot E} = \dfrac{1}{4 \pi} \left[ c(\nabla \times \mathbf{H})\cdot \mathbf{E} - \mathbf{E} \cdot \dfrac{\partial \mathbf{D}}{\partial t} \right]}$$
+                        Using the vector identity:
+                        $$\mathbf{E}\cdot(\nabla \times \mathbf{H}) = \mathbf{H}\cdot(\nabla \times \mathbf{E}) - \nabla \cdot(\mathbf{E} \times \mathbf{H})$$
+                        for the equation above, we have: 
+                        \begin{equation}
+                        \begin{aligned}
+                        &\mathbf{j \cdot E} = \dfrac{1}{4 \pi} \left[ -\mathbf{H}\dfrac{\partial \mathbf{B}}{\partial t} - c\nabla \cdot(\mathbf{E} \times \mathbf{H}) -\mathbf{E}\dfrac{\partial \mathbf{D}}{\partial t} \right] \\
+                        &\mathbf{j \cdot E} + \dfrac{1}{8 \pi} \left( \epsilon E^2 + \dfrac{B^2}{\mu^2} \right) = -\dfrac{c}{4 \pi}\nabla(\mathbf{E} \times \mathbf{H})   \quad \quad  (\mu \,\text{and}\, \epsilon \text{ are time independent})
+                        \end{aligned}
+                        \end{equation}
+                        This relation is called the <strong>Poynting theorem</strong>. This relation can be intepreted as <strong>The rate of change of electric field energy</strong> plus <strong>The rate of change of mechanical energy per unit volume</strong> 
+                        equals to the <strong>negative divergence of the field energy flux</strong>. 
+
+                        <br>
+                        The term $\boxed{S = \dfrac{c}{4 \pi} \mathbf{E} \times \mathbf{H}}$ is called the <strong>Poynting vector</strong>, which represents the energy flux (energy per unit area per unit time) of the electromagnetic field. 
+                        Integrating over a volume element, we have: 
+                        \begin{equation}
+                        \begin{aligned}
+                        \int_{V} \mathbf{j \cdot E} dV + \dfrac{d}{dt} \dfrac{1}{8 \pi}\int_V \left( \epsilon E^2 + \dfrac{B^2}{\mu}\right) &= -\int_A \mathbf{S \cdot dA}\\ 
+                        \Leftrightarrow \dfrac{d}{dt}(U_{kin} + U_{field}) & = -\int_A \mathbf{S \cdot dA} 
+                        \end{aligned}
+                        \end{equation}
+                        That is, the rate of change of total energy (kinetic + field) within a volume V is equal to the net inward flow of energy through a surface A enclosing the volume.
+
+                        <br>
+                        If we consider a static system, E and B will be given by Coulomb's law and $E, \, B \propto r^{-2}$. 
+                        Considering a spherical surface of radius r, the Poynting vector is then $|S| \propto |E| \cdot |B| \propto r^{-4}$. Thus as $r \rightarrow \infty$, $\int_{A} \mathbf{S \cdot dA} \rightarrow 0$.
+                        It means that no electromagnetic energy is transported over large distances in a static system. 
+
+                        <br>
+                        However, if we consider time-varying fields, $E,\, B \propto r^{-1}$ (bcz of the <strong>retared time</strong>), therefore as $r \rightarrow \infty$, $\int_{A} \mathbf{S \cdot dA} \rightarrow \text{finite value}$.
+
+
+                        <h2>Electromagnetic Waves</h2>
+                            Consider the Maxwell's equations in vacuum, we'll have $\epsilon = \mu = 1$
+                            With the derivation, we have the solution for E and B fields as: 
+                            $$\boxed{\mathbf{E} = \hat{\alpha}_1E_0 e^{i(\mathbf{k} \cdot r -\omega t)} \quad, \quad \mathbf{B} = \hat{\alpha}_2B_0 e^{i(\mathbf{k} \cdot r -\omega t)}} $$
+                            with $\mathbf{\hat{a}_1}\, \text{and} \, \mathbf{\hat{a}_2}$ are unit vectors, $E_0, \,B_0$ are the complex constants. The terms $\mathbf{k} = k\mathbf{n}$ and $\omega$ are wave vector and angular frequency respectively.
+                            <br>
+                            Substituting the solution to the Maxwell's equations, we have: 
+                            \begin{equation}
+                            \begin{aligned}
+                            &i\mathbf{k \cdot \hat{a}_1}E_0 = 0
+                            \quad \quad &i\mathbf{k \cdot \hat{a}_2}B_0 = 0\\
+                            &i\mathbf{k \times \hat{\alpha}_1} E_0 =\dfrac{i\omega}{c}\mathbf{\hat{a}_2} B_0
+                            \quad \quad &i\mathbf{k \times \hat{a}_2} B_0 = -\dfrac{i \omega}{c}\mathbf{\hat{a}_1}E_0
+                            \end{aligned}
+                            \end{equation}
+                            From this relations, we have that $\mathbf{\hat{a}_1 \perp \hat{a}_2 \perp k}$, we also have that: 
+                            $$E_0 = \dfrac{\omega}{k c} B_0 \quad \text{and} \quad B_0 = \dfrac{\omega}{k c}E_0 $$
+                            This implies that $E_0 = B_0$ and $\omega = ck$. This means that a EM wave propagate in vacuum with a phase velocity: 
+                            $$\boxed{v_{phase} = \dfrac{\omega}{k} = c}$$ 
+
+                            <br>
+                            <br> 
+                             Since E and B and oscillating quantities and have the form of $E(t) = E_0 e^{i\omega t}$ and $B(t) = B_0 e^{i\omega t}$. 
+                             We have that 
+                             $$Re(E) = \dfrac{E_0 e^{i\omega t} + E_0^{\star}e^{-i \omega t}}{2}$$
+                             Same for B field. Therefore, the <strong>time-averaged Poynting vector</strong> is:
+                             \begin{equation}
+                             \begin{aligned}
+                             \langle \mathbf{S} \rangle &= \langle \dfrac{c}{4 \pi} Re(E) Re(B)\rangle \\
+                             &= \dfrac{c}{4 \pi} \dfrac{1}{4} (E_0 e^{i\omega t} + E^{\star}_0 e^{-i \omega t})(B_0 e^{i \omega t} +B_0^{star} e^{-i \omega t})\\
+                             &= \dfrac{c}{16 \pi} (E_0 B_0 e^{2i\omega t} + E_0 B_0^{\star} + E_0^\star B_0 + E_0^\star B_0^\star e^{-2i\omega t} )\\ 
+                             &= \dfrac{c}{16 \pi} (E_0 B_0^{\star} + E_0^\star B_0) \quad \quad (\text{since}\, \langle e^{\pm 2 i\omega t} \rangle = 0)\\
+                                &= \dfrac{c}{8 \pi} Re(E_0 B_0^{\star}) = \dfrac{c}{8 \pi} Re(E_0^{\star} B_0)
+                             \end{aligned}
+                             \end{equation} 
+                             Since $E_0 = B_0$, we have that: 
+                             $$\boxed{\langle \mathbf{S} \rangle = \dfrac{c}{8 \pi} |E_0|^2 = \dfrac{c}{8 \pi} |B_0|^2 }$$
+                             We can also compute the <strong>time average of field energy</strong> as: 
+                             $$\boxed{\langle U_{field} \rangle = \langle\dfrac{1}{8 \pi}(E^2 + B^2) \rangle = \dfrac{1}{8 \pi} \dfrac{1}{2} (E_0 B_0^\star + E_0^\star B_0) = \dfrac{1}{8 \pi} |E_0|^2 = \dfrac{1}{8 \pi} |B_0|^2}$$
+
+
+                        <h2>Radiation Spectrum</h2>
+                            We can express $E(t)$ in terms of Fourrier transform as:
+                            $$\boxed{\hat{E}(\omega) = \dfrac{1}{2 \pi} \int_{-\infty}^{\infty} E(t) e^{i\omega t} dt}$$
+                            and the inverse transform is:
+                            $$\boxed{E_(t) = \dfrac{1}{2 \pi} \int_{-\infty}^{\infty} \hat{E}(\omega) e^{-i\omega t}d\omega}$$
+                            therefore we have that: 
+                            $$\boxed{E^\star(t) = E(t) \quad, \quad \hat{E}(-\omega) = \hat{E}^\star(\omega)}$$
+                            We also have that the instantaneous Poynting vector  is $S = \dfrac{d U_{total}}{dt dA} = \dfrac{c}{4 \pi}E^2(t)$
+                            <br>
+                            Therefore, the total power per unit area is:
+                            $$\dfrac{dU_{total}}{dt} = \dfrac{c}{4 \pi} \int_{-\infty}^\infty E^2(t)dt = \dfrac{c}{4 \pi} 4\pi \int_0^{\infty} |\hat{E}(\omega)|^2 d\omega = c \int_0^{\infty} |\hat{E}(\omega)|^2 d\omega$$
+                            (from Parseval theorem and $|\hat{E}(-\omega)|^2 = |\hat{E}(\omega)|^2$)
+                            <br>
+                            Therefore, we obtain the <strong>spectral energy density per unit angular frequency</strong> as:
+                            $$\boxed{\dfrac{dU_{total}}{dA d\omega} = c|\hat{E}(\omega)|^2}$$
+                            This is also called the <strong>radiation spectrum</strong>. 
+                            <br>
+                            <p style="color: rgba(255, 0, 0, 0.87); font-weight: bold;">Note:</p>
+                            From the uncertainty principle, we have that $\Delta t \Delta \omega \geq 1$, therefore to have a good frequency resolution $\Delta \omega$, we need to observe the signal for a long time $\Delta t$.
+
+                            
+                        <h2>Polarization</h2>
+
+
                     </div>
                 </article>
             </div>

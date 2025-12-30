@@ -132,7 +132,7 @@
 
                         <p>The peak in the Figure 3 is called the <b>Druid Profile</b> and it is associated with the size of the grains that are absorbing the photons. The main culprit seems to be PAHs (Polycyclic Aromatic Hydrocarbons).</p>
                         <div style="clear: both;"></div>
-
+                        
                         <h2>Stellar Matter</h2> 
 
                         <p>The ingredients of a star are gas and radiation. We need to quantify the properties of the material. The first step is to use the <b>Mean Molecular Weight</b>:
@@ -149,20 +149,87 @@
                         <h2>Stellar Structure and Evolution</h2>
                         
                         <h3>Equations of Stellar Structure</h3>
-                        <p>The four fundamental equations governing stellar structure:</p>
+                        <p> To derive the equations of stellar structure, we need to make a few assumptions:</p>
                         
-                        <p><strong>1. Mass continuity:</strong></p>
-                        $$\frac{dM_r}{dr} = 4\pi r^2 \rho$$
-                        
+                        <p><strong>1. Spherical symmetry:</strong> </p>
+                        The star is assumed to be spherically symmetric, 
+                        meaning that all properties depend only on the radial distance from the center. 
+                        We can neglect the magnetic field, rotation and meridian circulations.
+                    
                         <p><strong>2. Hydrostatic equilibrium:</strong></p>
+                        The pressure has to balance the gravity and steadily increase throughout the stars layers.
                         $$\frac{dP}{dr} = -\frac{GM_r \rho}{r^2}$$
                         
                         <p><strong>3. Energy transport:</strong></p>
+                        Flux carriers in the interiors are radiation, convection and conduction. The only physical mechanism that mix stellar interiors is convection.
                         $$\frac{dL_r}{dr} = 4\pi r^2 \rho \epsilon$$
                         
-                        <p><strong>4. Temperature gradient:</strong></p>
-                        $$\frac{dT}{dr} = -\frac{3\kappa \rho L_r}{16\pi a c T^3 r^2}$$
+                        <p><strong>4. Diffusion approximation:</strong></p>
+                        We neglect the dependency and we use the mean over the sum of all frequencies.
+                        This only apply to stellar interior since almost all elements are fully ionized. 
+                        Atomic diffusion and change in chemical composition are also negelected.
                         
+                        <br><br>
+
+                        <p>We have empirical evidence that star are not affected by rapid changes. In hydrostatic equilibrium, the gravity and pressure has to be balanced: 
+                        We can express this as:<p>
+                        \begin{equation} 
+                        \begin{aligned} 
+                        &F_p = F_G\\
+                        \Leftrightarrow ~&(P(r + dr) - P(r))dS = -\dfrac{GM}{r^2}dm\\
+                        \Leftrightarrow ~&\dfrac{dP}{dr}~ dr~ dS = -\dfrac{GM}{r^2}\rho~ dS~ dr \\
+                        \Leftrightarrow ~&\dfrac{dP}{dr} = -\dfrac{GM}{r^2}\rho \\
+                        \Leftrightarrow ~&\boxed{\dfrac{dP}{dr} = -g\rho}
+
+                        \end{aligned}
+                        \end{equation} 
+                        This is the <strong>momentum conservation equation.</strong>
+                        <br>
+
+                        <strong>Mass conservation equation</strong> can be expresses as:
+
+                        $$\boxed{\dfrac{dM}{dr} = 4\pi r^2 \rho}$$ 
+
+                        Now we have three unknowns (P, M, $\rho$), and two differential equations. 
+                        For thiss, we need to have another equation, which is the equation of state P = P ($\rho$, T).
+                        Since T is another unknown, we now need to have another equation for $\dfrac{dT}{dr}$ (radiative transfer equation).
+
+                        <br>
+                        The pressure in a star is given by the sum of gas pressure and radiation pressure:
+                        $$P = P_{gas} + P_{rad}$$ 
+                        where $P_{rad} = \dfrac{aT^4}{3}$, "a" here is the radiation density constant.
+
+                        From statistical mechanics, we have that: 
+                        $$P_{gas} = \dfrac{1}{3} \sum_i m_i v_i^2 = \dfrac{2}{3}W_i$$
+                        where $W_i$ is the kinetic energy density. We also have that the kinetic energy for a monatomic molecule is: 
+                        $$E_k = \dfrac{3}{2} K_B T$$ 
+                        
+                        Therefore, we can express the gas pressure as: 
+                        $$P_{gas} = \dfrac{2}{3}~\dfrac{3}{2}~n K_B T = \dfrac{\rho}{\mu m_H} K_B T = \dfrac{K_B T \rho}{\mu m_H}$$
+                        where n is the number of particles per unit volume. 
+                        
+                        Finally, we can express the total pressure as:
+                        $$\boxed{P = \dfrac{K_B T \rho}{\mu m_H} + \dfrac{aT^4}{3}}$$
+                        
+                        <br> 
+                        We can introduce another equation, which is the <strong>radiative transfer equation</strong>:
+                        $$\boxed{\dfrac{dT}{dr} = -\dfrac{3\kappa\rho}{4act^3}(\phi_rad + \phi_{cond})}$$
+                        where $\kappa$ is the opacity, $\phi_{rad}$ is the radiative flux, and $\phi_{cond}$ is the conductive flux.
+                        <br>
+                        However, from Stefan-Boltzmann law, we have that:
+                        $$L = 4\pi r^2 \sigma T^4 = 4\pi r^2 \phi$$ 
+                        therefore, we have to introduce another unknown, which is L. To deal with this, we use the <strong>energy conservation equation</strong>:
+                        $$\boxed{\dfrac{dL}{dr} = 4\pi r^2 \rho \epsilon}$$
+                        where $\epsilon$ is the <strong>energy generation rate per unit time</strong>, $\epsilon = \epsilon_g + \epsilon_N + \epsilon_{\nu}$.
+
+                        <br>
+                        Since the time scale for chemical composition to change is much larger, we can neglect it!
+
+                        <br> <br> 
+                        
+                        Another important point is the radius 'r' is not suitable as an independent variable sicne it's not able to follow the changes of the star. 
+                        The mass 'M' is better since it behaves Langragianly. Therefore, we can rewrite the conservation equations in terms of dM by devide both sides by $\dfrac{dM}{dr} = 4\pi r^2 \rho$.
+
                         <h2>Nuclear Fusion</h2>
                         
                         <h3>Proton-Proton Chain</h3>
