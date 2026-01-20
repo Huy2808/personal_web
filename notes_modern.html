@@ -230,27 +230,162 @@
                         Another important point is the radius 'r' is not suitable as an independent variable sicne it's not able to follow the changes of the star. 
                         The mass 'M' is better since it behaves Langragianly. Therefore, we can rewrite the conservation equations in terms of dM by devide both sides by $\dfrac{dM}{dr} = 4\pi r^2 \rho$.
 
-                        <h2>Nuclear Fusion</h2>
+                        <h2>Opacity</h2>
+                            In radiative transfer, opacity quantifies the probability that a photon would have an interaction: 
+                            $$\boxed{\kappa = \dfrac{1}{\lambda \rho}}$$
+                            with $\lambda$ being the mean free path of a photon. In physical terms,<strong> opacity is cross section</strong>. From the radiative transfer equation above, we can see that when <strong>temperature increases</strong>, the <strong>opacity decreases</strong>.
+                            <br><br>
+                            The total opacity is given by: 
+                            $$\boxed{\kappa = \kappa_{radiative} + \kappa_{conductive} + \kappa_{molecule}}$$ 
+                            A useful approximation for stellar interiors is the <strong>Kramers' opacity law</strong>: 
+                            $$\boxed{\kappa = const \, . \, \rho^{n} T^{-s}}$$
+
+                            The main source of opacity depends on the physical conditions of the stellar interior. At <strong>low temperature</strong> (T < 5000K), the main source is the <strong>formation of molecules and ions</strong>, 
+                            such as H<sup>-</sup>, $H_2$, ($TiO$, $VO$) (optical), ($H_2 O$ and CO) (NIR). The most important one is $H^-$ with: 
+                            $$\kappa_{H^-} = 10^{-31}\left( \dfrac{Z}{0.02}\right) \rho^{0.5} T^9 $$
+                            At <strong>even lower temperature</strong> (T < 2800K), the main source is the <strong>dust grains</strong>. This is the reason why low-mass stars are fully convective 
+                            since the high opacity doesn't allow radiation to transport energy efficiently. This all contribute to the <strong>κ<sub>molecule</sub></strong> term.
+                            <br><br>
+                            The main source of <strong>κ<sub>radiative</sub> </strong>are:
+                            <ul>
+                                <li><strong>Bound-bound transitions:</strong> 
+                                    <br>
+                                    This is the absorption of a line photon which excites an electron from a lower to a higher energy level within an atom or ion. This is more effective at $T < 10^6 K$ 
+
+                                </li>
+                                <li><strong>Bound-free transitions (photoionization):</strong> 
+                                    <br>
+                                    Absorption of a continuum photon of sufficient energy to ejects an bound electron from an atom or ion to a free state. The Kramer's law in this case is: 
+                                    $$\kappa \approx 10^{25} Z(1 + X) \rho T^{-3.5}$$
+                                </li>
+                                <li><strong>Free-free transitions (bremsstrahlung):</strong> 
+                                    <br>
+                                When a free electron passing an ion, it is accelerated and emits a photon. The Kramer's law in this case is:
+                                    $$\kappa \approx 10^{23} (X + Y)(1 + X) \rho T^{-3.5}$$
+                                </li>
+                                <li><strong>Electron scattering:</strong> 
+                                    <br>
+                                    
+                                    Thomson scattering of photons by free electrons. Dominant in very hot stars and stellar interiors.</li>
+                            </ul>
+                         In very dense objects, we have electron degeneracy (associated with <strong>κ<sub>conductive</sub> </strong>). It follows: 
+                         $$\kappa = const \, . \, \rho^{-2} T^2$$ 
+                         This is because all lower momentum quantum states are filled (Pauli blocking), therefore, only electrons near the Fermi surface (which are very few)can participate in conduction. 
+                         This leads to the decrease in the interaction with photon, hence the increase in photon mean free path and decrease in opacity. 
+                         <br><br>
+                         Conductive opaccity takes into account all phenomena <strong>not </strong>related to radiation and molecules. 
+
+                         For the intermediate and high mass stars, we need to introduce another parameters, which is the <strong>Energy generation rate</strong>.
+
                         
-                        <h3>Proton-Proton Chain</h3>
-                        <p>The dominant fusion process in Sun-like stars:</p>
-                        $$4p \rightarrow {}^4\text{He} + 2e^+ + 2\nu_e + 26.7\text{ MeV}$$
-                        
-                        <h3>CNO Cycle</h3>
-                        <p>Important in more massive stars where $T > 1.5 \times 10^7$ K.</p>
-                        
-                        <h2>Stellar Classification</h2>
-                        
-                        <h3>Spectral Types</h3>
-                        <p>O, B, A, F, G, K, M (from hottest to coolest)</p>
-                        
-                        <h3>Hertzsprung-Russell Diagram</h3>
-                        <p>Relationship between luminosity and temperature:</p>
-                        $$L = 4\pi R^2 \sigma T_{eff}^4$$
-                        
-                        <h2>Stellar Evolution Stages</h2>
-                        
-                        <h3>Main Sequence</h3>
+                        <h2>He burning phase for intermediate mass stars</h2> 
+
+                        <h2>Mass required to molecular cloud to form stars (Jeans Mass)</h2>
+                            Using viriral theorem, we can derive the minimum mass required for a molecular cloud to collapse and form stars, which is called <strong>Jeans Mass</strong>:
+                            $$\boxed{M_J \leq \left( \dfrac{4 \pi \rho}{3} \right)^{-0.5} \left( \dfrac{5 K_B T}{G \mu m_H} \right)^{1.5}}$$
+                            
+                            We can see that the Jeans mass increase with temperature and decrease with density. Therefore, cold and dense cloud are more likely to form stars. 
+
+                            <br><br>
+                            What typically happens during the evolution of the cloud is that when cooling time is much shorter than the free-fall time, $t_{cool} \ll t_{ff}$, 
+                            it means that the molecules and dust are very efficient in cooling the cloud, making the temperature barely change during the collapse. 
+                            Therefore we can <strong>assume</strong> that the collapse is <strong>isothermal ($T \approx const$)</strong>. This leads to the decrease in $M_J$ as $\rho$ increases while T remains constant.
+                            <br><br>
+                            If the cloud is inhomogeneous, the denser regions with $M > M_J$ will collapse by themselves with their own local $t_{ff}$ and this is called <strong>fragmentation</strong> and also called <strong>Kolmogorov Cascade</strong>.
+                            However, when the substructures reach a <strong>high enough density</strong>, they become <strong>optically thick</strong> and the cooling time increase significantly ($t_{cool} \approx t_{ff}$), the temperature starts to rise, 
+                            and the collapse becomes <strong>adiabatic</strong> (The <strong>isothermal assumption no longer holds</strong>).
+                            <br><br>
+                            In this phase, a sort of nucleus form and this is the first part of the protostar that reaches the hydrostatic equilibrium. This core has free falling gas surrounding it and this envelope absorbed and radiate the energy from the core outwards as infrared radiation.
+                            As the temperature increase (by the virial theorem), the radiation of the core (most of the energy caused by the contraction) begins to cause the dissocication of $H_2$, then ionization of H, then ionization of He, etc. until all elements are ionized. 
+                            The hydrostatic equilibrium is reached and a completed protostar is formed.
+                            
+                        <h2>Low mass vs High mass regime in Stars</h2>
+                         <h3>How to move from radiative to convective cores</h3>
+
+                            For the radiative diffusion, we need to have a certain <strong>temperature gradient</strong> to transport the energy outwards. This is given by:
+                            $$\nabla_{rad} = \left( \dfrac{d\, \log T}{d \,\log P} \right)_{rad}= \dfrac{3}{16 \pi a c G} \dfrac{\kappa l P}{m T^4}$$
+
+                            We can see that the larger the luminosity, the larger the temperature gradient required for radiative diffusion. However, there's an upper limit 
+                            to the temperature gradient that can be sustained by radiative diffusion, which is called <strong>adiabatic temperature gradient</strong>:
+                            $$\nabla_{ad} = \left( \dfrac{d\, \log T}{d \,\log P} \right)_{ad} = \dfrac{P}{T} \dfrac{E_T}{C_P}$$
+                            where $E_T$ is the specific isothermal heat capacity and $C_P$ is the specific heat capacity at constant pressure. They are given by:
+                            $$E_T = \dfrac{1}{\rho} \left(  \dfrac{4 \,P_r}{ P_g}  +1\right)\quad \quad C_P = \dfrac{1}{\rho T} \left( \dfrac{N+2}{2} P_g + 20 P_r + \dfrac{16P_r^2}{P_g} \right)$$
+                            $P_r$ is the radiation pressure and $P_g$ is the gas pressure. N is the degree of freedom of the particles.
+
+                            <br><br> 
+                            We have two regimes:
+                            <ul>
+                                <li><strong>$P_g \gg P_r$ (low mass star):</strong>
+                                    <br>
+                                    In this case, we have: 
+                                    $$\nabla_{ad} = \dfrac{2}{N+2}$$ 
+                                    with N = 3 for monatomic gas, we have $\nabla_{ad} = 0.4$. For diatomic gas, we have N = 5, therefore, $\nabla_{ad} = 0.29$. For partial ionization, N is large so that $\nabla_{ad} \approx 0 - 0.1$.
+                                <li><strong>$P_g  \ll P_r$ (high mass star):</strong> 
+                                    <br>
+                                    In this case, we have: 
+                                    $$\nabla_{ad} = \dfrac{1}{4}$$
+                                </li>
+                            </ul>   
+
+
+                            When $\boxed{\nabla_{rad} > \nabla_{ad}}$, radiative diffusion is no longer efficient enough to transport the energy outwards, and convection sets in. This is known as the <strong>Schwarzschild criterion</strong> for convective instability.
+
+                            <br><br>
+                            For a <strong>low mass star</strong>, the main energy generation mechanism is the <strong>proton-proton chain</strong>, which has a weak temperature dependence ($\epsilon_{pp} \propto T^4$). Since this temperature gradient is not steep, it gives us <strong>radiative cores</strong> in low mass stars.
+                            <br><br>
+                            For a <strong>high mass star</strong>, the main energy generation mechanism is the <strong>CNO cycle</strong>, which has a strong temperature dependence ($\epsilon_{CNO} \propto T^{18}$). This leads to a steep temperature gradient, resulting in <strong>convective cores and radiative envelopes</strong> in high mass stars.
+                            <br><br>
+                            For the <strong>intermediate mass stars</strong>, we don't know where the velocity becomes vanishing after the boundary of the convective region. This is called the <strong>problem of overshooting</strong>, which is the phenomenon where convective motions extend beyond the formal boundary defined by the Schwarzschild criterion.
+                            This is one of the mechanism that can increase the size of the helium core during the main sequece phase. 
+
+
+                        <h2>Physical mechanism along RGB</h2> 
+                            <p>Consider a <strong>low to mid mass star ($0.6 - 10 M_{\odot}$)</strong>, when it exhausts hydrogen in its core, it leaves the MS and starts to fuse hydrogen in a shell surrounding the core. The core increase it's mass as the shell produces more helium. Depending on the mass of the helium core, this continues for several 
+                            million years to billion years, with the star expanding and cooling at the a similar or slightly lower luminosity compared to its MS phase. This phase is called the <strong>Subgiant phase</strong> before the RGB phase.</p>
+                            
+                            <p>Depends on the total mass of the star, we have three different scenarios for the helium core:</p>
+                            
+                            <ul>
+                                <li><strong>$M_{star} < 1.5 M_{\odot}$:</strong> The He core will become degenerate. The H shell burning rapidly increase the star's luminosity and force it to expand and leave the MS and cross the Hertzsprung gap on a short timescale. Since the He core produces no energy and conducts heat effectively, it become nearly isothermal 
+                                    (almost no temperature gradient). Therefore the core is stable and radiative rather than convective (which needs superadiabatic gradient).
+                                </li>
+                                
+                                <li><strong>$1.5 M_{\odot} < M_{star} < 6 M_{\odot}$:</strong> The core will grow until the <strong>Schonberg-Chandrasekhar limit</strong> is reached, which is given by: 
+                                $$\boxed{\left(\dfrac{M_{core}}{M_{star}} \right) = 0.379\left(\dfrac{\mu_{env}}{\mu_{core}} \right)^2}$$
+                                where $\mu_{env}$ is the mean molecular weight of the envelope and $\mu_{core}$ is the mean molecular weight of the core.
+                                <br>
+                                This limit is the maximum mass that an isothermal core can have while still being able to support the overlying envelope. When this limit is exceeded, the helium core can no longer grow and will collapse, releasing energy that causes the outer layers of the star to expand significantly. This leads to the star ascending the <strong>Red Giant Branch (RGB)</strong>.</li>
+                                
+                                <li><strong>$M_{star} > 6 M_{\odot}$:</strong> The star leaves the MS and moves directly to the blue supergiant phase without ascending the RGB. This is because the core is massive enough to continue hydrogen burning in a shell without becoming degenerate or reaching the Schonberg-Chandrasekhar limit.</li>
+                            </ul>
+
+                            In summary, in any case, the core becomes filled with He and H begins to burn in a shell around it making the star expands and leaves the MS.  
+                            <br><br>
+                            During the RGB phase, there will be a point where the convective core will start to reside called <strong>first dredge-up</strong>, because the outer layers expand and cool down, making the convective zone move inward. 
+                            This is when the material from the bottom of the convective zone is brought to the surface and vice versa. This is the <strong>first time</strong> in the life of the star that the <strong>chemical composition change</strong>.  
+                            <br><br>
+                            When the RGB phase continues, the first dredge-up leave a discontinuity in the hydrogen profile. The He core will also continues to grow, push the H shell outwards until it reaches the discontinuity. 
+
+                            For stars approaching the tip of the RGB, the He core becomes more degenerate and increase its temperature and starts to loose energy via thermal neutrino emission which make the center cooler and not the hottest point anymore.
+                            This process coninues until $M_{core}^{He} \approx 0.5 M_{\odot}$, which is needed for <strong>triple-alpha process</strong> and the star can burn He in the core. 
+                            <br><br>
+                            In the He core of <strong>low mass stars</strong> (0.6 - 2.0 $M_{\odot}$), the triple-alpha process ignites in a runaway fusion called <strong>Helium Flash</strong> due to the degenerate nature of the core. We know that in degenerate matter, pressure is independent of temperature.
+                            Therefore, when He fusion starts, the temperature rises rapidly without the change of pressure (pressure change leads to expansion which cools the core). Temperauture increase leads to more He fusion, causing a <strong>thermal runaway</strong> mentioned above. However, 
+                            the energy released in absorbed by the core, lifting the degeneracy and expand the core, therefore it <strong>can't be seen from outside</strong>. Due to the expansion of the core, the H shell expands and cools down, reduce the total energy generation of the star. This makes the star to 
+                            contract and move to the <strong>Horizontal Branch (HB)</strong> on the HR diagram, <strong>shrinking in radius and increasing the surface temperature</strong>.
+
+                            <br><br>
+                            However, the majority of energy is still come from H fusion in the shell rather than He, and this produce more He to the core. The He at the shell then produce a thermal runaway, which is called <strong>Helium Shell Flash</strong> or <strong>Thermal Pulse</strong>. 
+                            This process continues towards the end of the <strong>Asymptotic Giant Branch (AGB)</strong> phase. 
+
+                            <br><br>
+                            During the <strong>AGB phase</strong>, the star has consumed most of its He in the core and make it into a <strong>C-O core</strong>. The H and He shell burning continue, <strong>parralleling with the original RGB</strong> phase but with a faster energy generation rate. 
+                            In the early part of this phase, large energy flux produced by <strong>He burning shell expand and cool down the H shell</strong>, make the H burning stop. 
+                            This makes the outer convection zone to penetrate deeper into the star (known as the <strong>second dredge-up</strong>), bringing more processed material, <strong>mostly He and N (due to CNO cycle)</strong> to the surface.
+                            <br><br>
+                            During the later part of the AGB phase, due to the <strong>thermal pulses</strong> from the He shell flashes, the <strong>outer layer expands and contracts periodically</strong>, make the convective zone to penetrate even deeper into the star. This is known as the <strong>third dredge-up</strong>, 
+                            which brings up <strong>carbon and s-process elements</strong> produced in the He shell <strong>to the surface</strong>. In leading to the formation of <strong>carbon stars</strong>.
+
                         <p>Stars spend ~90% of their lifetime here, burning hydrogen in the core.</p>
                         <p>Mass-luminosity relation:</p>
                         $$\frac{L}{L_\odot} \approx \left(\frac{M}{M_\odot}\right)^{3.5}$$

@@ -70,6 +70,64 @@
                     <a href="notes.html"><i class="fas fa-arrow-left"></i> Back to Notes</a>
                 </div>
                 
+                <!-- Floating TOC Button -->
+                <button class="toc-float-btn" id="tocFloatBtn" aria-label="Table of Contents">
+                    <i class="fas fa-list"></i>
+                    <span class="toc-btn-text"></span>
+                </button>
+                
+                <!-- TOC Overlay -->
+                <div class="toc-overlay" id="tocOverlay"></div>
+                
+                <!-- Expandable TOC Sidebar -->
+                <aside class="toc-sidebar" id="tocSidebar">
+                    <div class="toc-header">
+                        <h3 class="toc-title">
+                            <i class="fas fa-list-ul"></i>
+                            Table of Contents
+                        </h3>
+                        <button class="toc-close-btn" id="tocCloseBtn" aria-label="Close Table of Contents">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <nav class="toc-content" id="tocContent">
+                        <ul>
+                            <li>
+                                <a href="#fundamental-equations" class="toc-link" data-section="fundamental-equations">
+                                    <span class="toc-number">1.</span>
+                                    Fundamental Equations of Radiative Transfer
+                                </a>
+                                <ul>
+                                    <li><a href="#radiative-transfer" class="toc-link" data-section="radiative-transfer">Radiative transfer equation and how to solve</a></li>
+                                    <li><a href="#optical-depth" class="toc-link" data-section="optical-depth">Optical Depth</a></li>
+                                    <li><a href="#eddington-limit" class="toc-link" data-section="eddington-limit">Eddington Limit</a></li>
+                                    <li><a href="#blackbody-radiation" class="toc-link" data-section="blackbody-radiation">Blackbody Radiation</a></li>
+                                    <li><a href="#kirchoff-law" class="toc-link" data-section="kirchoff-law">Kirchoff's Law for thermal emission</a></li>
+                                    <li><a href="#thermodynamics-blackbody" class="toc-link" data-section="thermodynamics-blackbody">Thermodynamics of Blackbody radiation</a></li>
+                                    <li><a href="#planck-spectrum" class="toc-link" data-section="planck-spectrum">Planck Spectrum</a></li>
+                                    <li><a href="#planck-properties" class="toc-link" data-section="planck-properties">Properties of the Planck law</a></li>
+                                    <li><a href="#einstein-coefficients" class="toc-link" data-section="einstein-coefficients">Einstein Coefficients</a></li>
+                                    <li><a href="#scattering" class="toc-link" data-section="scattering">Scattering</a></li>
+                                    <li><a href="#radiative-diffusion" class="toc-link" data-section="radiative-diffusion">Radiative Diffusion</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#fundamentals-radiation" class="toc-link" data-section="fundamentals-radiation">
+                                    <span class="toc-number">2.</span>
+                                    Fundamentals of Radiation Fields
+                                </a>
+                                <ul>
+                                    <li><a href="#maxwell-equations" class="toc-link" data-section="maxwell-equations">Maxwell's Equations</a></li>
+                                    <li><a href="#poynting-theorem" class="toc-link" data-section="poynting-theorem">Poynting Theorem</a></li>
+                                    <li><a href="#em-waves" class="toc-link" data-section="em-waves">Electromagnetic Waves</a></li>
+                                    <li><a href="#radiation-spectrum" class="toc-link" data-section="radiation-spectrum">Radiation Spectrum</a></li>
+                                    <li><a href="#polarization" class="toc-link" data-section="polarization">Polarization</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </aside>
+                
                 <article class="note-article">
                     <header class="note-header">
                         <h1 class="note-title">Radiative Process</h1>
@@ -81,8 +139,8 @@
                     
                     <div class="note-body">
                     
-                        <h1>Fundamental Equations of Radiative Transfer</h1>
-                        <h2>Radiative transfer equation and how to solve</h2> 
+                        <h1 id="fundamental-equations">Fundamental Equations of Radiative Transfer</h1>
+                        <h2 id="radiative-transfer">Radiative transfer equation and how to solve</h2> 
                             We have a quantity that does not depend on the distance to the source, which is the <strong>specific intensity</strong>
                             $I_{\nu}$ (or brightness)$[erg s^{-1} cm^{-2} str^{-1} Hz^{-1}]$. It is defined as the amount of energy per unit time, per unit solid angle and per unit frequencies that passes through a unit area: 
                             $$\boxed{I_{\nu} = \dfrac{dE}{dA\, dt \, d\Omega \, d\nu}}$$
@@ -183,7 +241,7 @@
                             From both emission and absorption, we have the <strong>radiative transfer equation</strong>:
                             $$\boxed{\dfrac{dI_{\nu}}{ds} = -\alpha_{\nu} I_{\nu} + j_{\nu}}$$
                             
-                        <h2>Optical Depth</h2>
+                        <h2 id="optical-depth">Optical Depth</h2>
                             Instead of working with the distance 's', it is more convenient to work with the <strong>optical depth</strong> $\tau_{\nu}$ defined as:
                             $$\boxed{d\tau_{\nu} = \alpha_{\nu}ds}$$
                             or
@@ -223,7 +281,7 @@
                             Therefore, the <strong>mean free path</strong> is:
                             $$\boxed{l_{\nu} = \dfrac{1}{\alpha_{\nu}}}$$
 
-                        <h2> Eddington Limit</h2>
+                        <h2 id="eddington-limit"> Eddington Limit</h2>
                             Since the radiation carries momentum, it exerts a force on medium, therefore we have the <strong>flux vector</strong>:
                             $$\boxed{\vec{F_{\nu}} = \int_{\Omega} I_{\nu} \,\hat{n} \, d\Omega}$$
                             This flux vector is associated with a  <strong>momentum vector</strong>:
@@ -246,7 +304,7 @@
                             Therefore, we have the <strong>Eddington Limit</strong> is $\boxed{\dfrac{M}{L} = \dfrac{\kappa}{4 \pi G c}}$. The luminosity sastisfies this relation 
                             is called the <strong>Eddington Luminosity</strong>.
                         
-                        <h2>Blackbody Radiation</h2> 
+                        <h2 id="blackbody-radiation">Blackbody Radiation</h2> 
                             Blackbody radiation is the radiation which is it self in thermal equilibrium. 
                             <p><strong>Though Experiment:</strong></p>
                             A blackbody cavity contains radiation $I_{\nu}$ at temperature T. The cavity has small hole to measure the radiation without disturbing the euilibrium. 
@@ -262,7 +320,7 @@
 
                             <br> 
                             This kind of setup is similar to <strong>a medium with very high optical depth</strong>.
-                        <h2> Kirchoff's Law for thermal emission</h2>
+                        <h2 id="kirchoff-law"> Kirchoff's Law for thermal emission</h2>
                             Consider a thermal emitter at temperature T in a blackbody cavity at the same temperature. 
                             As the optical depth $\tau_{\nu}$ is very high, $I_{\nu} \rightarrow S_{\nu}$ (showed in the solution of radiative transfer equation). 
                             Combined with the argument from the blackbody radiation part, we have:
@@ -274,7 +332,7 @@
 
                             from this equation, we can say that <strong>thermal radiation ($S_{\nu} = B_{\nu}$)</strong> becomes <strong>blackbody radiation ($I_{\nu} = B_{\nu}$)</strong> only for  <strong>optically thick medium ($\tau_{\nu} >> 1$)</strong>.
 
-                        <h2>Thermodynamics of Blackbody radiation</h2>
+                        <h2 id="thermodynamics-blackbody">Thermodynamics of Blackbody radiation</h2>
                             Consider a blackbody cavity with a piston, it has volume V, temperature T, pressure p and energy density u.
                             <br>
                             From the 1st law of thermodynamics, we have $dQ = dU + pdV$, with Q is heat and U is total energy. From the 2nd law, we have $dS = \dfrac{dQ}{T}$, therefore:
@@ -326,7 +384,7 @@
 
 
 
-                        <h2>Planck Spectrum</h2> 
+                        <h2 id="planck-spectrum">Planck Spectrum</h2> 
                             Since $B_{\nu} = I_{\nu}$ and $u_{\nu}(\Omega) = \dfrac{I_{\nu}}{c}$, we have that:
                             $$B_{\nu} = u_{\nu} c = \rho_s\, \bar{E} \,c$$
                             Therefore, to derive $B_{\nu}$, we need to find the <strong>density of photon states ($\rho_s$)</strong> and the <strong>average energy per photon states ($\bar{E}$)</strong>.
@@ -360,7 +418,7 @@
                             In terms of wavelength, we have:
                             $$\boxed{B_{\lambda} =  \dfrac{2h c^2 \lambda^{-5}}{\left( \exp\left(\dfrac{\,h\,\nu \,c}{\lambda K_B T}\right) - 1 \right) }}$$ 
                         
-                        <h2>Properties of the Planck law</h2>
+                        <h2 id="planck-properties">Properties of the Planck law</h2>
                             <ul>
                                 <li><strong>Rayleigh-Jeans regime</strong>
                                     <br>
@@ -426,7 +484,7 @@
 
 
 
-                        <h2>Einstein Coefficients</h2>  
+                        <h2 id="einstein-coefficients">Einstein Coefficients</h2>  
                             <h3> Deffinition of coefficients</h3>
                             Consider a two-level atomic system with lower energy level 1 and upper energy level 2. The number density of atoms in each level are $n_1$ and $n_2$ respectively. The processes that can occur are:
                             <ul>
@@ -513,7 +571,7 @@
 
 
                                 </li>
-                        <h2>Scattering</h2>
+                        <h2 id="scattering">Scattering</h2>
                         <h3> Pure Scattering</h3>
                         Consider the scattering is elastic and isotropic, we have the emission coefficent from scattering as:
                         $$j_{\nu} = \sigma_{\nu} J_{\nu}$$
@@ -602,7 +660,7 @@
 
                             </li>
                         </ul>
-                        <h2>Radiative Diffusion</h2>
+                        <h2 id="radiative-diffusion">Radiative Diffusion</h2>
                         <h3> Rosseland Approximation</h3>
 
                         Consider a medium with properties change with depth of the medium. THe intensity depend only on a sigle angle $\theta$, let $\mu = \cos \theta$. The Rosseland mean absorption coefficient is:
@@ -613,12 +671,12 @@
                         <br>
                         <hr class="note-divider">
                     
-                        <h1>Fundamentals of Radiation Fields</h1>
+                        <h1 id="fundamentals-radiation">Fundamentals of Radiation Fields</h1>
 
 
 
 
-                        <h2>Maxwell's Equations</h2>
+                        <h2 id="maxwell-equations">Maxwell's Equations</h2>
 
                         First, we have the <strong>Maxwell's equations</strong>:
                         \begin{equation}
@@ -638,7 +696,7 @@
                         <br>
                         A consequence of this equation is the <strong>conservation of charge</strong>: 
                         $$\boxed{\nabla \cdot (\nabla \times \ H) = \nabla \cdot \mathbf{j} + \dfrac{\partial \rho}{\partial t} = 0}$$
-                        <h2>Poynting Theorem</h2> 
+                        <h2 id="poynting-theorem">Poynting Theorem</h2> 
                         We first have the work done by the electromagnetic field  per unit volume on a charge distribution from 4th Maxwell's equation:
                         $$\boxed{\mathbf{j \cdot E} = \dfrac{1}{4 \pi} \left[ c(\nabla \times \mathbf{H})\cdot \mathbf{E} - \mathbf{E} \cdot \dfrac{\partial \mathbf{D}}{\partial t} \right]}$$
                         Using the vector identity:
@@ -673,7 +731,7 @@
                         However, if we consider time-varying fields, $E,\, B \propto r^{-1}$ (bcz of the <strong>retared time</strong>), therefore as $r \rightarrow \infty$, $\int_{A} \mathbf{S \cdot dA} \rightarrow \text{finite value}$.
 
 
-                        <h2>Electromagnetic Waves</h2>
+                        <h2 id="em-waves">Electromagnetic Waves</h2>
                             Consider the Maxwell's equations in vacuum, we'll have $\epsilon = \mu = 1$
                             With the derivation, we have the solution for E and B fields as: 
                             $$\boxed{\mathbf{E} = \hat{\alpha}_1E_0 e^{i(\mathbf{k} \cdot r -\omega t)} \quad, \quad \mathbf{B} = \hat{\alpha}_2B_0 e^{i(\mathbf{k} \cdot r -\omega t)}} $$
@@ -714,7 +772,7 @@
                              $$\boxed{\langle U_{field} \rangle = \langle\dfrac{1}{8 \pi}(E^2 + B^2) \rangle = \dfrac{1}{8 \pi} \dfrac{1}{2} (E_0 B_0^\star + E_0^\star B_0) = \dfrac{1}{8 \pi} |E_0|^2 = \dfrac{1}{8 \pi} |B_0|^2}$$
 
 
-                        <h2>Radiation Spectrum</h2>
+                        <h2 id="radiation-spectrum">Radiation Spectrum</h2>
                             We can express $E(t)$ in terms of Fourrier transform as:
                             $$\boxed{\hat{E}(\omega) = \dfrac{1}{2 \pi} \int_{-\infty}^{\infty} E(t) e^{i\omega t} dt}$$
                             and the inverse transform is:
@@ -735,10 +793,819 @@
                             From the uncertainty principle, we have that $\Delta t \Delta \omega \geq 1$, therefore to have a good frequency resolution $\Delta \omega$, we need to observe the signal for a long time $\Delta t$.
 
                             
-                        <h2>Polarization</h2>
+                        <h2 id="polarization">Polarization</h2>
+                        <h3 id="monochromatic">Monochromatic Waves</h3>
+
+                        Since the electric field vector is perpendicular to the direction of propagation, we can decompose the electric field into two orthogonal components:
+                        $$\mathbf{E} = (\mathbf{\hat{x}}E_1 + \mathbf{\hat{y}}E_2)e^{-i\omega t} = \mathbf{E}_0 e^{-i\omega t}$$
+                        This is demonstrated in the figure below:
+                        <figure class="note-figure float-left">
+                            <img src="image/polarization.png" alt="Polarization Diagram" width="400px" style="max-width: 100%; height: auto;">
+                            <figcaption style="width: 300px; max-width: 100%;">Figure 2: Rotation of x and y electric field components through angle $\chi$ to conicide with principle axes x', and y' of the polarization ellipse. $\beta$ is the ellipticity and $\beta = tan^{-1}\dfrac{b}{a}$</figcaption>
+
+                        </figure>
+                        <br>
+                        The physical components (real parts) of the electric field are then:
+                        $$E_x = \mathcal{E}_1 \cos(\omega t - \phi_1), \quad \quad E_y = \mathcal{E}_2 \cos(\omega t - \phi_2)$$
+                        These are the tip of the electric field vector in the xy plane. 
+                        <br>
+                        From the Figure 2, we can see that the wave is <strong>elliptically polarized</strong>. The components of electric field is then: 
+                        $$\boxed{E'_{x} = \mathcal{E}_0\,cos{\beta}\,cos{\omega t}}, \quad \quad E'_y = -\mathcal{E}_0\,sin{\beta}\,sin{\omega t}$$
+                        where $-\dfrac{\pi}{2} \leq \beta \leq \dfrac{\pi}{2}$. With different values of $\beta$, we have different types of polarization:
+                        <ul>
+                            <li><strong>Linear Polarization:</strong>
+                                <br>
+                                When $\beta = 0 \,\text{or} \, \pm \dfrac{\pi}{2}$, the wave is linearly polarized.
+                                
+                            </li>
+                            <li><strong>Circular Polarization:</strong>
+                                <br>
+                                When $\beta = \pm \dfrac{\pi}{4}$, the ellipse becomes a circle, the wave is then circularly polarized.
+                            </li>
+                            <li><strong>Elliptical Polarization:</strong>
+                                <br>
+                                When $0 < \beta < \dfrac{\pi}{2}$, it is called <strong>clockwise</strong>, or <strong>right-handed elliptical polarized</strong>, or <strong>negative helicity</strong>.
+                                <br>
+                                When $-\dfrac{\pi}{2} < \beta < 0$, it is called <strong>counter-clockwise</strong>, or <strong>left-handed elliptical polarized</strong>, or <strong>positive helicity</strong>.
+                            </li>
+                        </ul>
+                        Apply the rotation transformation, we have:
+                       $$\begin{pmatrix}
+                        E_x \\
+                        E_y
+                        \end{pmatrix}
+                        =
+                        \begin{pmatrix}
+                        \cos \chi & -\sin \chi \\
+                        \sin \chi & \cos \chi
+                        \end{pmatrix}
+                        \begin{pmatrix}
+                        E'_x \\
+                        E'_y
+                        \end{pmatrix}.$$
+                        Therefore, we have: 
+                        \begin{equation}
+                        \begin{aligned}
+                        E_x &= \mathcal{E}_0(cos\beta \, cos\chi \, cos\omega t + sin\beta \, \sin\chi \, sin\omega t)\\
+                        E_y &= \mathcal{E}_0(cos\beta \, sin\chi \, cos\omega t - sin\beta \, cos\chi \, sin\omega t)
+                        \end{aligned}
+                        \end{equation}
+                        Combined with the first equations of $E_x$ and $E_y$ above, we can have the relations:
+                        \begin{equation}
+                        \begin{aligned}
+                        \mathcal{E}_1 \cos \phi_1 &= \mathcal{E}_0 \, \cos\beta \, \cos\chi \\
+                        \mathcal{E}_1 \sin \phi_1 &= \mathcal{E}_0 \, \sin\beta \, \sin\chi \\
+                        \mathcal{E}_2 \cos \phi_2 &= \mathcal{E}_0 \, \cos\beta \, \sin \chi\\
+                        \mathcal{E}_2 \sin \phi_2 &= -\mathcal{E}_0 \, \sin\beta \, \cos\chi
+
+                        \end{aligned}
+                        \end{equation}
+                        Combining these $\mathcal{E}_1$ and $\mathcal{E}_2$ gives us the <strong>Stoke parameters</strong>:
+                        $$\boxed{\begin{aligned}
+                        I &= \mathcal{E}_1^2 + \mathcal{E}_2^2 = \mathcal{E}_0^2 \\
+                        Q &= \mathcal{E}_1^2 - \mathcal{E}_2^2 = \mathcal{E}_0^2 \,\cos 2\beta \, \cos 2 \chi\\
+                        U &= 2 \mathcal{E}_1 \mathcal{E}_2 \, \cos(\phi_1 -\phi_2) = \mathcal{E}_0^2 \, \cos 2\beta \, \sin 2\chi\\
+                        V &= 2 \mathcal{E}_1 \mathcal{E}_2 \, \sin(\phi_1 - \phi_2) = \mathcal{E}_0^2 \, \sin 2\beta
+                        \end{aligned}}$$ 
+
+                        where I is the total intensity, Q and U describe the linear polarization, and V describes the circular polarization.
+
+                        <h3 id="quasi-monochromatic">Quasi-Monochromatic Waves</h3>
+                        In this case, the phase angle varies with time: 
+                        $$E_1(t) = \mathcal{E}_1 e^{i \phi_1(t)}, \quad \quad E_2(t) = \mathcal{E}_2 e^{i \phi_2(t)}.$$
+                        When we take a measurement, the measurement modifies the electric field, therefore the detected electric fields are: 
+                        $$\begin{pmatrix}
+                        E'_1 \\
+                        E'_2
+                        \end{pmatrix}
+                        =
+                        \begin{pmatrix}
+                        \lambda_{11} & \lambda_{12} \\
+                        \lambda_{21} & \lambda_{22}
+                        \end{pmatrix}
+                        \begin{pmatrix}
+                        E_1 \\
+                        E_2
+                        \end{pmatrix}$$
+                        where $\lambda_{ij}$ (i, j = 1, 2), are the complex constants that describe the measurement system.
+                        <br>
+                        However, at the end, what we measure is the time averaged of squared quantities: 
+                        $$\langle [Re(E'_1 e^{-i \omega t})]^2 \rangle = \dfrac{1}{2} Re(E'_1 E_1'^\star)$$
+
+                        Expand this gives us:
+                            $$\begin{aligned} 
+                            Re(E'_1 E'^{\star}_1) &= Re[(\lambda_{11} E_1 + \lambda_{12} E_2)(\lambda^{\star}_{11} E^{\star}_1 + \lambda^{\star}_{12} E^{\star}_2)] \\
+                            &= Re[\lambda_{11} \lambda^{\star}_{11} E_1 E^{\star}_1 + \lambda_{11} \lambda^\star_{12} E_1 E^{\star}_2 + \lambda_{12} \lambda^{\star}_{11} E_2 E^{\star}_1 + \lambda_{12} \lambda^{\star}_{12} E_2 E^{\star}_2]\\
+                            &= |\lambda_{11}|^2 E_1 E^{\star}_1 + |\lambda_{12}|^2 E_2 E^{\star}_2 + 2 Re[\lambda_{11} \lambda^{\star}_{12} E_1 E^{\star}_2]
+                            \end{aligned}$$
+
+                        Where we have: 
+                        $$\langle E_i E_j^\star \rangle = \dfrac{1}{T} \int^T_0 E_i(t) E_j^\star(t) \, dt$$
+                        which is the <strong>slow variations of the amplitudes</strong>. 
+
+                        <br> 
+                        It is clearly that, to characterized E, we need 4 quantities $\boxed{\langle E_i(t) E_j^\star(t) \rangle}$ (i, j = 1, 2). These 4 quantities can be related to the Stokes parameters as:
+                        $$\boxed{\begin{aligned}
+                        I &= \langle E_1 E_1^\star \rangle + \langle E_2 E_2^\star \rangle = \langle \mathcal{E}_1^2 + \mathcal{E}_2^2 \rangle \\
+                        Q &= \langle E_1 E_1^\star \rangle - \langle E_2 E_2^\star \rangle = \langle \mathcal{E}_1^2 - \mathcal{E}_2^2 \rangle \\
+                        U &= \langle E_1 E_2^\star \rangle + \langle E_1^\star E_2 \rangle = \langle 2 \mathcal{E}_1 \mathcal{E}_2 \cos(\phi_1 - \phi_2) \rangle \\
+                        V &= \dfrac{1}{i}(\langle E_1 E_2^\star \rangle - \langle E_1^\star E_2 \rangle ) = \langle 2 \mathcal{E}_1 \mathcal{E}_2 \sin(\phi_1 - \phi_2) \rangle
+                        \end{aligned}}$$
+                        Express $I^2$ with $Q^2, \,U^2,\, V^2$ with the <strong>Cauchy-Schwarz inequality</strong>, we have:
+                        $$\boxed{I^2 \geq Q^2 + U^2 + V^2}$$
+                        The equality holds for fully polarized waves, while the inequality holds for partially polarized or unpolarized waves. 
+                        The degree of polarization is then defined as:
+                        $$\boxed{\Pi = \dfrac{I_{pol}}{I} = \dfrac{\sqrt{Q^2 + U^2 + V^2}}{I}}$$
+
+                        <p style="color: rgba(255, 0, 0, 0.87); font-weight: bold;">Note:</p>
+                        A special case is partial linear polarization, where V = 0, therefore the <strong>degree of linear polarization</strong> is:
+                        $$\boxed{\Pi_{lin} = \dfrac{I_{max} - I_{min}}{I_{max} + I_{min}}}$$
+                        where: 
+                        $$
+                        \begin{aligned}
+                        I_{max} &= \dfrac{1}{2}I_{unpol} + I_{pol} = \dfrac{1}{2}I_{unpol} + \sqrt{Q^2 + U^2} \\
+                        I_{min} &= \dfrac{1}{2}I_{unpol}
+                        \end{aligned}
+                        $$
+                    <h3 id="electromagnetic-potentials">Electromagnetic Potentials</h3>
+                        It is often more convenient to express $\mathbf{E}$ and $\mathbf{B}$ fields in terms of a <strong>scalar potential</strong> $\phi(r, t)$ and a <strong>vector potential</strong> $\mathbf{A}(\mathbf{r}, t)$. 
+                        Since $\nabla \cdot \mathbf{B} = 0$, we can express B field as:
+                        $$\boxed{\mathbf{B} = \nabla \times \mathbf{A}}$$
+                        Substituting this into the 2nd Maxwell's equation, we have:
+                        $$\nabla \times \left( \mathbf{E} + \dfrac{1}{c} \dfrac{\partial \mathbf{A}}{\partial t}\right) = 0$$
+                        Therefore, we can express E field as:
+                        $$\boxed{\mathbf{E} = -\nabla \phi - \dfrac{1}{c} \dfrac{\partial \mathbf{A}}{\partial t}}$$
+                        Substituting these into the 1st Maxwell's equations, we have: 
+                        $$\boxed{\nabla^2 \phi + \dfrac{1}{c} (\nabla \cdot \mathbf{A}) = - 4\pi \rho}$$
+                        this can also be written as:
+                        $$\nabla^2 \phi - \dfrac{1}{c^2} \dfrac{\partial^2 \phi}{\partial t^2} +\dfrac{1}{c} \dfrac{\partial}{\partial t}\left(  \nabla \cdot \mathbf{A} + \dfrac{1}{c} \dfrac{\partial \phi}{\partial t}\right)= - 4\pi \rho$$
+                        and the 4th Maxwell's equation becomes:
+                        $$\boxed{\nabla \times (\nabla \times \mathbf{A}) - \dfrac{1}{c} \dfrac{\partial }{\partial t}\left(-\nabla \phi - \dfrac{1}{c}\dfrac{\partial \mathbf{A}}{\partial} \right) = \dfrac{4 \pi}{c} \mathbf{j}}$$
+                        Using the vector identity $\nabla \times (\nabla \times \mathbf{A}) = \nabla(\nabla \cdot \mathbf{A}) - \nabla^2 \mathbf{A}$, we have:
+
+                        $$\nabla^2 \mathbf{A} - \dfrac{1}{c^2} \dfrac{\partial^2 \mathbf{A}}{\partial t^2} - \nabla\left(\nabla \cdot \mathbf{A} + \dfrac{1}{c} \dfrac{\partial \phi}{\partial t}\right) = -\dfrac{4 \pi}{c} \mathbf{j}$$
+                        The potentials $\phi$ and $\mathbf{A}$ are not uniquely defined. We can perform a <strong>gauge transformation</strong> as:
+                        $$\boxed{\phi' = \phi - \dfrac{1}{c} \dfrac{\partial \Lambda}{\partial t} \quad , \quad \mathbf{A}' = \mathbf{A} + \nabla \Lambda}$$
+                        where $\Lambda(\mathbf{r}, t)$ is an arbitrary scalar function. But $E' \rightarrow E$ and $B' \rightarrow B$ under this transformation. So the physical fields are unchaged, which means that we can choose 
+                        specific gauge to simplify the equations. Such thing is called <strong>Lorentz condition</strong>:
+                        $$\boxed{\nabla \cdot \mathbf{A} + \dfrac{1}{c} \dfrac{\partial \phi}{\partial t} = 0}$$
+                        With this condition, the equations for the potentials become:
+                        $$\nabla^2 \phi - \dfrac{1}{c^2} \dfrac{\partial^2 \phi}{\partial t^2} = - 4\pi \rho, \quad \quad \nabla^2 \mathbf{A} - \dfrac{1}{c^2} \dfrac{\partial^2 \mathbf{A}}{\partial t^2} = -\dfrac{4 \pi}{c} \mathbf{j}$$
+                        The solutions to these equations are called the <strong>retarded potentials</strong> (can be found using Green's function method):
+                        $$\boxed{
+                            \begin{aligned}
+                            \phi(r, t) &= \int \dfrac{[\rho] d^3 r'}{|r - r'|}\\
+                            \mathbf{A}(r,t) &= \dfrac{1}{c} \int\dfrac{[j]d^3 r'}{|r - r'|}
+
+                            \end{aligned}
+
+                        }$$
+                        where the square bracket means that the quantity is evaluated at the <strong>retarded time</strong>:
+                        $$\boxed{t' = t - \dfrac{|r - r'|}{c}}$$
+                        This means that the potentials at position r and time t depend on the charge and current distribution at earlier time $t'$. This is because the electromagnetic interaction propagates at the speed of light c.
+                        <br>
+                    <h1 id="radiation-moving-charges"> Radiation from Moving Charges</h1>                    
+                    <h2 id="lienard-wiechert-potentials"> Lienard-Wiechert Potentials (Retared potential)</h2>
+                         Consider a particle with: 
+                         <ul>
+                            <li>Charge: q</li>
+                            <li>Position: $\mathbf{r_0}(t)$</li>
+                            <li>Velocity: $\mathbf{u}(t) = \dot{\mathbf{r}}_0(t)$</li>
+                
+                         </ul>
+
+                         From this we have the charge and current density as:
+                         $$
+                         \begin{aligned}
+                         \rho(\mathbf{r},t) &= q \delta(\mathbf{r} - \mathbf{r_0}(t))     \\
+                         \mathbf{j}(\mathbf{r}, t) &= q\mathbf{u}(t) \delta(\mathbf{r} - \mathbf{r_0}(t))
+                         \end{aligned}
+                         $$
+                         The Dirac delta appears because this is the single charge system. 
+                         <br><br>
+                         We then want to calculate the <strong>retarded potentials</strong> due to this charge and current densities. Try with scaler potential first: 
+                         $$
+                            \begin{aligned}
+                            \phi(\mathbf{r}, t) &= \int d^3 \mathbf{r'} \int dt' \dfrac{\rho(\mathbf{r'}, t')}{|\mathbf{r} - \mathbf{r'}|} \delta(t' - t + \dfrac{|\mathbf{r} - \mathbf{r'}|}{c}) \\
+                            &= q \int \delta(t' - t + \dfrac{|\mathbf{r} - \mathbf{r_0}(t')|}{c}) \dfrac{1}{|\mathbf{r} - \mathbf{r_0}(t')|} dt' \\
+                            &= q \int \delta(t' - t + \dfrac{R(t')}{c}) \dfrac{dt'}{R(t')}
+                            \end{aligned}
+                         $$
+                         with $R(t') = |\mathbf{r} - \mathbf{r_0}(t')| = |\mathbf{R}(t')|$.
+                         Apply this for the vector potential case, we have: 
+                         $$\mathbf{A}(\mathbf{r}, t)= \dfrac{q}{c}\int \mathbf{u}(t') \delta(t' - t + \dfrac{R(t')}{c}) \dfrac{dt'}{R(t')} $$ 
+                         Let's simplified this integrals by changing the variable of integration from $t'$ to $t'' = t' - t + \dfrac{R(t')}{c}$ (to handle with the Dirac delta). This gives us:
+                            $$dt'' = dt' + \dfrac{1}{c} \dot{R}(t') dt' = \left(1 - \dfrac{1}{c}\mathbf{n}(t')\cdot \mathbf{u}(t') \right) dt'
+                            $$
+                            with $\mathbf{n}(t') = \dfrac{\mathbf{R}(t')}{R(t')}$ is the unit vector from the retarded position of the charge to the field point. 
+
+                            <br>
+                            This gives us: 
+                            $$\phi(\mathbf{r}, t) = q \int R^{-1}(t')\left( 1 - \dfrac{1}{c}\mathbf{n}(t')\cdot \mathbf{u}(t') \right)^{-1} \delta(t'') dt''$$
+                            Set $k = 1 - \dfrac{1}{c}\mathbf{n}(t')\cdot \mathbf{u}(t')$ and let $t'' = 0$ (or $t' = t_{retard}$), we have the <strong>Liénard-Wiechert potentials</strong>:
+                            $$\boxed{\phi(r, t) = \left[ \dfrac{q}{k \,R}\right], \quad \quad \mathbf{A}(\mathbf{r}, t) = \left[ \dfrac{q}{c} \dfrac{\mathbf{u}}{k \,R} \right]}$$
+
+                    <p style="color: rgba(255, 0, 0, 0.87); font-weight: bold;">Note:</p>
+                    The difference of this potential compares to the standard one is that we derived it with the retarded time and the factor $k$. 
+                    <br>
+                    In <strong>non-relativistic regime</strong>, $k \approx 1$, which gives us the situation of <strong>classical electrodynamic</strong>.
+                    <br>
+                    In <strong>relativistic regime</strong>, this factor concentrate the potential into a narrow cone around the particle velocity which is called the <strong>beaming effect</strong>
+
+                    <h2>Radiation field</h2> 
+                        New notation: 
+                        $$\mathbf{\beta} = \dfrac{\mathbf{u}}{c}, \quad \text{therefore}\quad k = 1 - \mathbf{n} \cdot \mathbf{\beta}$$
+                        Substitute the Liénard-Wiechert potentials into the expressions of E and B fields, we have:
+                        $$
+                        \begin{aligned}
+                        \mathbf{E}(\mathbf{r} , t) &= -\nabla\phi - \dfrac{1}{c} \dfrac{\partial A}{\partial t} \\
+                        &= -q \left[\dfrac{1}{k} \nabla \left(\dfrac{1}{R} \right) + \dfrac{1}{R}\nabla \left(\dfrac{1}{k} \right) \right] - \dfrac{1}{c} \dfrac{q}{c} \dfrac{\partial }{\partial t} \left[ \dfrac{\mathbf{u}}{k R} \right]\\
+                        \end{aligned}
+                        $$
+                        $$\boxed{\mathbf{E} = q\left[ \dfrac{\mathbf{n -\beta}}{k^3 R^2} (1- \beta^2)\right] + \dfrac{q}{c}\left[\dfrac{\mathbf{n}}{k^3 R} \times {(\mathbf{n - \beta}) \times \dot{\mathbf{\beta}}}\right]}$$
+                        In analogy, we also have the magnetic field as:
+                        $$\boxed{\mathbf{B} = \left[\mathbf{n} \times \mathbf{E}\right]}$$
+                        The first term of E field is called the <strong>velocity field</strong> (or near field), which varies as $R^{-2}$. The second term is called the <strong>acceleration field</strong> (or radiation field), which varies as $R^{-1}$. 
+                        This term is tranveres with the direction of propagation and is <strong>responsible for radiation observed at large distances</strong> from the charge.
+                        <br>
+                        In the <strong>non-relativistic limit</strong> ($\beta \approx 0, \quad k \approx 1$), we get the <strong>Coulomb's law</strong>. 
+                        <br><br>
+                        Taking the ratio between the magnitudes of the radiation field and the velocity field, we have:
+                        $$\boxed{\dfrac{|E_{rad}|}{|E_{vel}|} \approx \dfrac{q/c \, \dot{\beta}/R}{q/R^2} = \dfrac{\dot{\beta}R}{c}}$$
+                         we can see that <strong>depends on the distance R</strong> from the charge, acceleration term or velocity term can dominate.
+
+                    <h2>Larmor's formula</h2>
+                     As mentioned above, in the non-relativistic limit ($\beta \approx 0$), the equation of E and B fields become:
+                     $$E_{rad} = \left[ \dfrac{q}{R c^2} \mathbf{n} \times (\mathbf{n} \times \dot{\mathbf{u}})\right]$$
+                     $$B_{rad} = \left[\mathbf{n} \times \mathbf{E}_{rad}\right]$$
+                     The configuration of E and B fields are shown in the FIgure 3. 
+
+                     <figure class="note-figure float-left">
+                            <img src="image/larmor.png" alt="E and B radiation field" width="400px" style="max-width: 100%; height: auto;">
+                            <figcaption style="width: 300px; max-width: 100%;">Figure 3: E and B radiation field configuration for a slowly moving particle.</figcaption>
+
+                    </figure>
+                    From this, we have the magnitude of E and B field as: 
+                    $$|E_{rad}| = |B_{rad}| = \dfrac{q \dot{u}}{R c^2}sin \Theta$$
+                    If we want to calculate the power radiated, we need to know the amount of outward energy flow, which is the Poynting vector:
+                    $$\mathbf{S} = \dfrac{c}{4 \pi} (\mathbf{E}_{rad} \times \mathbf{B}_{rad})$$
+                    Therefore, the magnitude of S is:
+                    $$|\mathbf{S}| = \dfrac{dW}{dA \, dt}=  \dfrac{c}{4 \pi} E_{rad}^2 = \dfrac{q^2 \dot{u}^2 }{4 \pi c^3 R^2} \sin^2 \Theta $$
+
+                    The power radiated per unit solid angle is then:
+                    $$\dfrac{dW}{dt \,d\Omega} = S \dfrac{dA}{d \Omega} = S R^2 = \dfrac{q^2 \dot{u}^2}{4 \pi c^3} \sin^2 \Theta$$
+                    The total powe radiated is then: 
+                    $$P = \dfrac{dW}{dt} = \int \dfrac{q^2 \dot{u}^2}{4 \pi c^3} \sin^2 \Theta d\Omega =  \dfrac{q^2 \dot{u}^2}{4 \pi c^3} \int_0^{2 \pi} d \phi \int_0^\pi \sin^2 \Theta \sin \Theta d\Theta $$
+                    since the element of solid angle is $d\Omega = \sin \Theta d\Theta d\phi$.
+                    Performing the integration, we have the <strong>Larmor's formula</strong>: 
+                    $$\boxed{P = \dfrac{2}{3} \dfrac{q^2 \dot{u}^2}{c^3}}$$
+                    This is the <strong>total power radiated by an accelerating charge in the non-relativistic limit.</strong>
+                    <br><br>
+                    One thing to notice that is the existence of the term $\sin^2 \Theta$, which make <strong>no radiation</strong> is emitted <strong>in the direction of acceleration</strong> and <strong>maximum</strong> in the plane <strong>perpendicular to the acceleration direction.</strong>
 
 
-                    </div>
+
+                    <h2>Dipole approximation</h2>
+                    What if instead of a single charge, we have a <strong>system of charges</strong>? We cannot simply sum up the contribution from individual charges because of the difference in the retarded time. 
+                    A solution to this is to impose a condition that the time in which the system changes significantly (denoted as $\tau$) is much longer than the time it takes for light to cross the system (with size $L$). 
+                    In this case, the difference in retarted time between different parts of the system is negligible. This condition can be written as:
+                    $$\tau \gg \dfrac{L}{c}$$
+                    $\tau$ can also be characterized as the time it takes for the particle to change its motion significantly: 
+                    $$\tau \approx \dfrac{l}{u}$$
+                    with l is the characteristic scale of the particle's trajectory, and u is the typical velocity. 
+                    Therefore, the condition becomes:
+                    $$\dfrac{l}{u} \gg \dfrac{L}{c} \quad \Rightarrow \quad \dfrac{u}{c} \ll \dfrac{l}{L}$$
+                    since $l \ll L$, therefore $\dfrac{u}{c} \ll 1$, which is the non-relativistic limit. So we can have the E field, which is also the <strong>dipole approximation</strong> as: 
+                    $$\boxed{\mathbf{E}_{rad} = \sum_i \dfrac{q_i}{c^2} \dfrac{\mathbf{n} \times (\mathbf{n} \times \dot{\mathbf{u}}_i)}{R_i} = \dfrac{\mathbf{n} \times (\mathbf{n} \times \mathbf{\ddot{d}})}{c^2 \,R_o}}$$
+                    with $$\mathbf{d} = \sum_i q_i \mathbf{r}_i$$ is the <strong>dipole moment</strong> of the system, and $R_o $ is the distance from the system to the field point (because we observe from very far so $R_i \rightarrow R_0 \rightarrow \infty$).
+
+                    <br><br>
+                    Using Larmor's formular, we can have the <strong>power radiated</strong> as: 
+                    $$\boxed{\dfrac{dP}{d\Omega} = \dfrac{\ddot{d}^2}{4 \pi c^3} \sin^2 \Theta \quad \Rightarrow \quad P = \dfrac{2}{3}\dfrac{\ddot{d}^2}{c^3}}$$
+                    <br><br>
+                    We can also calculate the <strong>radiation spectrum</strong> from this dipole radiation. Using Fourier transform, we have:
+                    $$d(t) = \int e^{-i \omega t} \hat{d}(\omega) \, d\omega \quad \Rightarrow \quad \ddot{d}(t) = -\int \omega^2 e^{i\omega t} \hat{d}(\omega) \, d\omega$$
+                    From this we have the magnitude of E field as: 
+                    $$\hat{E}(\omega) = -\dfrac{1}{c^2 R} \omega^2 \hat{d}(\omega)\sin \Theta$$
+                    The spectrum is then: 
+                    $$\dfrac{dW}{d\omega dA} = c |\hat{E}(\omega)|^2 = \dfrac{\omega^4}{c^3 R^2} |\hat{d}(\omega)|^2 \sin^2 \Theta$$
+                    The total power radiated per unit solid angle is then: 
+                    $$\dfrac{dW}{d\omega d\Omega} = \dfrac{dW}{d\omega dA} \dfrac{d A}{d \Omega} = \dfrac{dW}{d\omega dA} R^2 = \dfrac{\omega^4}{c^3} |\hat{d}(\omega)|^2 \sin^2 \Theta$$
+                    Integrate over solid angle gives total power as: 
+                    $$\boxed{\dfrac{dW}{d\omega} = \dfrac{8 \pi }{3 c^3} \omega^4 |\hat{d}(\omega)|^2}$$
+                    This is the <strong>Larmor's formular in the frequency</strong>
+
+
+                    <h2> Thompson Scattering</h2> 
+                    Consider an incoming plane wave, we have a linear polarization $E = \epsilon E_0 \sin \omega_0 t$ with $\epsilon$ is the E field direction. Normally, the electron on the way of the wave feels the Lorentz force, but in the non-relativistic limit, we can ignore the magnetic force ($\dfrac{v}{c} \rightarrow 0$). 
+                    Therefore, the force act on the electron is $F = e E$ and with this, the electron start to oscillate along side the direction of E field. Oscillating means that the electron is accelerating, therefore it radiates. We want to find the power of this radiation. 
+                    <br><br>
+                    Before that, we have: 
+                    $$
+                    \begin{aligned}
+                    F &= e E \\
+                    m \ddot{\mathbf{r}} &= e \, \epsilon\,  E_0 \, \sin \omega_0 \,t\\
+                    \ddot{\mathbf{d}} &= \dfrac{e^2 \,\epsilon\, E_0}{m} \sin \omega_0 \,t\\
+                    \Leftrightarrow \mathbf{d} &= -\dfrac{e^2 \, E_0}{m \omega_0^2} \epsilon \, \sin \omega_0 \, t
+
+                    \end{aligned}
+                    $$
+                     This is the oscillating dipole moment of the electron.
+                    <br>
+                    Using the Larmor's formular, we have: 
+                    $$\dfrac{dP}{d\Omega} = \dfrac{\langle \ddot{\mathbf{d}}^2\rangle}{4 \pi c^3} \sin^2 \Theta = \dfrac{e^4 \epsilon^2 E_0^2 \langle \sin^2 \omega_0 t \rangle}{4 \pi m^2 c^3} \sin^2 \Theta = \dfrac{e^4 E_0^2}{8 \pi m^2 c^3} \sin^2 \Theta$$
+                    Therefore the total power radiated is:
+                    $$\boxed{P = \dfrac{e^4 E_0^2}{3 \pi m^2 c^3}}$$
+                    We can also derive the <strong>differential cross-section</strong> of this scattering process as $\dfrac{d \sigma}{d \Omega}$. We have:
+                    $$\dfrac{dP}{d\Omega} = \langle S \rangle \dfrac{d \sigma}{d \Omega} =\dfrac{c E_0^2}{8 \pi} \dfrac{d \sigma}{d \Omega}$$ 
+                    Therefore, we have: 
+                    $$\dfrac{d \sigma}{d \Omega} = \dfrac{e^4}{8 \pi m^2 c^4 } sin^2 \Theta$$
+                    Integrate over solid angle gives us the <strong>Thompson cross-section for electron</strong> as:
+                    $$\boxed{\sigma_T = \dfrac{8 \pi}{3} \left(\dfrac{e^2}{m c^2}\right)^2}$$
+
+                    
+                    The cross section didn't depend on the frequency doesn't mean that the scattering is equally effective at all frequencies. This is only valid for low frequencies, but when the frequencies is high enough (X-rays), we have to account for the quantum effects and can not used the Larmor's formular. 
+
+                <h1>Relativistic Covariance and Kinematics</h1>
+                <h2>Lorentz Transformation</h2>
+                    Consider two inertial frames S and S' moving at a relative velocity v along the x-axis. The Lorentz transformation equations relating the coordinates (t, x, y, z) in frame S to the coordinates (t', x', y', z') in frame S' are given by:
+                    $$
+                    \begin{aligned}
+                    t' &= \gamma \left( t - \dfrac{v x}{c^2} \right) \\
+                    x' &= \gamma (x - v t) \\
+                    y' &= y \\
+                    z' &= z
+                    \end{aligned}
+                    $$
+                    where $\gamma = \dfrac{1}{\sqrt{1 - \dfrac{v^2}{c^2}}}$ is the Lorentz factor.
+                    <br><br>
+                    The inverse transformation is given by:
+                    $$
+                    \begin{aligned}
+                    t &= \gamma \left( t' + \dfrac{v x'}{c^2} \right) \\
+                    x &= \gamma (x' + v t') \\
+                    y &= y' \\
+                    z &= z'
+                    \end{aligned}
+                    $$
+                    These transformations ensure that the speed of light remains constant in all inertial frames, as required by the theory of special relativity.
+
+                    <h2> Four-Vectors</h2>
+                    An event in space-time is fully described by its 1 time and 3 position components, which form the <strong>four-vector</strong>. Moreover, the space-time 
+                    is not Euclidean, it follows a Minkowski metric given by:
+                    $$
+                    \eta_{\mu \nu} = \eta^{\mu \nu}= \begin{pmatrix}
+                    -1 & 0 & 0 & 0 \\
+                    0 & 1 & 0 & 0 \\
+                    0 & 0 & 1 & 0 \\
+                    0 & 0 & 0 & 1
+                    \end{pmatrix}
+                    $$
+                    Applying the metric tensor allows us to pass from contravariant to covariant compoents and vice versa: 
+                    $$\boxed{\chi_{\mu} = \eta_{\mu \nu} \chi^{\nu}}$$
+                    From this we can have the Lorentz transformation in four-vector notation as:
+                    $$\Lambda^{\mu}_{\ \nu} = \begin{pmatrix}
+                    \gamma & -\beta \gamma & 0 & 0 \\
+                    -\beta \gamma & \gamma & 0 & 0 \\
+                    0 & 0 & 1 & 0 \\
+                    0 & 0 & 0 & 1
+                    \end{pmatrix}$$
+                    
+                    If we want to get the components of the spacial 4-vectors in a Lorentz transformation (S'), we get:
+                    $$\boxed{\chi'^{\mu} = \Lambda^{\mu}_{\ \nu} \chi^{\nu}}$$
+                    So know we have the space-time invariant interval as: 
+                    $$s^2 = \eta_{\mu \nu} \,\chi^{\nu} \,\chi^{\mu} = \eta_{\sigma \tau} \, \chi'^{\sigma}\, \chi'^{\tau} = \eta_{\sigma \tau}\, \Lambda_{\mu}^{\sigma}\, \Lambda_{\nu}^{\tau} \,\chi^{\mu}\, \chi^{\nu}$$ 
+
+                    We also have the covariant component of the transformation as:
+                    $$\boxed{\tilde{\Lambda}_{\mu}^{\nu} = \eta_{\mu \tau}\, \Lambda_{\sigma}^{\tau} \,\eta^{\sigma \nu} \Rightarrow \chi'_{\mu} = \tilde{\Lambda}_{\mu}^{\nu} \chi_{\nu}}$$ 
+                    Therefore, the invariant interval becomes: 
+                    $$\boxed{s^2 = \Lambda_{\nu}^{\mu} \, \tilde{\Lambda}^{\sigma}_{\nu} = \delta_{\nu}^{\sigma}}$$
+                    <br><br>
+                    continue....
+
+                    <h2> Emission from relativistic particles</h2>
+                    We want to find the covariant form of the Larmor's formula. First, we define the <strong>four-momentum</strong> as:
+                    $$\boxed{P^{\mu} = m \gamma \begin{pmatrix} c \\ u \end{pmatrix} = \gamma\begin{pmatrix} E/c \\ m \,u \end{pmatrix} }$$
+                    We are interested how the time component, whih is the energy transforms across different reference frames. 
+
+                    <br>
+                    To demonstrate that the power is a Lorentz invariant, we consider 2 frame S and S' where S' is moving at a velocity v along the x-axis of S. 
+                    The energy component of 4-momentum transforms as:
+                    $$\dfrac{E}{c} = \gamma \left( \dfrac{E'}{c} + \beta P'_x\right)$$
+                    Assume that in S', the particle emits isotropically, therefore $P'_x = 0$. This gives us $dW = \gamma dW'$ and $dt = \gamma dt'$, therefore we have: 
+                    $$P = \dfrac{\gamma dW'}{\gamma dt'} = \dfrac{dW'}{dt'} = P'$$
+                    Now from the Larmor's formula in the rest frame S', we have:
+                    $$P' = \dfrac{2 q^2}{3 c^3} |\mathbf{a}'|^2 = \dfrac{2 q^2}{3 c^3} a'_k \, a'^k = \dfrac{2 q^2}{3 c^3} (a'_0 \, a'^0 + a'_k \, a'^k) = \vec{a}\, \vec{a}$$
+                    Then, the covariant form of the acceleration 4-vector is:
+                    $$P = \dfrac{2 q^2}{3 c^3} \vec{a}\, \vec{a} = \dfrac{2 q^2}{3 c^3} (a_{//}'^2 +  a_{\perp}'^2)$$
+                    From the Lorentz transformation of acceleration, we have: 
+                    $$\boxed{a'_{//} = \gamma^3 a_{//}, \quad a'_{\perp} = \gamma^{2} a_{\perp}}$$
+                    Therefore, the <strong>power radiated by a relativistic particle</strong> is:
+                    $$\boxed{P = \dfrac{2 q^2}{3 c^3} \gamma^4(\gamma^2 a^2_{//} + a^2_{\perp})}$$
+
+                    <h1>Bremsstrahlung Emission</h1>
+
+                    <h2>Emission from sigle-speed electrons</h2>
+                    Consider an electron moving at velocity $u$ past an ion with charge Ze at an impact factor $b$. There are 2 assumptions here:
+                    <ul>
+                        <li>The ion remains still because it is much more massive than the electron</li>
+                        <li>The electron is fast enough such that the deflection angle is small. This is call <strong>small-angle scattering regime</strong></li>
+                    </ul>
+                    We want to calculate the total power radiated by the electron using Larmor's formula. First we have the dipole moment is $\mathbf{d} = e\, R$, therefore it's second derivative is $\ddot{\mathbf{d}} = e \, \mathbf{\dot{u}}$.
+                    Taking the Fourrier transform, we have:
+                    $$-\omega^2 \hat{\mathbf{d}}(\omega) = -\dfrac{e}{2 \pi} \int_{-\infty}^{\infty} \mathbf{\dot{u}} e^{i\omega t} dt$$
+                    we will later use this in the spectrum of radiation of the dipole approximation. 
+                    <br> <br> 
+                    To compute the above integral, we first define the <strong> collision time</strong> as:
+                    $$\boxed{\tau \approx \dfrac{b}{u}}$$ 
+                    which is the time it takes for the electron to pass the ion at the impact factor. 
+                    For the case in which $\omega \tau \gg 1$ (high-frequency regime), the exponential oscillates rapidly, making the integral goes to 0. If $\omega \tau \ll 1$ (low-frequency regime), the exponential can be approximated as 1, then $\int \dot{v} dt = |\Delta v|$. 
+                    So we have: 
+                    $$\hat{\mathbf{d}}(\omega) =
+                        =
+                        \begin{cases}
+                        \dfrac{e}{2 \pi \omega^2} |\Delta v|, 
+                        & b \ll \dfrac{u}{\omega}, \\[1.2ex]
+                        0, 
+                        & b \gg \dfrac{u}{\omega}.
+                        \end{cases}
+                    $$
+                    <br><br>
+                    Since the path is nearly straight, the change in velocity is mostly in the perpendicular direction ($\Delta v = \Delta v_{\perp}$). However, we have that: 
+                    $$F = m\,\dot{u}_{\perp} = \dfrac{-Ze^2b}{(b^2 + u^2 t^2)^{3/2}}$$
+                    Therefore, we have:
+                    $$|\Delta u_{\perp}| = \dfrac{Ze^2b}{m} \int_{-\infty}^{\infty} \dfrac{dt}{(b^2 + u^2 t^2)^{3/2}}$$
+                    $$\Leftrightarrow \boxed{|\Delta u_{\perp}| = \dfrac{2Z e^2}{m b u }}$$
+                    From this, using dipole approximation equation, we can have the <strong>power from the single free-free collision</strong> as: 
+                    $$\boxed{\dfrac{dW(b)}{d\omega}
+                        =
+                        \begin{cases}
+                        \dfrac{8 Z^{2} e^{6}}{3 \pi c^{3} m^{2} u^{2} b^{2}}, 
+                        & b \ll \dfrac{u}{\omega}, \\[1.2ex]
+                        0, 
+                        & b \gg \dfrac{u}{\omega}.
+                        \end{cases}}
+                    $$
+
+                    Let's make this more practical by <strong>generalizeing to a distribution of electron and ions</strong>. Consider $n_i$ number of ions 
+                    and $n_e$ number of electrons, assume that they have the same velocity $u$. The <strong>element area</strong> is $dA = 2 \pi \,b \,db$ around a single ion. 
+                    The total power per unit volume per unit frequency is then: 
+                    $$\boxed{\dfrac{dW}{dt d\omega dV} = n_e \, n_i \, 2 \pi \, u \int_{b_{min}}^{b_{max}} \dfrac{dW(b)}{d\omega} \, b \, db}$$
+                    From the discussion above in high-frequency regime, there's an effective $b_{max}$ whenre integral is 0, let's take $b_{max} = \dfrac{u}{\omega}$. 
+                    The situation of $b_{min}$ is a bit more complicated. If it's too small, the small angle approximation failed since the Coulomb force become too strong. There are 2 ways to define $b_{min}$:
+                    <ul>
+                        <li>b is small enough that $\dfrac{\Delta v}{v} = \dfrac{2 Ze e^2}{m b_{min} v^2} \approx 1$, therefore: 
+                            $$\boxed{b_{min}^{(1)} = \dfrac{2 Ze^2}{m v^2}}$$
+
+                        </li>
+
+                        <li> Considering the quantum effect, by the uncertainties principle $\Delta x\, \Delta p \geq \hbar$, take $\Delta p \approx m v$ and $\Delta x \approx b_{min}$, we have
+                         
+                            $$\boxed{b_{min}^{(2)} = \dfrac{\hbar}{m v}}$$
+
+                        </li>
+                    </ul>
+                    If $b_{min}^{(1)} \gg b_{min}^{(2)}$, we use the classical description in the integral, $b_{min} = b_{min}^{(1)}$. Otherwise, we need to account for the quantum correction in the scattering process. 
+
+                    <br><br>
+                    Substitute the limits into the integral, we have the total power is: 
+                    $$\dfrac{dW}{d\omega dt dV} = \dfrac{16\, e^6 \,Z^2}{3\, c^3 \,m^2 \,u } n_e \,n_i\, \ln\left(\dfrac{b_{max}}{b_{min}}\right)$$
+
+                    <p style="color: rgba(255, 0, 0, 0.87); font-weight: bold;">Note:</p>
+                    For any regime, the exact results can be obtained by introducing the <strong>Gaunt factor</strong> $g_{ff}$, which is substituted into the log term: 
+                    $$\boxed{g_{ff}(u, \omega) = \dfrac{\sqrt{3}}{u} ln\left( \dfrac{b_{max}}{b_{min}}\right)}$$
+                    In the high-frequency limit, $g_{ff} \approx 1$.
+
+                    <h2>Thermal Bremsstrahlung Emission</h2>
+                        In this case, the velocity of electrons follow the <strong>Maxwell-Boltzmann distribution</strong>:
+                        $$dP \propto e^{\dfrac{-E}{kT}}d^3 u = \exp{\left(\dfrac{-mu^2}{2kT}\right)} d^3 u$$
+                        Assuming an isotropic distribution, we have:
+                        $$d^3 u = 4 \pi u^2 du$$
+                        We then want to get the total power by <strong>taking the power of a single electron and weight it with the probability distribution</strong>: 
+                        $$\dfrac{dW(T, \omega)}{dV \, dt\, d\omega} = \dfrac{\int \dfrac{dW(u, \omega)}{dV\, dt\, d\omega} dP(u)}{\int dP(u)}$$
+                        Perform the integration gives: 
+                        $$\boxed{\dfrac{dW}{dV\, dt\, d\omega} = \dfrac{2^5 \, \pi\, e^6}{3 \,c^2 \,m} \dfrac{n_e\, n_i\,Z^2}{\sqrt{3} \,\sqrt{2 \pi}\, kT} \left(\dfrac{m}{kT}\right)^{0.5} \,\bar{g_{ff}} \,\exp{\left( \dfrac{-m\, v_{min}^2}{kT}\right)} \dfrac{kT}{M} }$$
+                        with $\bar{g_{ff}}$ is the <strong>velocity-averaged Gaunt factor</strong> considering $g_{ff}$ slowly varying in time. The term $v_{min}$ is defined as:
+                        $$v_{min} = \left( \dfrac{2h \nu}{m} \right)^{0.5}$$
+                        Because to emit a photon of frequency $\nu$, the electron must supply at least the energy $h\nu \leq \dfrac{1}{2} m v^2$. This is the <strong>photon discreteness effect</strong>. 
+                        We also want to translate from angular frequency to regular frequency: 
+                        $$d\omega = 2 \pi d\nu \quad \Rightarrow \quad \dfrac{dW}{dV\, d\omega \, dt} = \dfrac{1}{2 \pi} \dfrac{dW}{dV\, d\nu \, dt}$$
+                        
+                        Therefore we have the final form of the <strong>thermal bremsstrahlung emission</strong> as:
+                        $$\boxed{\dfrac{dW}{dV \, dt\, d\nu} =\dfrac{2^5\,\pi\, e^6}{3\, c^2 \, m} \left(\dfrac{2 \pi}{3\,k\,T\,m} \right)^{0.5} n_e\,n_i\,Z^2 \exp{\left(\dfrac{h\nu}{kT} \right)} \bar{g_{ff}}}$$
+                        Evaluating in <strong>cgs unit [erg $s^{-1}$ $cm^{-3}$ $Hz^{-1}$]</strong> gives:
+
+                        $$\boxed{\epsilon_{\nu}^{ff} = \dfrac{dW}{dV \, dt\, d\nu} =6.8 \times 10^{-38} \, Z^2 \, n_e \, n_i \, T^{-1/2} \, e^{-h\nu/kT} \, \bar{g_{ff}}}$$
+                        Its spectrum looks kinda <strong>flat</strong> in log log scale until the <strong>cutoff frequency</strong> at $h\nu \approx kT$, after that it drops exponentially. 
+                        <br><br>
+                        This formalism can be generalize to a non-thermal distribution by changing the probability distribution. 
+                        <br><br>
+                        About the <strong>polarization</strong>, the emission of Bremsstrahlung is generally <strong>unpolarized</strong> because the acceleration direction of electrons is random. Eventhough the interaction of a signal electron results in polarized radiation. 
+                        <br><br>
+                        We can also have the expression for the <strong>total power emitted per unit volume</strong> by integrating over frequency:
+                        $$\epsilon^{ff} = \dfrac{dW}{dt \, dV}  = \dfrac{2^5\,\pi\, e^6}{3\, c^2 \, m} \left(\dfrac{2 \pi}{3\,k\,T\,m} \right)^{0.5} n_e\,n_i\,Z^2 \, \bar{g_B}$$
+                        where $\bar{g_B}$ is the <strong>frequencyand velocity-averaged Gaunt factor</strong>
+                        <br><br>
+                        All the calculation we've done under the assumption that the source is <strong>optically thin</strong> to the free-free emission.
+                    <h2>Thermal Bremmstrahlung Absorption</h2>
+
+                        In this case, we have the inverse process, the free electrons absorb photons while being deflected by ions. In this case, we need to take the ions into account to conserve energy and momentum. 
+                        <br><br>
+                        Using the <strong>Kirchhoff's law</strong> $j^{ff}_\nu = \alpha^{ff}_\nu B_\nu(T)$, we have the absorption coefficient as:
+                        $$\boxed{\alpha_{\nu}^{ff} = \dfrac{4e^6}{3 \,m\,h\,c} \left(\dfrac{2 \pi}{3 \,k\,T \,m} \right)^{0.5} Z^2 \,n_e \,n_i \nu^{-3}\left( 1 - \exp{\left( -\dfrac{h\nu}{kT}\right)}\right) \bar{g_{ff}}}$$
+                        with $j^{ff}_{\nu} = \dfrac{e^{ff}_{\nu}}{4 \pi} = \dfrac{1}{4 \pi} \dfrac{dW}{dt \,dV \, d\nu}$
+
+                        <br><br>
+                        For $h\nu \gg kT$, we have, the exponential term goes to 0, therefore $\alpha_{\nu}^{ff} \propto \nu^{-3}$. For $h\nu \ll kT$, we can approximate the term as $\dfrac{h\nu}{kT}$, therefore $\alpha_{\nu}^{ff} \propto \nu^{-2}$.
+                        <br><br>
+
+                        We find Bremsstrahlung emission whenever we find inonized gas, such as in HII regions, the intracluster medium (ICM) of galaxy clusters, and the solar corona. Bremmstrahlung emission is also the way we can use to measure the temperature of ICM. 
+                    
+                    <h1>Synchrotron Emission</h1>
+
+                    <h2>Emitted Power</h2>
+                    In this case, particle accelerated by a magnetic field B will radiate. Since the particle is moving relativistically, we can separate the <strong>space-like</strong> and <strong>time-like</strong> components of the Force: 
+                    $$\dfrac{d}{dt}(\gamma \, m\, v) = \dfrac{q}{c}\mathbf{v}\times\mathbf{B} , \quad \quad \dfrac{d}{dt} (\gamma \,m\, c^2) = q\,\mathbf{v}\cdot \mathbf{E}$$
+
+                    Since $\mathbf{v} = |v| = const$, $\gamma = const$ follows the second equation. 
+                    <br><br>
+                    We can also separate the velocity into $v_{//}$ and $v_{\perp}$ components with respect to $\mathbf{B}$ : 
+                    $$\dfrac{d v_{//}}{dt} = 0, \quad \quad \dfrac{d v_{\perp}}{dt} = \dfrac{q}{c} q \mathbf{v_{\perp}} \times \mathbf{B} $$
+                    Since $v_{//}$ and $\mathbf{|v|}$ are constant, therefore $v_{\perp}$ is also constant. This means that the <strong>particle moves in a helical path</strong> around the magnetic field line, which is called <strong>Uniform Circular Motion</strong>. 
+                    <br><br>
+                    We then can have the <strong>frequency of rotation</strong> or <strong>gyration</strong> as:
+                    $$\boxed{\omega_{B}= \dfrac{1}{T} =  \dfrac{q}{\gamma \, m\, c} B }$$
+                    since: 
+                    $$\dfrac{v_{\perp}}{T} = \dfrac{q}{\gamma \, m\, c}v_{\perp} B$$
+                    The acceleration is perpendicular to the velocity with the magnitude as:
+                    $$\boxed{a_{\perp} = \omega_{B} v_{\perp}}$$
+                    Apply the generalized Larmor's formula for relativistic particles, we have the <strong>total power radiated</strong> as:
+                    $$\boxed{P = \dfrac{2 q^2 \gamma^4}{3 c ^3} (a^2_{\perp} + \gamma^2 a^2_{//}) = \dfrac{2}{3} \left(\dfrac{q^2}{mc^2} \right)^2\,c\,\left(\dfrac{v_{\perp}}{c} \right)^2 \, \gamma^2 \, B^2 }$$
+                    For an <strong>isotropic distribution</strong> of velocities, we need to <strong>average over all pitch angles</strong> $\alpha$ between $\mathbf{v}$ and $\mathbf{B}$. We have:
+                    $$\langle \beta_\perp^2\rangle = \dfrac{\beta^2}{4 \pi} \int sin^2{\alpha} d\Omega = \dfrac{2 \beta^2}{3}$$
+                    Therefore, the <strong>averaged power</strong> is:
+                    $$\boxed{P = \dfrac{4}{3} \sigma_{T} \, c\,\beta^2\,\gamma^2\, U_B}$$
+                    where $\sigma_T = \dfrac{8 \pi\,r_0^2}{3}$ is the <strong>Thomson cross-section</strong>, and $U_B = \dfrac{B^2}{8 \pi}$ is the <strong>magnetic energy density</strong>. The term $r_0 = \dfrac{q^2}{m c^2}$ is the <strong>classical radius of the electron</strong>.
+
+
+                    <h2> Spectrum of Synchrotron Radiation</h2> 
+
+                    The <strong>electric field</strong> of the electron will be <strong>like a sine wave</strong> with a frequency given by the <strong>gyration frequency</strong> $\omega_B$. This leads to <strong>a spectrum with only a sigle peak</strong> at $\omega = \omega_B$. 
+                    However, in highly relativistic case, the radiation is <strong>beamed</strong> in the direction of motion of the electron due to the Lorentz transformation. This means that the observer will only see the radiation when the beam is pointing towards them.
+
+                    <br><br>
+                    Let A be the radius of the circular motion, the observer will see the radiation during a short amount of time $\Delta t$. The period for electron to complete one circle is $T = \dfrac{2 \pi A}{v}$. The time interval $\Delta t$ can be approximated as:
+                    $$\Delta t = \dfrac{\Delta \theta}{2 \pi} T = \dfrac{2}{\gamma} \dfrac{T}{2 \pi} = \dfrac{2}{\gamma \omega_B}, \quad \quad \Delta \theta = \pi - 2\left( \dfrac{\pi}{2} - \dfrac{1}{\gamma}\right) = \dfrac{2}{\gamma}$$ 
+                    If the pitch angle $\alpha \neq \dfrac{\pi}{2}$: 
+                    $$\Delta t = \dfrac{2}{\gamma \omega_B \sin \alpha}$$
+
+                    <br><br>
+                    We also need to account for the <strong> Doppler effect</strong>, the observed time interval is then: 
+                    `$$\Delta t^A = \dfrac{2}{\gamma \,\omega_B \, sin{\alpha}} \left( 1- \dfrac{v}{c}\right) $$
+                    In very relativistic case ($\beta \approx 1$), we have $\gamma \approx 2 (1 - \dfrac{v}{c})^{-1}$, therefore: 
+                    $$\boxed{\Delta t^A = \dfrac{1}{\gamma^3 \, \omega_B \, \sin \alpha}}$$
+                    We can see that this is a <strong>very short amount of time</strong>, which leads to a very <strong>broad spectrum</strong> due to the Fourier transform relation between time and frequency. 
+                    The critical frequency (over which we have no more emission) of the synchrotron radiation is then:
+                    $$\boxed{\omega_c = \dfrac{3}{2} \gamma^3 \, \omega_B \, \sin \alpha}$$
+                    This is <strong>much bigger than the gyration frequency</strong> $\omega_B$.
+
+
+                    <br><br>
+                    In the <strong>midly relativistic</strong> case, the sine wave start to deform with a boost towards the direction of motion. 
+                    This leads to <strong>more harmonics</strong> to describe the signal of more relativistic particles. The spectrum will have multiple peaks and the first peak is $\omega_B$. 
+
+                    <br><br>
+                    We also have the <strong>power per unit frequency for highly relativistic particles</strong> as:
+                    $$\boxed{P(\omega) = \dfrac{\sqrt{3}}{2 \pi} \dfrac{q^3 \, B\, sin \alpha}{m c^2} F(\omega / \omega_c) }$$
+                    where F is a dimensionless function defined. 
+
+                    <br><br>
+                    The important concept is that we have a broad spectrum that depends on $\omega_c$, and $\omega_c$ depends on the width of the pulses that we obsevred and it depends on the velocity of the electron. 
+
+                    <br><br>
+                    We can also extend to a <strong>distribution of relativistic electrons</strong>. The velocity distribution can be described by a <strong>power-law</strong>:
+                    $$N(E)\,dE = c\, E^{-p}\,dE$$ 
+                    For highly relativistic particles, most of the energy is in kinetic energy, so energy and velocity is interchangeable. Since $\gamma$ captures the velocity distribution, we have: 
+                    $$N(\gamma) d\gamma = \tilde{c} \, \gamma^{-\tilde{p}} d\gamma$$
+                    where $\tilde{p}$ is the <strong>spectral index</strong>. To get the total power of the distribution, we need to integrate over all Lorentz factors:
+                    $$P(\omega) = \int_{\gamma_{min}}^{\gamma_{max}} P(\omega)\,\gamma^{-p} d\gamma \propto \int_{\gamma_{min}}^{\gamma_{max}} F(\omega/\omega_c \gamma^{-p} \,d\gamma)$$
+
+                    We can make a change of variable since $\omega_c \propto \gamma^2$, and $x \propto \omega / \gamma^2$, therefore $\gamma \propto \omega^{1/2}/x^{1/2}$,d\gamma \propto \omega^{1/2}/x^{-3/2} \,dx and  we have:
+                    $$\begin{aligned}
+                    P(\omega) &\propto \int_{x_{min}^{x_{max}}} F(x)\, \dfrac{x^{p/2}}{\omega^{p/2}} w^{1/2} \, x^{-3/2}\,dx \\
+                    &\propto \omega^{-\dfrac{p-1}{2}} \int_{x_{min}}^{x_{max}} F(x) \, x^{\dfrac{p-3}{2}} \, dx
+                    
+                    \end{aligned}
+                    $$
+                    Since we have a <strong>very broad range of velocities</strong>, we can take the <strong>limits from 0 to infinity</strong>. 
+                    Therefore, the integral becomes a constant that only depends on p. Finally we have the <strong>Total power for a power-law distribution of electrons</strong> as:
+                    $$\boxed{P(\omega) = \omega^{-\dfrac{p-1}{2}}}$$
+
+                    So by measuring the slope of this power-law, we can get the velocity of the electrons.
+
+
+                    <h2>Polarization of Synchrotron</h2>
+
+                    Synchrotron emission is <strong>highly polarized</strong> because the B field defines a preferred direction. It is infact <strong>linearly polarized</strong> in the plane perpendicular to the B field. 
+
+                    <br><br>
+                    Consider the non-relativistic electron, <strong>observe from above</strong> the B field line, we'll have <strong>circular polarization</strong> since the electron in moving in a circle. 
+                    However, if we <strong>observe from the side</strong>, we'll have <strong>linear polarization</strong> since the electron is moving back and forth.
+                    At <strong>other directions</strong>, we'll have <strong>elliptical polarization</strong>. 
+
+                    <br><br>
+                    In the <strong>relativistic case</strong>, due to the beaming effect, the observer will only see the radiation when the electron is moving towards them. This means that the <strong>polarization will be mostly linear</strong>, since the motion is mostly back and forth. 
+                    If we are a bit off-axis, we'll see some eliptical polarization.
+
+                    <br><br>
+                    For a distribution of electrons, we'll have the superposition of the beam where the eliptical polarization of each electron cancel each other, results in linear polarization. The <strong>degree of linear polarization</strong> is given by:
+                    $$\boxed{\Pi = \dfrac{p +1}{p + 7/3}}$$
+                    for particles with a power-law distribution of spectral index p.
+
+                    <br><br>
+                    The <strong>high degree of polarization</strong> is one of the <strong>key signatures of synchrotron emission</strong>. Since the polarization depends on the orientation of magnetic field, measuring the characteristics of polarization can give us information about the magnetic field structure in the emission region.
+
+                    <h2>Synchrotron self-absorption</h2>
+
+                    Each emission process has an absorption counterpart. In this case, the radiation emitted by the gyrating electron can be absorbed by other electrons in the same population. 
+                    We'll use generalized Kirchhoff's law to get the absorption coefficient. 
+                    
+                    <br><br>
+                    We can also imagine our power law distribution as a superposition of Maxwell-Boltzmann distributions with different temperatures. So different electrons are associated with different temeprature $\gamma m c^2 \rightarrow kT_e$. 
+                    Each electron will have an emitted power that it's highly peaked around the critical frequency: 
+                    $$\omega \approx \omega_c = \dfrac{3}{2} \dfrac{q\, B \,\gamma^2}{m\, c} sin \alpha \propto \gamma^2 \,B$$
+                    The temperature associated with this frequency is then:
+                    $$k T_e \propto \gamma \propto \dfrac{\nu}{B}^{0.5} \quad \text{since} \,\nu = \dfrac{\omega}{2 \pi}$$
+
+                    At low frequencies, the the medium will be optically thick due to synchrotron self-absorption and the temperature of electrons will be comparable to the brightness temperature $T_e \approx T_b$. We define $T_b$ as: 
+                    $$I(\nu) = 2 k T_b \dfrac{\nu^2}{c^2} \propto \dfrac{\nu^{5/2}}{B^{1/2}}$$
+                    At high frequencies, it is rare to have electrons with high enough energy to emit at that frequency, therefore the medium is optically thin. Therefore, the interaction rate is low and 
+                    we have no thermal equilibrium. The intensity in this regime is:
+                    $$I(\nu) \propto \nu^{-(p-1)/2}$$
+
+                    This leads to a turn over in the synchrotron spectrum at the frequency where the optical depth $\tau_\nu = 1$. 
+                    <br><br>
+                    So we can say that synchrotron self-absorption is more important at low frequencies. 
+
+
+                    <h1>Compton Scattering</h1>
+
+                    This is the generalization of the Thomson scattering. In this case, we dont have the low-energy limit, therefore we need to consider the relativistic effect, where $h \nu \gg m c^2$. We have 2 important consequences of this: 
+                    <ul>
+                        <li>Since the photon energy is greater than that of the electron, the electron will be deflect upon the impact.
+                            <br><br>
+                            Before the impact: 
+                            $$\vec{P}_{\gamma i} = \dfrac{\epsilon_i}{c} (1, \hat{n}_i), \quad \quad \vec{P}_{e i} = (m\,c , 0) $$
+                            After the impact:
+                            $$\vec{P}_{\gamma f} = \dfrac{\epsilon_f}{c} (1, \hat{n}_f), \quad \quad \vec{P}_{e f} = \left( \dfrac{E}{c}, \vec{P} \right)$$
+                            Due to the conservationf of momentum, we have: 
+                            $$|\vec{P}_{ef}|^2 = |\vec{P}_{ei} + \vec{P}_{\gamma i} - \vec{P}_{\gamma f}|^2$$ 
+                            since the modulus square is Lorentz invariant, we can evaluate it in the rest frame of electron: 
+                            $$
+                            \begin{aligned}
+                            -\dfrac{E^2}{c^2} + |\vec{P}|^2 = -m^2\, c^2 &= -\left(mc + \dfrac{\epsilon_i}{c} - \dfrac{\epsilon_f}{c} \right)^2 + \left(\dfrac{\epsilon_i}{c}\hat{N}_i + \dfrac{\epsilon_f}{c} \hat{N}_f \right)\\
+                            \Rightarrow - m\,\epsilon_i + m\, \epsilon_f + \dfrac{\epsilon_i \, \epsilon_f}{c^2}(1 - cos\theta) &= 0 \\
+                            \end{aligned}
+                            
+                            $$
+                            Therefore, we have the <strong> energy of electron after collision</strong> as: 
+                            $$ \boxed{\epsilon_f = \dfrac{\epsilon_i}{1 + \dfrac{\epsilon_i}{m c^2} (1 - \cos\theta)}}$$ 
+                            We can see that, if $\epsilon_i \ll m c^2$, then $\epsilon_f \approx \epsilon_i$, which is the Thomson scattering limit.
+                            <br><br>
+                            In terms of wavelength, we have: 
+                            $$\dfrac{h}{\lambda_f} = \dfrac{\dfrac{h}{\lambda_i}}{1 + \dfrac{\dfrac{h}{\lambda_i}}{m c^2} (1 - \cos\theta)}$$
+                            $$\Rightarrow \boxed{\lambda_f - \lambda_i = \dfrac{h}{m c} (1 - \cos\theta)}$$
+                            where $\lambda_c = \dfrac{h}{m c} = 2.43 \times 10^{-10} cm$ is the <strong>Compton wavelength of electron</strong>. 
+                            <br><br>
+                            If $\theta = 0$, then $\lambda_f \lambda_i$, which is the forward scattering case. If $\theta = \pi$, then we have the maximum wavelength shift $\Delta \lambda_{max} = 2 \lambda_c$.
+
+
+
+
+
+
+                        </li>
+
+                    
+                        <li>We need to account for the quantum correction also
+                            <br><br>
+                            The differential cross-section for Compton scattering is given by the <strong>Klein-Nishina cross section</strong>:
+
+                            $$\boxed{\dfrac{d\sigma}{d\Omega} = \dfrac{r_0^2}{2} \dfrac{\epsilon_f^2}{\epsilon_i^2} \left( \dfrac{\epsilon}{\epsilon_f} + \dfrac{\epsilon_f}{\epsilon} - \sin^2\theta \right)}$$
+                            If $\epsilon_i \approx \epsilon_f$, we have the Thomson cross-section recovered.
+                        
+                            
+                        
+                        </li>
+                        </ul>
+                        <h2> Inverse Compton Scattering</h2>
+                        This happens when ultra-relativistic electrons transfer energy to the photons. Imagine an electron with high Lorentz factor, it's rest frame, it'll see an incoming low-energy photonand we find ourself in the Thomson scattering regime $\epsilon_f' = \epsilon_i'$. 
+
+                        <br><br>
+                        Transforming back to the lab frame, we use doppler effect:
+                        $$\epsilon_f = \gamma \epsilon_f' (1 + \beta \cos \theta')$$
+
+
+                        <br><br>
+                        Consider we have an <strong>isotropic distribution</strong> of electron and photon, and only <strong>single scattering</strong> happens. 
+                        Now we have the number density of photons having energy in $[\epsilon, \, \epsilon + d\epsilon]$ as $\nu d\epsilon$. It can also be computed by multipply 
+                        N(P), photon phase space distribution function (Lorentz invariant) with the volume element in momentum space $d^3p$. We then have:
+                        $$\nu d\epsilon = N(P)d^3P$$
+                        and $\dfrac{\nu d\epsilon}{\epsilon} $ is also Lorentz invariant. Now, we can have the <strong>total power emitted in electron rest frame</strong>
+
+                        $$\begin{aligned}
+                        
+                        P = \dfrac{dE_{f}'}{dt'} &= c \sigma_T \int \epsilon' \, \nu' \, d\epsilon' \\
+                        &= c\, \sigma_T \int {\epsilon'}^2 \dfrac{\nu' d\epsilon'}{\epsilon'} \\
+                        &=  c\, \sigma_T \int {\epsilon'}^2 \dfrac{\nu d\epsilon}{\epsilon} = c\, \sigma_T \int \epsilon\,\gamma^2\,(1 - \beta \,\cos\theta)^2\dfrac{\nu \,d\epsilon}{\epsilon}
+                        \end{aligned}$$
+                        For an isotropic distribution, we have $\langle \cos^2 \theta \rangle = \dfrac{1}{3}$, therefore:
+                        $$\dfrac{dE_f '}{dt'} = c \,\sigma_T \,\gamma^2\,(1 + \dfrac{\beta^2}{3}) \, U_{ph} $$
+                        with $U_{ph} = \int \epsilon \,\nu \, d\epsilon$ is the <strong>energy density of the photon field</strong>. 
+                        <br><br>
+                        We also have the rate of which photon are removed from original photon field as: 
+                        $$\dfrac{dE_i'}{dt'} = c \,\sigma_T \, U_{ph}$$
+                        This is thereby converted into higher energy photons. Therefore, the <strong>net power gained by photon field</strong> is:
+                        $$P_{compton} = \dfrac{dE_rad}{dt} = c \,\sigma_T\,U_{ph} \left[ \gamma^2 \left(1 + \dfrac{1}{3} \beta^2 \right) - 1\right]$$
+                        since $\gamma^2 - 1 = \gamma^2\,\beta^2$, therefore, we have the final form of the <strong>power gained by photon field due to inverse Compton scattering</strong> as:
+                        $$\boxed{P_{compton} = \dfrac{4}{3} c \,\sigma_T \, U_{ph} \, \gamma^2 \, \beta^2}$$
+
+
+                        <br><br> 
+
+                        We can also compute the <strong>total Compton power from a medium of relativistic electrons</strong> by integrating over the distribution of electrons:
+                        $$\boxed{P_{tot} \,(erg\,s^{-1}\,cm^{-3}) = \int P_{compton}\, N(\gamma) \,d\gamma}$$ 
+
+                        <br><br>
+                        In the <strong>non-relativistic limit </strong>, we can have thermal electrons and $\gamma \approx 1$, then: 
+                        $$P_{tot} = \dfrac{4}{3} \sigma_T\,c\,U_{ph}\,\langle \beta^2 \rangle =\dfrac{4}{3} \sigma_T\,c\,U_{ph}\,\langle \dfrac{v^2}{c^2} \rangle $$
+                        Solving the Maxwell-Boltzmann distribution of $\langle v^2 \rangle$, we have: 
+                        $$\langle v^2 \rangle =\dfrac{3}{2 \alpha} = \dfrac{3kT}{m}$$
+                        Therefore we have the <strong>total Compton power for non-relativistic thermal electrons</strong> as:
+
+                        $$\boxed{P_{tot} = \dfrac{4 \,\sigma_T\, U_{ph} \, kT}{m c}}$$
+
+                        <br><br>
+                        Back to the single particle case, we can see that power of (inverse) Compton scattering has the same form as the synchrotron emission power. 
+                        it because they are both caused by the acceleration of electrons in an electromagnetic field. 
+
+                        <h2>Synchrotron Self-Compton</h2> 
+                        We can have a situation where synchrotron radiation is scattered by the same population of electrons that emitted it, which creates inverse Compton scattering. Consider the ratio between the synchrotron power and the inverse Compton power:
+                        $$\dfrac{P_{syn}}{P_{IC}} = \dfrac{U_B}{U_{ph}}$$
+                        This is a positive feedback loop, where the more synchrotron radiation is emitted, the more inverse Compton scattering occurs, which in turn produces more high-energy photons that can further scatter off electrons. 
+                        This process cools down the source very efficiently until a point called the <strong>Compton catastrophe</strong>.   
+                        <br><br>
+                        
+                        The <strong>spectrum of inverse compton radiation </strong> is: 
+                        $$I(\nu) = \dfrac{3 \sigma_T \, c\, N(\nu_0)}{16 \gamma^4 \, \nu_0^2} \nu \left[ 2 \nu \ln\left( \dfrac{\nu}{4 \gamma^2 \,\nu_0} + \nu + 4 \gamma^2 \nu_0 - \dfrac{\nu^2}{2\gamma^2 \,\nu_0}\right)\right]$$ 
+                        Solve the equation make the spectrum peak about $\nu \approx \gamma^2 \nu_0$ and cut off at $\nu = 4\gamma^2\, \nu_0$ as shown in Figure 4 below.
+                        <figure class="note-figure float-left">
+                                                    <img src="image/compton_spectrum.png" alt="compton spectrum" width="400px" style="max-width: 100%; height: auto;">
+                                                    <figcaption style="width: 300px; max-width: 100%;">Figure 4: Spectrum of inverse Compton radiation.</figcaption>
+
+                                            </figure>
+
+
+                        For a distribution of electrons that follows a power-law $d N \propto \gamma^{-p}d\gamma $, then we'll have $I_{\nu} \propto \nu^{-(p-1)/2}$, which is the same as synchrotron emission.
+
+                    <h2>Comptonization</h2>
+
+                    We have the <strong>Compton y-parameter</strong>, which quantifies the variation in the energy density of photons after they travel through a medium of hot electrons. It is defined as:
+                    $$\boxed{Y = \langle \dfrac{\Delta \epsilon}{\epsilon} \rangle_{NR,\, R} \times Max(\tau_{es}, \tau_{es}^2)}$$
+                    where $\tau_{es} = n_e \, \sigma_T \, L = \rho \,\kappa_{es} \,L$ is the <strong>optical depth</strong> of the medium to electron scattering. If $Y \geq 1$, the total photon energy and spectrum significantly change and viceversa.
+
+                    <br><br>
+                    We have two cases:
+                    <ul>
+                        <li>For <strong>non-relativistic electrons</strong>, we have: 
+                            $$\langle \dfrac{\Delta \epsilon}{\epsilon} \rangle_{NR}= \dfrac{4 k T}{m c^2}$$
+
+                        </li>
+
+                        <li>For <strong>relativistic electrons</strong>, we have: 
+                            $$\langle \dfrac{\Delta \epsilon}{\epsilon} \rangle_{R}= 16 \left( \dfrac{k T}{m c^2} \right)^2$$
+
+                        </li>
+                    </ul> 
+
+                    <h2>Sunyaev-Zeldovich Effect</h2>
+                    This is the distortion of the Cosmic Microwave Background (CMB) spectrum due to inverse Compton scattering by hot electrons in galaxy clusters.
+                    <br><br>
+                    In this case, the CMB photons gain energy from the hot electrons, resulting in a shift of the CMB spectrum towards higher frequencies. This effect can be used to study the properties of galaxy clusters, such as their temperature and density.
+                    <br><br>
+                    With the electron temperature $T_e \approx 10^8 - 10^9 K$ in galaxy clusters, and optical depth $\tau_{es} \approx 0.01$, we have Compton parameter in non-relativistic case: 
+                    $$Y \approx \dfrac{4kT}{mc^2}\tau = \dfrac{4kT}{mc^2} \int n_e \sigma_T dl \approx 10^{-4}$$
+                    This small value of Y indicates a subtle change in CMB spectrum, but it is still detectable with precise measurements.
+                    <br><br>
+                    Since SZ is proportional to electron density $n_e$, this can help us to: 
+                    <ul>
+                        <li>Measuring CMB variation allows us to determine the mass of galaxy clusters.</li>
+                        <li>Help us measure the most external regions of galaxy clusters where X-ray emission is weak. This is because X-ray brightness depends on the square of the electron density, while SZ effect depends linearly on electron density.</li>
+                        <li>Independent of redshift, making it a valuable tool for studying distant galaxy clusters. X-ray is inverse square of distance dependent.</li>
+                    </ul>
+
+                </div>
+
                 </article>
             </div>
         </section>
