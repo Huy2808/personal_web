@@ -1051,19 +1051,7 @@ main,
 }
 
 /* === NOTE ARTICLE PAGE === */
-.note-article {
-    width: 90%;
-    max-width: none;
-    margin: 0 auto 4rem auto;
-    background: rgba(10, 10, 15, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 5rem;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    box-sizing: border-box;
-}
+/* Note: .note-article is now defined in the TOC section to accommodate left sidebar */
 
 .note-header {
     margin-bottom: 3rem;
@@ -1095,10 +1083,442 @@ main,
     color: var(--accent-primary);
 }
 
+/* === TABLE OF CONTENTS === */
+/* Floating TOC Button - Always visible while scrolling */
+.toc-float-btn {
+    position: fixed;
+    left: var(--toc-button-left, 20px);
+    top: var(--toc-button-top, 120px);
+    width: 60px;
+    height: 60px;
+    background: var(--accent-primary);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    box-shadow: 0 4px 20px rgba(74, 158, 255, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.toc-float-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(74, 158, 255, 0.6);
+    background: #5fadff;
+}
+
+.toc-float-btn:active {
+    transform: scale(0.95);
+}
+
+.toc-float-btn i {
+    font-size: 1.3rem;
+}
+
+.toc-btn-text {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* TOC Button animation when sidebar is open */
+.toc-float-btn.active {
+    background: var(--accent-secondary);
+}
+
+/* Overlay for mobile/tablet */
+.toc-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1001;
+}
+
+.toc-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* TOC Sidebar - Slide in from left, anchored to content edge */
+.toc-sidebar {
+    position: fixed;
+    left: var(--toc-left, 0px);
+    top: 0;
+    width: 320px;
+    height: 100vh;
+    background: rgba(26, 26, 46, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid var(--border-color);
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.5);
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1002;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.toc-sidebar.active {
+    transform: translateX(0);
+}
+
+/* TOC Header */
+.toc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+    background: rgba(74, 158, 255, 0.1);
+}
+
+.toc-title {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.toc-title i {
+    color: var(--accent-primary);
+    font-size: 1.2rem;
+}
+
+.toc-close-btn {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 107, 107, 0.1);
+    border: none;
+    border-radius: 8px;
+    color: var(--accent-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.toc-close-btn:hover {
+    background: rgba(255, 107, 107, 0.2);
+    transform: rotate(90deg);
+}
+
+.toc-close-btn i {
+    font-size: 1.2rem;
+}
+
+/* TOC Content */
+.toc-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1.5rem;
+    scrollbar-gutter: stable;
+    min-height: 0; /* ensure overflow works inside flex column */
+}
+
+/* Custom scrollbar */
+.toc-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.toc-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.toc-content::-webkit-scrollbar-thumb {
+    background: var(--accent-primary);
+    border-radius: 3px;
+}
+
+.toc-content::-webkit-scrollbar-thumb:hover {
+    background: #5fadff;
+}
+
+/* TOC List */
+.toc-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc-content > ul > li {
+    margin-bottom: 1.5rem;
+}
+
+.toc-content ul ul {
+    padding-left: 1.2rem;
+    margin-top: 0.5rem;
+    border-left: 2px solid rgba(74, 158, 255, 0.2);
+}
+
+.toc-content li {
+    margin-bottom: 0;
+}
+
+/* TOC Links */
+.toc-link {
+    display: block;
+    padding: 0.7rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    position: relative;
+}
+
+/* Collapsible subsection toggle */
+.toc-item {
+    position: relative;
+}
+
+.toc-toggle-sub {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.toc-toggle-sub:hover {
+    background: rgba(74, 158, 255, 0.12);
+}
+
+.toc-toggle-sub i {
+    transition: transform 0.3s ease;
+}
+
+.toc-toggle-sub[aria-expanded="true"] i {
+    transform: rotate(90deg);
+}
+
+.toc-sublist {
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    will-change: max-height;
+}
+
+.toc-link:hover {
+    color: var(--accent-primary);
+    background: rgba(74, 158, 255, 0.1);
+    transform: translateX(4px);
+}
+
+/* Main section links (level 1) */
+.toc-content > ul > li > .toc-link {
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    background: rgba(74, 158, 255, 0.05);
+    margin-bottom: 0.5rem;
+}
+
+.toc-content > ul > li > .toc-link:hover {
+    background: rgba(74, 158, 255, 0.15);
+}
+
+/* Subsection links */
+.toc-content ul ul .toc-link {
+    font-size: 0.88rem;
+    padding: 0.6rem 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Section numbering */
+.toc-number {
+    display: inline-block;
+    min-width: 2rem;
+    color: var(--accent-primary);
+    font-weight: 700;
+    margin-right: 0.3rem;
+}
+
+/* Active section highlighting */
+.toc-link.active {
+    color: var(--accent-primary);
+    background: rgba(74, 158, 255, 0.2);
+    font-weight: 600;
+    border-left: 3px solid var(--accent-primary);
+    padding-left: calc(1rem - 3px);
+}
+
+.toc-link.active-parent {
+    color: var(--accent-primary);
+    background: rgba(74, 158, 255, 0.12);
+    font-weight: 600;
+}
+
+.toc-content ul ul .toc-link.active {
+    padding-left: calc(0.8rem - 3px);
+}
+
+.toc-link.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 60%;
+    background: var(--accent-primary);
+    border-radius: 0 2px 2px 0;
+}
+
+/* Note article adjustment */
+.note-article {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 4rem auto;
+    background: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+
+/* Light theme adjustments */
+[data-theme="light"] .toc-float-btn {
+    background: var(--accent-primary);
+    box-shadow: 0 4px 20px rgba(74, 158, 255, 0.3);
+}
+
+[data-theme="light"] .toc-sidebar {
+    background: rgba(250, 250, 245, 0.98);
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .toc-header {
+    background: rgba(74, 158, 255, 0.08);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .toc-close-btn {
+    background: rgba(255, 107, 107, 0.08);
+}
+
+[data-theme="light"] .toc-close-btn:hover {
+    background: rgba(255, 107, 107, 0.15);
+}
+
+[data-theme="light"] .toc-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .toc-content ul ul {
+    border-left-color: rgba(74, 158, 255, 0.25);
+}
+
+[data-theme="light"] .toc-link:hover {
+    background: rgba(74, 158, 255, 0.12);
+}
+
+[data-theme="light"] .toc-content > ul > li > .toc-link {
+    background: rgba(74, 158, 255, 0.06);
+}
+
+[data-theme="light"] .toc-content > ul > li > .toc-link:hover {
+    background: rgba(74, 158, 255, 0.18);
+}
+
+[data-theme="light"] .toc-link.active {
+    background: rgba(74, 158, 255, 0.25);
+}
+
+/* Responsive Design */
+@media (min-width: 1400px) {
+    /* Desktop: Wider sidebar */
+    .toc-sidebar {
+        width: 360px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Mobile: Full-width slide-in panel */
+    .toc-sidebar {
+        width: 85%;
+        max-width: 320px;
+    }
+    
+    .toc-float-btn {
+        left: 15px;
+        top: 90px;
+        width: 55px;
+        height: 55px;
+    }
+    
+    .toc-float-btn i {
+        font-size: 1.2rem;
+    }
+    
+    .toc-btn-text {
+        font-size: 0.65rem;
+    }
+    
+    .note-article {
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .toc-sidebar {
+        width: 90%;
+    }
+    
+    .toc-float-btn {
+        left: 10px;
+        top: 85px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .toc-btn-text {
+        display: none;
+    }
+}
+
 .note-body {
     color: var(--text-secondary);
     line-height: 1.8;
     text-align: justify;
+}
+
+/* Clearfix to ensure floated figures stay inside the content box */
+.note-body::after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
 .note-body h1 {
