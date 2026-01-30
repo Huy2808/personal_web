@@ -1015,3 +1015,538 @@ setTimeout(() => {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { App, CosmicWeb, Navigation, ThemeToggle, ContactForm };
 }
+
+// === TABLE OF CONTENTS TOGGLE ===
+class TableOfContents {
+    constructor() {
+        this.floatBtn = document.getElementById('tocFloatBtn');
+        this.sidebar = document.getElementById('tocSidebar');
+        this.overlay = document.getElementById('tocOverlay');
+        this.closeBtn = document.getElementById('tocCloseBtn');
+        this.tocContent = document.getElementById('tocContent');
+        this.tocLinks = [];
+        this.sections = [];
+        this.currentActive = null;
+        this.isOpen = false;
+        this.expandState = new Map(); // key: section id of li, value: boolean expanded
+        
+        if (this.floatBtn && this.sidebar) {
+            this.init();
+        }
+    }
+    
+    init() {
+        // Generate TOC from headings and collect sections
+        this.generateTOC();
+        this.collectSections();
+        
+        // Bind events
+        this.floatBtn.addEventListener('click', () => this.toggle());
+        this.closeBtn.addEventListener('click', () => this.close());
+        this.overlay.addEventListener('click', () => this.close());
+        
+        // Handle TOC link clicks
+        this.tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => this.handleLinkClick(e));
+        });
+        
+        // Track scroll for active section
+        window.addEventListener('scroll', throttle(() => this.updateActiveSection(), 100));
+        window.addEventListener('resize', throttle(() => this.updateAnchorPosition(), 100));
+        
+        // Initial active section
+        this.updateActiveSection();
+        this.setInitialExpandStates();
+        this.updateAnchorPosition();
+        
+        // Handle escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.isOpen) {
+                this.close();
+            }
+        });
+
+        // Observe content changes to regenerate TOC automatically
+        const noteBody = document.querySelector('.note-body');
+        if (noteBody && 'MutationObserver' in window) {
+            const observer = new MutationObserver(throttle(() => {
+                this.generateTOC();
+                this.collectSections();
+                this.bindLinks();
+                this.updateActiveSection();
+                this.setInitialExpandStates();
+            }, 300));
+            observer.observe(noteBody, { childList: true, subtree: true });
+            this.observer = observer;
+        }
+    }
+    
+    bindLinks() {
+        // Remove previous listeners by replacing node list
+        this.tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => this.handleLinkClick(e));
+        });
+    }
+
+    ensureId(element) {
+        if (element.id && element.id.trim().length > 0) return element.id;
+        const text = (element.textContent || '').trim().toLowerCase();
+        let slug = text
+            .replace(/[^a-z0-9\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-');
+        if (!slug || slug === '-') slug = 'section';
+        // Ensure uniqueness
+        let unique = slug;
+        let i = 1;
+        while (document.getElementById(unique)) {
+            unique = `${slug}-${i++}`;
+        }
+        element.id = unique;
+        return unique;
+    }
+
+    generateTOC() {
+        const container = this.tocContent;
+        if (!container) return;
+
+        const headings = document.querySelectorAll('.note-body h1, .note-body h2, .note-body h3');
+        const list = document.createElement('ul');
+        let currentH1 = null; // { li, id }
+        let currentH2 = null; // { li, id }
+
+        // Compute hierarchical numbering and prefix headings
+        let h1Count = 0, h2Count = 0, h3Count = 0;
+        const numberMap = new Map(); // id -> number string
+        headings.forEach((h) => {
+            const tag = h.tagName.toLowerCase();
+            let num = '';
+            if (tag === 'h1') {
+                h1Count += 1; h2Count = 0; h3Count = 0;
+                num = `${h1Count}`;
+            } else if (tag === 'h2') {
+                if (h1Count === 0) { h1Count = 1; }
+                h2Count += 1; h3Count = 0;
+                num = `${h1Count}.${h2Count}`;
+            } else if (tag === 'h3') {
+                if (h1Count === 0) { h1Count = 1; }
+                if (h2Count === 0) { h2Count = 1; }
+                h3Count += 1;
+                num = `${h1Count}.${h2Count}.${h3Count}`;
+            }
+            const id = this.ensureId(h);
+            numberMap.set(id, num);
+
+            // Preserve original title and prefix visible heading with number
+            const orig = h.dataset.origTitle || (h.textContent || '').trim();
+            h.dataset.origTitle = orig;
+            // Avoid duplicating numbers: rebuild from original
+            h.innerHTML = `<span class="section-number">${num}</span> ${orig}`;
+        });
+
+        const createToggle = () => {
+            const btn = document.createElement('button');
+            btn.className = 'toc-toggle-sub';
+            btn.setAttribute('type', 'button');
+            btn.setAttribute('aria-expanded', 'true');
+            btn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            return btn;
+        };
+
+        const createLink = (id, text, number) => {
+            const a = document.createElement('a');
+            a.className = 'toc-link';
+            a.setAttribute('data-section', id);
+            a.href = `#${id}`;
+            a.innerHTML = `<span class="toc-number">${number}</span> ${text}`;
+            return a;
+        };
+
+        const createItem = (level, id, text, number, parentId = null, rootId = null) => {
+            const li = document.createElement('li');
+            li.className = `toc-item level${level}`;
+            const a = createLink(id, text, number);
+            if (parentId) a.setAttribute('data-parent', parentId);
+            if (rootId) a.setAttribute('data-root', rootId);
+            li.appendChild(a);
+            return li;
+        };
+
+        headings.forEach((h) => {
+            const tag = h.tagName.toLowerCase();
+            const id = this.ensureId(h);
+            const text = (h.dataset.origTitle || h.textContent || '').trim();
+            const number = numberMap.get(id) || '';
+
+            if (tag === 'h1') {
+                const li = createItem(1, id, text, number);
+                const sub = document.createElement('ul');
+                sub.className = 'toc-sublist';
+                // Toggle only added if subsections exist; we'll add after first child
+                li.appendChild(sub);
+                list.appendChild(li);
+                currentH1 = { li, id, sub };
+                currentH2 = null;
+            } else if (tag === 'h2') {
+                const li = createItem(2, id, text, number, currentH1?.id || null, currentH1?.id || null);
+                const sub = document.createElement('ul');
+                sub.className = 'toc-sublist';
+                li.appendChild(sub);
+                if (currentH1) {
+                    currentH1.sub.appendChild(li);
+                    // Add toggle to H1 if this is the first H2
+                    if (!currentH1.li.querySelector('.toc-toggle-sub')) {
+                        const toggle = createToggle();
+                        currentH1.li.insertBefore(toggle, currentH1.li.querySelector('.toc-link').nextSibling);
+                    }
+                } else {
+                    list.appendChild(li);
+                }
+                currentH2 = { li, id, sub };
+            } else if (tag === 'h3') {
+                const li = createItem(3, id, text, number, currentH2?.id || currentH1?.id || null, currentH1?.id || null);
+                if (currentH2) {
+                    currentH2.sub.appendChild(li);
+                    // Add toggle to H2 if first H3
+                    if (!currentH2.li.querySelector('.toc-toggle-sub')) {
+                        const toggle = createToggle();
+                        currentH2.li.insertBefore(toggle, currentH2.li.querySelector('.toc-link').nextSibling);
+                    }
+                } else if (currentH1) {
+                    currentH1.sub.appendChild(li);
+                } else {
+                    list.appendChild(li);
+                }
+            }
+        });
+
+        // Top-level numbers already computed; no need to renumber here
+
+        // Hide toggle buttons on items without children
+        list.querySelectorAll('.toc-item').forEach((item) => {
+            const sub = item.querySelector(':scope > .toc-sublist');
+            const toggle = item.querySelector(':scope > .toc-toggle-sub');
+            if (toggle) {
+                if (!sub || !sub.children.length) {
+                    toggle.remove();
+                } else {
+                    // Restore previous expand state or default expanded
+                    const sectionId = item.querySelector(':scope > .toc-link')?.getAttribute('data-section');
+                    const expanded = this.expandState.has(sectionId) ? this.expandState.get(sectionId) : true;
+                    toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+                    if (!expanded) {
+                        sub.style.maxHeight = '0px';
+                    } else {
+                        sub.style.maxHeight = `${sub.scrollHeight}px`;
+                    }
+                }
+            }
+        });
+
+        // Replace content
+        container.innerHTML = '';
+        container.appendChild(list);
+
+        // Update links cache & bind toggles
+        this.tocLinks = Array.from(container.querySelectorAll('.toc-link'));
+        this.bindLinks();
+
+        // Bind toggle events
+        this.bindToggleEvents();
+    }
+
+    collectSections() {
+        this.sections = [];
+        this.tocLinks.forEach(link => {
+            const sectionId = link.getAttribute('data-section');
+            const section = document.getElementById(sectionId);
+            if (section) {
+                this.sections.push({
+                    id: sectionId,
+                    element: section,
+                    link: link
+                });
+            }
+        });
+    }
+    
+    toggle() {
+        if (this.isOpen) {
+            this.close();
+        } else {
+            this.open();
+        }
+    }
+    
+    open() {
+        this.isOpen = true;
+        this.sidebar.classList.add('active');
+        this.overlay.classList.add('active');
+        this.floatBtn.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scroll on mobile
+    }
+    
+    close() {
+        this.isOpen = false;
+        this.sidebar.classList.remove('active');
+        this.overlay.classList.remove('active');
+        this.floatBtn.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scroll
+    }
+    
+    handleLinkClick(e) {
+        e.preventDefault();
+        const link = e.currentTarget;
+        const sectionId = link.getAttribute('data-section');
+        const targetElement = document.getElementById(sectionId);
+        
+        if (targetElement) {
+            // Calculate offset for fixed navbar
+            const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 80;
+            const offset = 20;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - navbarHeight - offset;
+            
+            // Smooth scroll
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+            
+            // Close sidebar on mobile after clicking
+            if (window.innerWidth <= 768) {
+                setTimeout(() => this.close(), 300);
+            }
+            
+            // Update active state immediately
+            this.setActiveLink(link);
+        }
+    }
+    
+    updateActiveSection() {
+        const scrollPosition = window.pageYOffset + window.innerHeight / 3;
+        
+        let currentSection = null;
+        
+        // Find the current section based on scroll position
+        for (let i = this.sections.length - 1; i >= 0; i--) {
+            const section = this.sections[i];
+            const sectionTop = section.element.offsetTop;
+            
+            if (scrollPosition >= sectionTop) {
+                currentSection = section;
+                break;
+            }
+        }
+        
+        // Update active link if section changed
+        if (currentSection && currentSection.link !== this.currentActive) {
+            this.setActiveLink(currentSection.link);
+        }
+    }
+    
+    setActiveLink(link) {
+        // Remove active states
+        this.tocLinks.forEach(l => {
+            l.classList.remove('active');
+            l.classList.remove('active-parent');
+        });
+        
+        // Add active class to current link
+        if (link) {
+            link.classList.add('active');
+            this.currentActive = link;
+
+            // Highlight parents
+            const parentId = link.getAttribute('data-parent');
+            const rootId = link.getAttribute('data-root');
+            const parentLink = parentId ? this.tocLinks.find(l => l.getAttribute('data-section') === parentId) : null;
+            const rootLink = rootId ? this.tocLinks.find(l => l.getAttribute('data-section') === rootId) : null;
+            if (parentLink) parentLink.classList.add('active-parent');
+            if (rootLink && rootLink !== parentLink) rootLink.classList.add('active-parent');
+            
+            // Scroll link into view within sidebar
+            const sidebar = document.querySelector('.toc-content');
+            if (sidebar && link) {
+                const linkTop = link.offsetTop;
+                const linkHeight = link.offsetHeight;
+                const sidebarHeight = sidebar.offsetHeight;
+                const sidebarScroll = sidebar.scrollTop;
+                
+                // Check if link is outside visible area
+                if (linkTop < sidebarScroll || linkTop + linkHeight > sidebarScroll + sidebarHeight) {
+                    sidebar.scrollTo({
+                        top: linkTop - sidebarHeight / 2 + linkHeight / 2,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        }
+    }
+
+    bindToggleEvents() {
+        const toggles = this.tocContent.querySelectorAll('.toc-toggle-sub');
+        toggles.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const item = btn.closest('.toc-item');
+                const sub = item?.querySelector(':scope > .toc-sublist');
+                const sectionId = item?.querySelector(':scope > .toc-link')?.getAttribute('data-section');
+                if (!sub || !sectionId) return;
+                const expanded = btn.getAttribute('aria-expanded') === 'true';
+                this.expandState.set(sectionId, !expanded);
+                this.animateSublist(sub, !expanded);
+                btn.setAttribute('aria-expanded', !expanded ? 'true' : 'false');
+                // Ensure expanded content stays accessible within scrollable container
+                if (!expanded) {
+                    // If we just expanded, nudge scroll to reveal new content if clipped
+                    this.ensureVisibleInSidebar(sub);
+                }
+            });
+        });
+    }
+
+    animateSublist(sub, expand) {
+        // Clean previous transitionend listener
+        sub.ontransitionend = null;
+
+        if (expand) {
+            sub.style.display = 'block';
+            // Set from 0 to measured height for animation
+            sub.style.maxHeight = sub.scrollHeight + 'px';
+            // After transition completes, set to none so content can grow naturally
+            sub.ontransitionend = (e) => {
+                if (e.propertyName === 'max-height') {
+                    sub.style.maxHeight = 'none';
+                    sub.ontransitionend = null;
+                }
+            };
+        } else {
+            // If currently 'none', set to current height then animate to 0
+            if (sub.style.maxHeight === 'none' || !sub.style.maxHeight) {
+                sub.style.maxHeight = sub.scrollHeight + 'px';
+                // Force reflow
+                // eslint-disable-next-line no-unused-expressions
+                sub.offsetHeight;
+            }
+            sub.style.maxHeight = '0px';
+            sub.ontransitionend = (e) => {
+                if (e.propertyName === 'max-height') {
+                    // Optionally hide after collapse
+                    sub.style.display = 'block'; // keep accessible for measurement
+                    sub.ontransitionend = null;
+                }
+            };
+        }
+    }
+
+    ensureVisibleInSidebar(element) {
+        const sidebar = document.querySelector('.toc-content');
+        if (!sidebar || !element) return;
+        const elTop = element.getBoundingClientRect().top;
+        const elBottom = element.getBoundingClientRect().bottom;
+        const sbTop = sidebar.getBoundingClientRect().top;
+        const sbBottom = sidebar.getBoundingClientRect().bottom;
+        if (elBottom > sbBottom) {
+            const delta = elBottom - sbBottom + 24; // some padding
+            sidebar.scrollBy({ top: delta, behavior: 'smooth' });
+        } else if (elTop < sbTop) {
+            const delta = elTop - sbTop - 24;
+            sidebar.scrollBy({ top: delta, behavior: 'smooth' });
+        }
+    }
+
+    setInitialExpandStates() {
+        // Determine current active or hash target to expand ancestors
+        let activeId = null;
+        if (location.hash && document.getElementById(location.hash.slice(1))) {
+            activeId = location.hash.slice(1);
+        } else if (this.currentActive) {
+            activeId = this.currentActive.getAttribute('data-section');
+        } else if (this.sections.length) {
+            activeId = this.sections[0].id;
+        }
+
+        // Default: collapse all groups unless previously stored in expandState
+        const items = this.tocContent.querySelectorAll('.toc-item');
+        items.forEach((item) => {
+            const link = item.querySelector(':scope > .toc-link');
+            const sub = item.querySelector(':scope > .toc-sublist');
+            const toggle = item.querySelector(':scope > .toc-toggle-sub');
+            if (!sub || !toggle || !link) return;
+            const id = link.getAttribute('data-section');
+            let expanded = this.expandState.has(id) ? this.expandState.get(id) : false;
+
+            // If this is an ancestor of active, force expand
+            if (!expanded && activeId) {
+                const isAncestor = this.isAncestorOf(id, activeId);
+                if (isAncestor) expanded = true;
+            }
+
+            toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+            if (expanded) {
+                sub.style.maxHeight = sub.scrollHeight + 'px';
+            } else {
+                sub.style.maxHeight = '0px';
+            }
+        });
+    }
+
+    isAncestorOf(ancestorId, targetId) {
+        // Walk up via data-parent to see if ancestorId appears
+        let current = this.tocLinks.find(l => l.getAttribute('data-section') === targetId);
+        const guard = 50; let i = 0;
+        while (current && i++ < guard) {
+            const parent = current.getAttribute('data-parent');
+            if (!parent) return false;
+            if (parent === ancestorId) return true;
+            current = this.tocLinks.find(l => l.getAttribute('data-section') === parent);
+        }
+        return false;
+    }
+
+    updateAnchorPosition() {
+        const article = document.querySelector('.note-article');
+        const navbar = document.querySelector('.navbar');
+        if (!article) return;
+
+        const rect = article.getBoundingClientRect();
+        const contentLeft = rect.left; // viewport-relative
+        const gap = 16; // px gap between sidebar and content edge
+        const buttonGap = 10;
+        const sidebarWidth = this.sidebar.offsetWidth || 320;
+        const buttonWidth = this.floatBtn.offsetWidth || 60;
+
+        // Mobile: default positions
+        if (window.innerWidth <= 768) {
+            document.documentElement.style.setProperty('--toc-left', '0px');
+            document.documentElement.style.setProperty('--toc-button-left', '15px');
+            const top = (navbar?.offsetHeight || 80) + 10;
+            document.documentElement.style.setProperty('--toc-button-top', `${top}px`);
+            return;
+        }
+
+        // Desktop: anchor to content left edge
+        const sidebarLeft = Math.max(0, contentLeft - sidebarWidth - gap);
+        const buttonLeft = Math.max(0, contentLeft - buttonWidth - buttonGap);
+        const top = (navbar?.offsetHeight || 80) + 40;
+
+        document.documentElement.style.setProperty('--toc-left', `${sidebarLeft}px`);
+        document.documentElement.style.setProperty('--toc-button-left', `${buttonLeft}px`);
+        document.documentElement.style.setProperty('--toc-button-top', `${top}px`);
+    }
+}
+
+// Initialize TOC when DOM is loaded
+let tocInstance = null;
+
+function initTableOfContents() {
+    tocInstance = new TableOfContents();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTableOfContents);
+} else {
+    initTableOfContents();
+}
